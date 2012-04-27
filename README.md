@@ -1,20 +1,9 @@
-CONTENTS OF THIS FILE
-====================
-
- * About Oxwall
- * Copyright
- * Installation and Configuration
- * Appearance
- * Oxwall Store
-
-ABOUT OXWALL
-============
+### ABOUT OXWALL
 
 Oxwall is an open source social network platform, which supports a variety of community driven websites, from narrow fan clubs and local communities to extended social networking portals. It was designed and developed with a creative approach pursuing one purpose - to allow people running communities as easy as possible.
 Oxwall was launched in 2010 and is supported by a nonprofit organization Oxwall Foundation ( see http://www.oxwall.org/foundation/ ). For more information, visit Oxwall website at http://www.oxwall.org/.
 
-COPYRIGHT
-=========
+### COPYRIGHT
 
 Oxwall platform is licensed under Common Public Attribution License 1.0.
 In short the license states that:
@@ -31,8 +20,7 @@ Legal information about Oxwall:
  * Terms of use:
         http://www.oxwall.org/terms/
 
-INSTALLATION AND CONFIGURATION
-==============================
+### INSTALLATION AND CONFIGURATION
 
 To get started you need to download Oxwall main package from http://www.oxwall.org/download/. The package includes the core of the platform and some additional modules (called plugins), such as Photo Uploading, Video Sharing, Instant Chat, Forum and Blogs. Every plugin can be enabled/disabled in the admin panel.
 Upload unpacked package with an FTP client, type http://www.mycommunity/install/ in your browser, and follow instructions.
@@ -48,8 +36,7 @@ More information:
  * Download additional plugins:
         http://www.oxwall.org/store/list/plugin/latest
        
-APPEARANCE
-==========
+### APPEARANCE
 
 The visual appearance of an Oxwall-powered site is defined by a selected theme (themes are extensions that set site’s fonts, color scheme, and layout). Oxwall default package includes several standard themes, with more themes available for download. Users can also create their own custom themes. Themes can be customized via the Admin Panel, using simple customization interface. Additional theme customization can be done with an FTP client.
 
@@ -59,8 +46,7 @@ More about themes:
  * Learn more about theme customization:
         http://docs.oxwall.org/dev:theme:index
        
-OXWALL STORE
-============
+### OXWALL STORE
 
 Oxwall has it's own public Store with numerous themes and plugins available for download. Themes and plugins in the Store are created by the Oxwall Foundation team or third-party contributors. Users can share their plugins and themes with the community by submitting them to the Store.
 
