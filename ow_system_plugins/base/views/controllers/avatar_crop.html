@@ -1,0 +1,54 @@
+
+<div class="ow_change_avatar ow_stdmargin clearfix">
+
+    <p>{text key='base+avatar_avatar_is'}</p>
+    
+    {block_decorator name='box' addClass='ow_wide ow_automargin ow_stdmargin clearfix'}
+    <div class="clearfix">
+        <div class="avatar_current ow_left ow_supernarrow ow_center">
+            <h4>{text key='base+avatar_current'}</h4>
+            {if $hasAvatar}
+                <img width="100" src="{$avatar}" alt="" />
+                
+            {else}
+                <img width="100" src="{$default}" alt="" />    
+            {/if}
+        </div>
+        <div class="ow_right ow_superwide">
+            <h4>{text key='base+avatar_new'}</h4>
+            {form name=avatarUploadForm}
+                <p>{input name='avatar'}</p>
+                <p>{submit name='upload' class='ow_ic_up_arrow'}</p>
+            {/form}
+            <p>{text key='base+avatar_upload_types'}</p>
+        </div>
+    </div>
+    {/block_decorator}
+    
+    {if $hasAvatar}
+    <div class="ow_avatar_crop ow_stdmargin">
+        {block_decorator name='box_cap' type='empty' iconClass='ow_ic_cut' langLabel='base+avatar_crop'}{/block_decorator}
+        {block_decorator name='box' type='empty' addClass='ow_smallmargin clearfix'}
+            <p>{text key='base+avatar_crop_instructions'}</p>
+            
+            {block_decorator name='box' addClass='ow_wide ow_automargin ow_smallmargin clearfix'}
+            <div class="clearfix">        
+                <div class="ow_left ow_superwide ow_center">
+                    <h4>{text key='base+avatar_picture'}</h4>
+                    <img id="jcrop-target" width="220" class="ow_smallmargin" src="{$original}" alt="" />
+                    <br />{decorator name='button' langLabel='base+avatar_apply_crop' class='ow_ic_cut' id='crop-btn'}
+                </div>
+                <div class="ow_avatar_preview ow_right ow_supernarrow ow_center">
+                    <h4>{text key='base+avatar_preview'}</h4>
+                    <div style="width: 100px; height: 100px; overflow: hidden"><img id="preview" src="{$original}" alt="" /></div>
+                </div>
+            </div>
+            {/block_decorator}
+            
+        {/block_decorator}
+    </div>
+    {/if}
+    
+    {decorator name='button' langLabel='base+avatar_back_profile_edit' class='ow_ic_left_arrow' id='button-profile-edit'}
+    
+</div>

@@ -1,0 +1,164 @@
+{script}
+{literal}
+
+    $("#check-all").click(function() {
+        $('#user-list-form input:not(:disabled)[type="checkbox"]').attr("checked", $(this).attr("checked") == "checked");
+    });
+        
+    $("#suspend_user_btn").click(function(){
+        $('#user-form-command').val('suspend'); 
+        return confirm(OW.getLanguageText('admin', 'confirm_suspend_users'));
+    });
+
+    $("#unsuspend_user_btn").click(function(){
+        $('#user-form-command').val('unsuspend');
+    });
+    
+    $("#email_verify_user_btn").click(function(){
+        $('#user-form-command').val('email_verify');
+    });
+    
+    $("#email_unverify_user_btn").click(function(){
+        $('#user-form-command').val('email_unverify');
+    });
+    
+    $("#delete_user_btn").click(function(){
+        $('#user-form-command').val('delete');
+        
+        var $form_content = $("#delete-user-confirm").children();
+
+        window.delete_user_floatbox = new OW_FloatBox({
+            $title: OW.getLanguageText('base', 'delete_user_confirmation_label'),
+            $contents: $form_content,
+            icon_class: 'ow_ic_delete',
+            width: 450
+        });
+        
+        return false;
+    });
+    
+    $("#button-cancel-user-delete").click(function(){
+        window.delete_user_floatbox.close();
+    });
+    
+    $("#button-confirm-user-delete").click(function(){
+        $("#user-list-form").submit();
+    });
+
+{/literal}
+{/script}
+
+{style}
+{literal}
+    .user_list_thumb {
+        width: 55px;
+        height: 45px;
+    }
+    
+    .user_list_thumb img {
+        width: 45px;
+        height: 45px;
+    }
+    
+    #user-list-form .ow_lbutton {
+        cursor: default;
+    }
+{/literal}
+{/style}
+
+{if $users}
+
+{if isset($search)}
+    <div class="ow_anno ow_std_margin ow_nocontent">{text key="admin+user_search_result" for=$search}</div>
+{/if}
+
+<div class="clearfix ow_smallmargin">
+    <div class="ow_left">{$paging}</div>
+    {if $total}<div class="ow_right">{text key='admin+found_users' count=$total}</div>{/if}
+</div>
+
+<form id="user-list-form" method="post" action="">
+<table class="ow_table_2">
+<tr>
+    <td width="1"></td>
+    <th>{text key='admin+user'}</th>
+    <th>{text key='admin+user_status'}</th>
+    <th>{text key='admin+joined'}</th>
+</tr>
+{foreach from=$users item='user'}
+    {capture assign='userId'}{$user->id}{/capture}
+    {capture assign='username'}{$userNameList[$userId]}{/capture}
+    <tr class="{cycle values='ow_alt1,ow_alt2'}">
+        <td><input type="checkbox" {if $adminId == $user->id }disabled="disabled"{else}value="{$user->id}" name="users[{$user->id}]"{/if}  /></td>
+        <td>
+            <div class="clearfix">
+                <div class="ow_left ow_txtleft user_list_thumb"><a href="{url_for_route for="base_user_profile:[username=>`$username`]"}">{user_avatar userId=$userId}</a></div>
+                <div class="ow_left ow_txtleft">
+                    {user_link name=$displayNames[$userId] username=$userNameList[$userId]}<br />
+                    <span class="ow_small">
+                    {if !empty($sexList[$userId])}
+                        {$sexList[$userId]}
+                    {/if}
+                    {if !empty($questionList[$userId].birthdate)}
+                        {age dateTime=$questionList[$userId].birthdate}
+                    {/if}
+                    {if !empty($sexList[$userId]) || !empty($questionList[$userId].birthdate)}<br />{/if}
+                    {if !empty($questionList[$userId].email)}
+                        <span class="ow_remark">{$questionList[$userId].email}</span>
+                    {/if}
+                    </span>
+                    {if $onlineStatus}
+                    <div class="ow_small">
+                        {if (!empty($onlineStatus[$userId]) && $onlineStatus[$userId])}
+                            <span class="ow_lbutton ow_green">{text key='base+activity_online'}</span>
+                        {elseif $user->activityStamp}
+                            {text key='base+activity_stamp'} <span class="ow_remark">{format_date timestamp=$user->activityStamp}</span>
+                        {/if}
+                    </div>
+                    {/if}
+                </div>
+            </div>
+        </td>
+        <td>
+            {if $suspendedList[$userId]}<div><span class="ow_lbutton ow_red">{text key='admin+user_status_suspended'}</span></div>{/if}
+            {if $unverifiedList[$userId]}<div><span class="ow_lbutton">{text key='admin+user_status_unverified'}</span></div>{/if}
+            {if $unapprovedList[$userId]}<div><span class="ow_lbutton">{text key='admin+user_status_unapproved'}</span></div>{/if}
+        </td>
+        <td class="ow_small">{if $user->joinStamp}{format_date timestamp=$user->joinStamp}{/if}</td>
+    </tr>
+{/foreach}
+<tr class="ow_alt1">
+     <th><input type="checkbox" id="check-all" /></th>
+     <td colspan="3" class="ow_txtleft">
+         {text key='base+check_all'} | {text key='base+with_selected'}
+         <input id="user-form-command" type="hidden" name="command" value="" />
+         
+         {decorator name='button_list_item' type='submit' langLabel='base+suspend_user_btn' id='suspend_user_btn' class='ow_mild_red'}
+         {decorator name='button_list_item' type='submit' langLabel='base+unsuspend_user_btn' id='unsuspend_user_btn' class='ow_mild_green'}
+         {decorator name='button_list_item' type='submit' langLabel='base+mark_email_verified_btn' id='email_verify_user_btn' class='ow_mild_green'}
+         {decorator name='button_list_item' type='submit' langLabel='base+mark_email_unverified_btn' id='email_unverify_user_btn' class='ow_mild_red'}
+         {decorator name='button_list_item' type='submit' langLabel='base+delete' id='delete_user_btn' class='ow_mild_red'}
+     </td>
+</tr>
+</table>
+
+<div class="ow_hidden" id="delete-user-confirm">
+<div class="ow_stdmargin ow_center">
+    <div class="ow_stdmargin">
+        {text key="admin+confirm_delete_users"}
+    </div>
+	
+	{decorator name="button" type="button" id="button-cancel-user-delete" langLabel="base+delete_user_cancel_button"}
+	{decorator name="button" type="submit" id="button-confirm-user-delete" class="ow_ic_delete ow_red" langLabel="base+delete_user_delete_button"}
+</div>
+</div>
+
+</form>
+
+{$paging}
+
+{else}
+    {block_decorator name='box' addClass='ow_stdmargin clearfix ow_italic ow_center'}
+        {text key='admin+no_users'}
+    {/block_decorator}
+{/if}

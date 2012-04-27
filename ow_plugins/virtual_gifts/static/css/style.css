@@ -1,0 +1,57 @@
+
+.ow_gift_wrapper {
+    width: 100px;
+    height: 110px;
+    float: left;
+    margin: 0px 0px 4px 4px;
+    text-align: center;
+    position: relative;
+}
+
+.ow_gift_holder {
+    display: -moz-inline-box;
+    display: inline-block;
+    vertical-align: middle;
+    width: 80px;
+    zoom: 1;
+    //display: inline;
+    overflow: hidden;
+}
+
+.ow_gift_holder img {
+    height: 80px;
+}
+
+.ow_gift_helper {
+    display: -moz-inline-box;
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    width: 0px;
+    zoom: 1;
+    //display: inline;
+}
+
+.ow_gift_image {
+    float: left;
+    margin-right: -80px;
+    width: 80px;
+}
+
+.ow_gift_image img {
+    width: 80px;
+}
+
+.ow_gift_message {
+    margin-left: 80px;
+    padding-left:10px;
+}
+
+.ow_gift_templates ul.ow_regular li{
+    list-style-position: inside;
+    margin: 0px;
+}
+
+.ow_gift_message_area {
+    height: 40px;
+}

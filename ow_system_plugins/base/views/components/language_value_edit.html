@@ -1,0 +1,25 @@
+<div style="width: 510px;" class="ow_automargin">
+
+	{block_decorator name="box" type="empty"}
+	{form name="lang-values-edit"}
+		<table class="ow_table_1 ow_form ow_smallmargin">
+			<tr class="ow_center">
+				<th>Language</th>
+				<th>Translation</th>
+			</tr>
+			{foreach from=$langs item='lang'}
+				<tr class="{cycle values="ow_alt1,ow_alt2"}">
+					<td class="ow_label">{$lang->getLabel()} ({$lang->getTag()})</td>
+					<td class="ow_value">{input name="lang[`$lang->id`][`$prefix`][`$key`]"}</td>
+				</tr>
+			{/foreach}
+			<tr>
+				<td class="ow_submit" colspan="2">
+					{submit name="submit"}
+				</td>
+			</tr>
+		</table>
+	{/form}
+	{/block_decorator}
+	
+</div>

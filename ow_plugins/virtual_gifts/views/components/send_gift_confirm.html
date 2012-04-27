@@ -1,0 +1,27 @@
+
+{form name='confirm-gift-form'}
+<div class="clearfix ow_smallmargin">
+    <div class="ow_gift_image">
+        <img src="{$imageUrl}" width="80" />
+    </div>
+    {if $showPrice && $template->price != 0}
+    <div class="ow_gift_message">
+        {text key='virtualgifts+gift_price'} <b>{$template->price}</b> {text key='usercredits+credits'}<br />
+    </div>
+    {/if}
+</div>
+<table class="ow_table_3 ow_smallmargin">
+    <tr>
+        <td class="ow_label" style="width: 13%;">{text key='virtualgifts+message'}</td>
+        <td class="ow_value">{input name='message' class='ow_gift_message_area'}</td>
+    </tr>
+    <tr>
+        <td class="ow_label"></td>
+        <td class="ow_value" style="border: none">{input name='isPrivate'} {label name='isPrivate'}</td>
+    </tr>
+</table>
+<div class="ow_center">
+    {decorator name='button' id='cancel_btn' langLabel='base+cancel' class='ow_ic_reply'}
+    {submit name='send' class='ow_ic_mail'}
+</div>
+{/form}

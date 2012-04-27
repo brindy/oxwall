@@ -1,0 +1,43 @@
+{style}{literal}
+    .ow_avatar_console .ow_avatar_label {
+        bottom: 5px;
+        right: 5px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+    }
+{/literal}{/style}
+
+{if $owner}
+    {literal}
+    <script language="javascript" type="text/javascript">
+        $(function(){
+            $("#avatar-console").hover(
+              function(){
+                $("#avatar-change").fadeIn("fast");
+              },
+              function(){
+                $("#avatar-change").fadeOut("fast");
+              }
+          );    		
+       });
+    </script>
+    {/literal}        
+{/if}
+
+
+	<div class="ow_avatar_console ow_center" id="avatar-console">
+		<div style="height: {$avatarSize}px; background: url({$avatar}) no-repeat center center; width: 100%">
+		    {if $owner}
+		    <div class="ow_avatar_change" id="avatar-change" style="display: none">
+		        <a class="ow_lbutton" href="{$changeAvatarUrl}">{text key='base+avatar_change'}</a>
+		    </div>
+		    {/if}
+		    {if isset($role.label)}<span class="ow_avatar_label"{if isset($role.custom)} style="background-color: {$role.custom}"{/if}>{$role.label}</span>{/if}
+		</div>    
+	</div>
+{if $isUserOnline}
+    {block_decorator name='box' type='empty' addClass='ow_center clearfix ow_online_now_btn'}
+
+        {online_now userId=$userId}
+    {/block_decorator}
+{/if}

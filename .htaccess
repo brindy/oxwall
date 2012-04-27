@@ -1,0 +1,20 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+AddEncoding gzip .gz
+AddEncoding gzip .gzip
+<FilesMatch "\.(js.gz|js.gzip)$">
+  ForceType text/javascript
+</FilesMatch>
+<FilesMatch "\.(css.gz|css.gzip)$">
+  ForceType text/css
+</FilesMatch>
+
+RewriteCond %{REQUEST_URI} .*/http-bind
+RewriteRule (.*) /http-bind [L]
+
+RewriteCond %{REQUEST_URI} !^/index\.php
+RewriteCond %{REQUEST_URI} !/ow_updates/index\.php
+RewriteCond %{REQUEST_URI} !/ow_updates/
+RewriteCond %{REQUEST_URI} (/|\.php|\.html|\.htm|\.feed|robots\.txt|\.raw|/[^.]*)$  [NC]
+RewriteRule (.*) index.php

@@ -1,0 +1,58 @@
+<div>
+	<ul class="ow_bl clearfix ow_small ow_stdmargin">
+		{if $isAdmin}
+			{if !$myself}
+				{if !$isSuspended}
+					<li>
+						<a href="{url_for for="BASE_CTRL_SuspendedUser:suspend:[id=>$userId]"}?backUrl={$backUrl}" class="ow_mild_red">
+							{text key="base+user_suspend_btn_lbl"}
+						</a>
+					</li>
+				{else}
+					<li>
+						<a href="{url_for for="BASE_CTRL_SuspendedUser:unsuspend:[id=>$userId]"}?backUrl={$backUrl}" class="ow_mild_green">
+							{text key="base+user_unsuspend_btn_lbl"}
+						</a>
+					</li>
+				{/if}
+			{/if}
+			<li>
+				<a href="javascript://" class="ow_mild_green" onclick="{literal}window.baseChangeUserRoleFB = OW.ajaxFloatBox('BASE_CMP_GiveUserRole', [{/literal}{$userId}{literal}], { width:556, title: '{/literal}{text key='base+authorization_user_roles'}{literal}'});{/literal}">
+					{text key="base+authorization_give_user_role"}
+				</a>
+			</li>
+			{if !$isApproved}
+			<li>
+				<a href="{url_for for="BASE_CTRL_User:approve:[userId=>`$userId`]"}" class="ow_mild_green">
+					{text key="base+profile_toolbar_user_approve_label"}
+				</a>
+			</li>
+			{/if}
+
+		{/if}
+		{foreach from=$links item='link'}
+			<li><a href="{$link.href}"{if isset($link.class)} class="{$link.class}"{/if}{if isset($link.id)} id="{$link.id}"{/if}>
+				{$link.label}
+				</a>
+			</li>
+		{/foreach}
+        {if $isAdmin || $isModerator}
+        
+        	{if !$isFeatured}
+				<li>
+					<a href="{url_for for="BASE_CTRL_User:controlFeatured:[id=>$userId, command=>mark]"}?backUrl={$backUrl}" class="">
+						{text key='base+user_action_mark_as_featured'}
+					</a>
+				</li>
+			{else}
+				<li>
+					<a href="{url_for for="BASE_CTRL_User:controlFeatured:[id=>$userId, command=>unmark]"}?backUrl={$backUrl}" class="">
+						{text key='base+user_action_unmark_as_featured'}
+					</a>
+				</li>
+			{/if}
+		{/if}
+	</ul>
+</div>
+
+{$cmpsMarkup}

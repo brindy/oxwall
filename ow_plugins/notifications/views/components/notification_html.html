@@ -1,0 +1,42 @@
+<body style="font-size:13px;font-family:Lucida Grande,Verdana;">
+    <p>
+       {text key="notifications+email_html_head" userName=$userName}
+    </p>
+    {if $compose}
+        <p>
+          {text key="notifications+email_html_description"}
+        </p>
+    {/if}
+{foreach from=$items item=section key=time}
+    {if $compose}
+        <div style="font-weight: bold">{format_date timestamp=$time}</div>
+    {/if}
+    <ul>
+        {foreach from=$section item=item}
+            <li style="padding-bottom:5px; width: 450px">
+                <div>
+                    {$item.string}
+                </div>
+                {if $item.avatar}
+                    <div style="float:left; width: 40px;">
+                        <img src="{$item.avatar}" width="40" height="40"/>
+                    </div>
+                {/if}
+                {if $item.content}
+                    <div style="float:left;margin-left:5px;font-size:11px;color:#666; width: 405px">{$item.content}</div>
+                {/if}
+                <br clear="all" />
+            </li>
+        {/foreach}
+    </ul>
+{/foreach}
+
+<p>
+{text key="notifications+email_html_bottom"}
+</p>
+{if $single}
+    <a href="{$unsubscribeUrl}">{text key="notifications+unsubscribe_one_label"}</a>
+{/if}
+<a href="{$settingsUrl}">{text key="notifications+settings_edit_label"}</a> |
+<a href="{$unsubscribeUrl}">{text key="notifications+unsubscribe_all_label"}</a>
+</body>

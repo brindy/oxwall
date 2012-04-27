@@ -1,0 +1,35 @@
+{style}
+{literal}
+table.ow_table_1 td.ow_label
+{
+    width: 35%;
+}
+{/literal}
+{/style}
+{form name='contact_form'}
+<table class="ow_table_1 ow_form ow_automargin" style="width: 500px;">
+    <tr class="ow_alt1">
+		<td class="ow_label">{label name='to'}</td>
+		<td class="ow_value">{input name='to'}{error name='to'}</td>
+	</tr>
+    <tr class="ow_alt2">
+		<td class="ow_label">{label name='from'}</td>
+		<td class="ow_value">{input name='from'}{error name='from'}</td>
+	</tr>
+    <tr class="ow_alt1">
+		<td class="ow_label">{label name='subject'}</td>
+		<td class="ow_value">{input name='subject'}{error name='subject'}</td>
+	</tr>
+    <tr class="ow_alt2">
+		<td class="ow_label">{label name='message'}</td>
+		<td class="ow_value">{input name='message'}{error name='message'}</td>
+	</tr>
+    <tr class="ow_alt1">
+		<td class="ow_label">{label name='captcha'}</td>
+		<td class="ow_value ow_center">{input name='captcha'}{error name='captcha'}</td>
+	</tr>
+	<tr>
+        <td class="ow_center" colspan="2">{submit name='send' class='ow_button ow_ic_mail'}</td>
+	</tr>
+</table>
+{/form}

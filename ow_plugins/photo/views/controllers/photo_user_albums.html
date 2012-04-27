@@ -1,0 +1,55 @@
+
+<div class="ow_photo_infobar ow_alt2">
+    <span class="ow_txt_value">{$total}</span> {text key='photo+albums_by'} {user_link id=$userId name=$displayName}
+</div>
+
+<div class="ow_photo_list ow_stdmargin clearfix">
+
+    {assign var='alt1' value=true}
+    {assign var='cnt' value=0}
+    
+    {* Count of items in row *}
+    {assign var='count' value=5}
+
+	{foreach from=$albums item='album' name='a'}
+	    
+	    {if $cnt == $count}
+            {if $alt1}{assign var='alt1' value=false}{else}{assign var='alt1' value=true}{/if}
+            {assign var='cnt' value=0}
+        {/if}
+        
+        {assign var='cnt' value=$cnt+1}
+        
+	    {capture name='href'}
+	        {url_for_route for="photo_user_album:[user=>`$user`, album=>`$album.dto->id`]"}
+	    {/capture}
+	
+	    {capture name='infoStr'}
+	        <div class="ow_center ow_photo_info_str">{$album.dto->name} 
+	        (<span class="ow_txt_value"><a href="{$smarty.capture.href}">{$album.photo_count}</a></span>)</div>
+	    {/capture}
+
+        {if $cnt == 1}
+            <div class="clearfix {if $alt1}ow_alt1{else}ow_alt2{/if}">
+        {/if} 
+	
+	    {decorator name='photo_list_item' 
+	        data=$album
+	        href=$smarty.capture.href
+	        url=$album.cover
+	        width=$widthConfig
+	        height=$heightConfig
+	        infoString=$smarty.capture.infoStr
+	        set_class="ow_item_set`$count`"}
+
+        {if $cnt == $count && $smarty.foreach.a.iteration != 1 || $smarty.foreach.a.last}
+            </div>
+        {/if}
+        	
+	{foreachelse}
+	    <div class="ow_nocontent">{text key='photo+no_album_found'}</div>
+	{/foreach}
+
+</div>
+
+{$paging}

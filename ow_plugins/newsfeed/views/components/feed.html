@@ -1,0 +1,138 @@
+{style}{literal}
+
+    ul.ow_newsfeed {
+        padding: 5px 0px 0px 5px;
+    }
+
+    .ow_newsfeed_avatar {
+        height: 45px;
+        width: 45px;
+        margin-right: -45px;
+        float: left;
+    }
+
+    .ow_newsfeed_avatar img {
+        height: 45px;
+        width: 45px;
+    }
+
+    .ow_newsfeed_body {
+        margin-left: 45px;
+        padding-left: 10px;
+        position: relative;
+    }
+
+    .ow_newsfeed .ow_newsfeed_item {
+       list-style-image: none;
+    }
+
+    .ow_newsfeed_toolbar {
+        float: none;
+    }
+
+    .ow_newsfeed .ow_comments_list {
+        margin-bottom: 0px;
+    }
+
+    .ow_newsfeed_remove {
+        position: absolute;
+        top: 5px;
+        right: 0px;
+        display: none;
+    }
+
+    .ow_newsfeed_body:hover .ow_newsfeed_remove {
+        display: block;
+    }
+
+    .ow_newsfeed_delimiter {
+        border-bottom-width: 1px;
+        height: 1px;
+        margin-bottom: 7px;
+    }
+
+    .ow_newsfeed_doublesided_stdmargin {
+        margin: 14px 0px;
+    }
+
+    .ow_newsfeed_likes {
+        margin-bottom: 3px;
+    }
+
+    .ow_newsfeed_tooltip .tail {
+        padding-left: 25px;
+    }
+
+    .ow_newsfeed_placeholder {
+        height: 30px;
+        background-position: center 5px;
+    }
+
+    .ow_newsfeed_view_more_c {
+        text-align: center;
+    }
+
+    .ow_newsfeed_string {
+    	max-width: 600px;
+    }
+
+    .ow_newsfeed_item_picture {
+        width: 28%;
+        float: left;
+        max-width: 100px;
+        min-width: 70px;
+        margin-right: 1%;
+    }
+
+    .ow_newsfeed_large_image .ow_newsfeed_item_picture {
+        width: 38%;
+        max-width: 150px;
+    }
+
+    .ow_newsfeed_large_image .ow_newsfeed_item_content {
+        width: 60%;
+        max-width: 390px;
+    }
+
+    .ow_newsfeed_item_picture img {
+        width: 100%;
+    }
+
+    .ow_newsfeed_item_content {
+        float: left;
+        min-width: 50px;
+        width: 70%;
+        max-width: 440px;
+    }
+
+    .ow_newsfeed_features {
+        max-width: 450px;
+        overflow: hidden;
+    }
+
+    .ow_newsfeed_feedback_counter {
+        padding: 2px 5px;
+    }
+
+    .ow_newsfeed_activity_content {
+        border-top-style: dashed;
+        border-top-width: 1px;
+        padding-top: 3px;
+    }
+
+{/literal}{/style}
+<div id="{$autoId}">
+    {if !empty($status)}
+		<div class="ow_smallmargin">
+            {$status}
+		</div>
+	{/if}
+	<ul class="ow_newsfeed ow_smallmargin">
+	    {$list}
+	</ul>
+	{if $viewMore}
+		<div class="ow_newsfeed_view_more_c">
+		    {decorator name="button" class="ow_newsfeed_view_more ow_ic_down_arrow" langLabel="newsfeed+feed_view_more_btn"}
+		</div>
+	{/if}
+</div>

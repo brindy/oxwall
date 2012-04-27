@@ -1,0 +1,121 @@
+{style}
+{literal}
+.theme_icon{
+	background-repeat:no-repeat;
+	background-position:50% 50%;
+	height:150px;
+	width:150px;
+    border:1px solid #ccc;
+    display:block;
+    cursor:pointer;
+}
+
+.theme_title{
+	font-weight:bold;
+}
+
+.theme_desc{
+	padding:10px 0;
+}
+
+.theme_controls input[type="text"]{
+	width:200px;
+}
+
+.theme_control_image{
+	background-repeat:no-repeat;
+	background-position:50% 50%;
+	border:1px solid #ccc;
+	height:40px;
+	width:200px;
+}
+
+.theme_item{
+	float:left;
+}
+
+.theme_item a{
+	display:block;
+	width:150px;
+	height:170px;
+	margin:4px;
+	background-repeat:no-repeat;
+	border:1px solid #ccc;
+}
+
+.theme_item a:hover{
+	text-decoration:none;
+	color:red;
+}
+
+.theme_item a.clicked{
+	border:1px solid red;
+	color:red;
+}
+
+.theme_item span.fake{
+	display:block;
+	height:150px;
+}
+
+.theme_item span.name{
+	display:block;
+	text-align:center;
+}
+
+.selected_theme_info{
+    float:right;
+    width:360px;
+}
+
+{/literal}
+{/style}
+<div class="clearfix">
+<div class="selected_theme_info">
+    {block_decorator name='box_cap' type='empty' iconClass="ow_ic_info" langLabel='admin+theme_info_cap_label'}
+{/block_decorator}
+{block_decorator name='box' type='empty'}
+<div class="clearfix">
+    <div style="float: left;width:150px;"><a onclick="{literal}new OW_FloatBox({$contents:$('.selected_theme_info .theme_preview'), $title:'Preview', width:'720px', height:'600px'}){/literal}" class="theme_icon" style="background-image:url({$themeInfo.iconUrl});"></a></div>
+    <div style="float:right;width: 195px;"><div class="theme_title">{$themeInfo.title}</div>
+        <div class="theme_desc">{$themeInfo.description}</div></div>
+</div>
+	<div style="padding:10px 5px;">
+		<div class="theme_info">
+			<table class="ow_table_3">
+			<tr>
+			<td class="ow_label">{text key='admin+theme_info_author_label'}:</td>
+			<td class="ow_value"><span class="author">{$themeInfo.author}</span></td>
+			</tr>
+			<tr>
+			<td class="ow_label">{text key='admin+theme_info_author_url_label'}:</td>
+			<td class="ow_value"><span class="author_url"><a href="{$themeInfo.authorUrl}">{$themeInfo.authorUrl}</a></span></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="border: none;text-align: right;">
+                    {decorator name='button' class='theme_select_submit' langLabel='admin+themes_choose_activate_button_label'}
+                </td>
+			</tr>
+			</table>
+            <div style="display: none;"><div class="theme_preview" style="text-align: center;"><img src="{$themeInfo.previewUrl}" /></div></div>
+		</div>
+	</div>
+    {/block_decorator}
+</div>
+    <div style="float:left;width:500px;">
+{block_decorator name='box_cap' type='empty' iconClass="ow_ic_monitor" langLabel='admin+themes_choose_list_cap_title'}
+{/block_decorator}
+{block_decorator name='box' type='empty'}
+<div class="themes_select clearfix">
+{foreach from=$themes item='theme'}
+<div class="theme_item{if $theme.active} active{/if}">
+	<a class="{$theme.key}" href="javascript://" style="background-image:url({$theme.iconUrl});">
+		<span class="fake"></span>
+		<span class="name">{$theme.title}</span>
+	</a>
+</div>
+{/foreach}
+</div>
+{/block_decorator}
+    </div>
+</div>

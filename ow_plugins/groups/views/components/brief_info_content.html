@@ -1,0 +1,79 @@
+{script}
+{literal}
+document.flag = function(type, id, title, url, langKey){
+    if(typeof(document.addRoleStorage) === 'undefined'){
+        document.storage = [];
+    }
+
+    $.post( '{/literal}{url_for for="BASE_CTRL_Flag:form"}{literal}', {type: type, id: id, title: title, url: url, langKey: langKey}, function(json){
+        if( typeof(json.isFlagged) != 'undefined' ){
+            OW.warning("{/literal}{text key="base+flag_already_flagged"}{literal}");
+            return;
+        }
+
+        document.storage['flag-panel'] = {
+            fb: new OW_FloatBox({$title: '{/literal}{text key='base+flag_as'}{literal}', $contents: json['markup'], width: '315px'})
+        }
+
+        OW.addCss(json.css);
+
+        OW.addScriptFiles(json['include_js'], function(){ 
+            OW.addScript(json['js']);
+        });
+
+    }, 'json');
+}
+{/literal}
+{/script}
+
+{style}{literal}
+
+.ow_group_brief_info .image 
+{
+    width: 100px;
+    margin-right: -100px;
+}
+
+.ow_group_brief_info .image img 
+{
+    width: 100px;
+}
+
+.ow_group_brief_info .details
+{
+    padding-left: 5px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.ow_group_brief_info .details .controls 
+{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+{/literal}{/style}
+
+{block_decorator name="box" type="empty" toolbar=$toolbar}
+<div class="ow_group_brief_info clearfix ow_smallmargin">
+    {if $group.imgUrl}
+        <div class="image ow_left">
+            <a href="{$group.url}"><img src="{$group.imgUrl}" /></a>
+        </div>
+        <div class="details" style="margin-left: 100px;">
+    {else}
+        <div class="details">
+    {/if}
+    
+        <h3 class="title">
+            <a href="{$group.url}">{$group.title}</a>
+        </h3>
+
+        <div class="body">
+            {$group.description|autolink}
+        </div>
+    </div>
+</div>
+
+{/block_decorator}

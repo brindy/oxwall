@@ -1,0 +1,85 @@
+{style}{literal}
+    .ow_photo_submit_wrapper { padding: 9px; float: left; margin: 0px 5px 5px 0px; cursor: pointer; }
+    
+    .ow_photo_submit_slot {
+        width: 110px;
+        height: 110px;
+        position: relative;
+    }
+    
+    .ow_photo_submit_action { display: none; width: 19px; height: 18px; background-repeat: no-repeat; background-position: center bottom; }
+    
+    .ow_photo_submit_action_cont { position: absolute; right: 2px; top: 2px; border: none; height: 20px; text-align: right; padding: 0px; }
+        
+    .ow_photo_submit_group { /*display: none;*/ }
+{/literal}{/style}
+
+<div id="ow_photo_submit">
+{form name='photoSubmitForm'}
+<div class="clearfix ow_smallmargin" id="photo_slots">
+{foreach from=$list item='photo'}
+    <div {if count($list) > 1}class="ow_photo_submit_wrapper"{/if} id="wrapper_{$photo.dto->id}">
+    <div {if count($list) > 1}class="ow_photo_submit_slot"{/if}>
+        <img src="{$photo.imageSrc}" width="110" />
+        <div class="ow_highbox ow_photo_submit_action_cont">
+            <a class="ow_photo_submit_action ow_action_delete ow_ic_delete" rel="{$photo.dto->id}" href="javascript://" title="{text key='base+delete'}"></a>
+            <a class="ow_photo_submit_action ow_action_tag ow_ic_tag" rel="{$photo.dto->id}" href="javascript://" title="{text key='photo+add_tags'}"></a>
+            <a class="ow_photo_submit_action ow_action_edit ow_ic_comment" rel="{$photo.dto->id}" href="javascript://" title="{text key='photo+describe_photo'}"></a>
+        </div>
+    </div>
+    </div>
+{/foreach}
+</div>
+
+{block_decorator name='box'}
+<table class="ow_table_1 ow_form">
+{if count($list) > 1}
+<tr class="ow_alt1">
+<td class="ow_label">
+    <input type="checkbox" id="photo_check_all" /> <label for="photo_check_all">{text key='base+check_all'}</label>
+</td>
+    <td class="ow_value">
+        {text key='base+with_selected'}
+        {decorator name='button' id='btn-group-description' langLabel='photo+add_description' class='ow_ic_chat'}
+        {decorator name='button' id='btn-group-tag' langLabel='photo+add_tags' class='ow_ic_tag'} 
+    </td>
+</tr>
+{else}
+<tr class="ow_alt2">
+        <td class="ow_label">{label name='description'}</td>
+        <td class="ow_value">{input name='description'}<br />{error name='description'}</td>
+        <td class="ow_desc ow_small">{text key='photo+description_desc'}</td>
+    </tr>
+    <tr class="ow_alt1">
+        <td class="ow_label">{label name='tags'}</td>
+        <td class="ow_value">{input name='tags'}<br />{error name='tags'}</td>
+        <td class="ow_desc ow_small">{text key='photo+tags_desc'}</td>
+    </tr>
+{/if}
+
+<tr class="ow_alt2">
+    <td class="ow_label">{label name='album'}</td>
+    <td class="ow_value">{input name='album'} {error name='album'}</td>
+    <td class="ow_desc ow_small">{text key='photo+album_desc'}</td>
+</tr>
+</table>
+<div class="ow_center">{submit name='submit'}</div>
+{/block_decorator}
+
+<div id="photo_desc_cont" style="display: none;">
+<div class="ow_center">
+    <div class="ow_smallmargin"><textarea id="photo-desc-area" name="photo_desc"></textarea></div>
+    {decorator name='button' id='btn-edit-description' langLabel='base+form_element_submit_default_value' class='ow_ic_ok'}
+</div>
+</div>
+
+<div id="photo_tag_cont" style="display: none;">
+<div class="ow_center">
+    <div class="ow_smallmargin"><input type="text" name="tags" id="photo-tag-input" /></div>
+    {decorator name='button' id='btn-edit-tags' langLabel='base+form_element_submit_default_value' class='ow_ic_ok'}
+</div>
+</div>
+
+{/form}
+
+</div>

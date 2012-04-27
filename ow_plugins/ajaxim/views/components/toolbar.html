@@ -1,0 +1,99 @@
+{if $debug_mode}<div id="server_msg_container"></div>{/if}
+<div id="im_console">
+    <div class="clearfix">
+    {block_decorator name='tooltip' addClass='contacts_widget ow_hidden'}
+            <div id="contacts_friends" style="display: block;"><div id="contacts_friends_label" style="display: none;">{text key='ajaxim+friends_online'}</div><div id="contacts_friends_list"></div></div>
+            <div id="contacts_other" style="display: block;"><div id="contacts_other_label" style="display: none;">{text key='ajaxim+others_online'}</div><div id="contacts_other_list"></div></div>
+            <div id="contacts_online_list_label" class="contact ow_alt2 new_mail clearfix" style="display: none;">
+                <div title="{text key='base+view_all'}"  class="ow_center" ><a href="{$online_list_url}" target="_blank" ><span>...</span></a></div>
+            </div>
+            <div id="user_settings_container">
+                <a id="user_settings" href="javascript://" >{text key='ajaxim+user_settings_link'}</a>
+                <div style="display: none;">
+                    <div id="user_settings_form" style="padding: 10px;">
+                        {form name='user_settings_form'}
+                        <table class="ow_table_4 ow_automargin">
+                            <tr>
+                                <td class="ow_label">
+                                    {label name='ajaxim_enable_sound'}
+                                </td>
+                                <td class="ow_value">
+                                    {input name='ajaxim_enable_sound'}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div style="text-align: center;padding: 10px;">{submit name='submit'}</div>
+                                </td>
+                            </tr>
+                        </table>
+                        {/form}
+                        {if $privacyPluginActive}
+                        <div class="ow_center">
+                            <a target="_blank" href="{$privacy_settings_url}">{text key='ajaxim+change_privacy_settings'}</a>
+                        </div>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+        {/block_decorator}
+    </div>
+
+    <!-- IM prototypes description -->
+
+    <span id="main_tab_label_proto" class="ow_txt_value im_main_tab_text" style="display: none;" >{text key='ajaxim+chat'}</span>
+    <span id="no_online_users" style="display: none;">{text key='ajaxim+no_contacts_online' }</span>
+    <span id="new_message_label" style="display: none;">{text key='ajaxim+new_message' }</span>
+    <span id="last_message_sent_label" style="display: none;">{text key='ajaxim+last_message_sent' }</span>
+    <span id="user_offline_message" style="display: none;">{text key='ajaxim+user_is_offline'}</span>
+    <span id="user_online_message" style="display: none;">{text key='ajaxim+user_is_online'}</span>
+
+    <div id="main_tab_contact_proto" class="console_item notification_shortcut" style="display: none; position: relative; z-index: 99;">
+        <div class="fake_node">
+            <a href="javascript://" class="ow_preloader new_mail main_tab_contact_click">
+                <span class="ow_txt_value im_main_tab_text"></span>
+            </a>
+        </div>
+            <div class="talkbox" style="display: none; z-index: 99;">
+                {block_decorator name='tooltip'}
+                <div class="cap">
+                    <div id="talkbox_contact_info" class="clearfix">
+                        {decorator name='avatar_item' data=$avatar_proto_data}
+                        <div class="talkbox_username"><a href="#" target="_blank">&nbsp;</a></div>
+                        <div class="talk_box_status ow_remark" style="display: none;">{text key='ajaxim+user_offline'}</div>
+                    </div>
+                    <div class="talk_box_cap_panel clearfix">
+                        <div class="close_cmd">x</div>
+                        <div class="min_cmd">-</div>
+                    </div>
+                </div>
+                <div class="box ow_small ow_alt2"><div id="message_list"></div><div id="message_preloader" class="ow_dnd_preloader ow_preloader_content"></div></div>
+                <div style="padding: 10px 0 10px 0;">
+                    <input type="text" class="talkbox_msg" name="msg" />
+                    <!--<div class="im_history_cmd ow_ic_calendar"> </div>-->
+                    <!--<input type="button" class="talkbox-send" value="{text key='ajaxim+send'}" /> -->
+                </div>
+                {/block_decorator}
+            </div>
+    </div>
+
+
+    <!-- Contact item in contact list prototype -->
+    <div id="contact_proto" class="contact ow_alt2 new_mail clearfix" style="display: none;">
+        <div class="contact_avatar">
+            <img src="{$no_avatar_url}" />
+        </div>
+        <div class="contact_username" ></div>
+    </div>
+
+    <!-- Prototype of message in talkbox -->
+    <div id="talk_box_msg_proto" class="talk_box_msg clearfix" style="display: none;">
+        <div class="message_cap"></div>
+        <div class="message"></div>
+    </div>
+
+
+
+</div>
+
+<audio id="ajaxim_sound_player_audio" src="{$ajaxim_sound_url}" />

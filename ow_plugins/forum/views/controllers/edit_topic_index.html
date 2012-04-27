@@ -1,0 +1,132 @@
+
+{*Edit topic form*}
+
+{style}
+{literal}
+    .ow_forum_attachment_icon {
+        display: inline-block;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        width: 14px;
+        height: 17px;
+    }
+    .forum_attachments_label {
+        margin: 15px 0 5px;
+        padding-left: 5px;
+        font-weight: bold;
+    }
+{/literal}
+{/style}
+
+{script}
+{literal}
+    $('#toggle_attach_link').click(function(){
+        $('#attach_file_inputs').toggle();
+    });
+    $('#toggle_attach_edit_link').click(function(){
+        $('#attach_edit_file_inputs').toggle();
+    });
+    
+    $(".ow_forum_attachment").hover(
+        function(){
+            $(this).find("a.forum_delete_attachment").show();
+        },
+        function(){
+            $(this).find("a.forum_delete_attachment").hide();
+        }
+    );
+    
+    $("a.forum_delete_attachment").each(function(){
+        
+        var container_handler = $(this).parent();
+        
+        $(this).click(function(){            
+            
+            if ( confirm(OW.getLanguageText('forum', 'confirm_delete_attachment')) )
+            {
+               var attachment_id = $(this).attr("rel");
+               
+               var params = {};
+               var url = '{/literal}{url_for_route for='forum_delete_attachment'}{literal}';
+               params['attachmentId'] = attachment_id;
+               
+               $.ajaxSetup({dataType: 'json'});
+               
+               $.post(url, params, function(data){
+                    
+                    if ( data.result == true )
+                    {
+                        OW.info(data.msg);
+                        
+                        container_handler.remove();
+                    }
+                    else if (data.error != undefined)
+                    {
+                        OW.warning(data.error);
+                    }
+               });             
+            }
+            else
+            {
+                return false;
+            }
+        });
+    });
+{/literal}
+{/script}
+
+{if $isHidden}
+    <div class="ow_stdmargin">
+        {$componentForumCaption}
+    </div>
+{/if}
+{$breadcrumb}
+
+
+{form name='edit-topic-form'}
+    <table class="ow_table_1 ow_form" width="100%">
+    <tbody>
+        <tr class="ow_alt{cycle values='2,1'}">
+            <td class="ow_label">{text key='forum+new_topic_subject'}</td>
+            <td class="ow_value">
+                {input name='title'}
+                {error name='title'}
+            </td>
+        </tr>
+        <tr class="ow_alt{cycle values='2,1'}">
+            <td class="ow_label">{text key='forum+new_topic_body'}</td>
+            <td class="ow_value">
+                {input name='text' id='post_body'}
+                {error name='text'}
+            </td>
+        </tr>
+        {if $enableAttachments}
+        <tr class="ow_alt{cycle values='2,1'}">
+            <td class="ow_label">{text key='forum+attachments'}</td>
+            <td class="ow_value ow_txtleft ow_small">
+            {capture assign='postId'}{$post->id}{/capture}
+                {if isset($attachments[$postId])}
+                {foreach from=$attachments[$postId] item='attm'}
+                <span class="ow_forum_attachment">
+                    <span class="ow_forum_attachment_icon ow_ic_attach">&nbsp;</span>
+                    {if $attm.downloadUrl != ''}<a href="{$attm.downloadUrl}">{$attm.fileName}</a>{else}{$attm.fileName}{/if} ({$attm.fileSize}Kb)
+                    <a href="javascript://" class="forum_delete_attachment ow_lbutton ow_hidden" rel="{$attm.id}">{text key='base+delete'}</a>
+                </span><br />
+                {/foreach}
+                {/if}
+                <span class="ow_forum_attachment_icon ow_ic_attach">&nbsp;</span>
+                <a href="javascript://" id="toggle_attach_edit_link">{text key='forum+attach_files'}</a><br /><br />
+                <div class="ow_hidden ow_smallmargin" id="attach_edit_file_inputs">
+                    {input name='attachments'}
+                </div>
+            </td>
+        </tr>
+        {/if}
+        <tr class="ow_alt{cycle values='2,1'}">
+            <td colspan="2" class="ow_submit">
+                {submit name='save' class="ow_ic_save"}
+            </td>
+        </tr>
+    </tbody>
+    </table>    
+{/form}

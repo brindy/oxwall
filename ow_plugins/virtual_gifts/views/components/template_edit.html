@@ -1,0 +1,31 @@
+
+<div id="edit_template_form">
+    <div>
+    {form name='edit-template-form'}
+        <table class="ow_table_3">
+            {if $single}
+            <tr>
+            <td class="ow_label">{label name='file'}</td>
+            <td class="ow_value">
+                <div class="ow_smallmargin"><img src="{$imageUrl}" width="80" /></div>
+                {input name='file'}
+            </td>
+            </tr>
+            {/if}
+            {if $categoriesSetup}
+            <tr>
+            <td class="ow_label">{label name='category'}</td>
+            <td class="ow_value">{input name='category'}</td>
+            </tr>
+            {/if}
+            {if $setPrice}
+            <tr>
+            <td class="ow_label">{label name='price'}</td>
+            <td class="ow_value">{input name='price' class='ow_settings_input'} {text key='usercredits+credits'}</td>
+            </tr>
+            {/if}
+        </table>
+        <div class="ow_center">{submit name='save' class='ow_ic_save'}</div>
+    {/form}
+    </div>
+</div>

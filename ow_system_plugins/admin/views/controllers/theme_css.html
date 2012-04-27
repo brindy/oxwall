@@ -1,0 +1,31 @@
+{style}
+{literal}
+textarea.edit_css{
+    height:400px;
+}
+.css_code pre{
+	padding:10px;
+	height:400px;
+	overflow:scroll;
+}
+{/literal}
+{/style}
+{$contentMenu}
+{block_decorator name='box_cap' langLabel='admin+theme_css_existing_css_box_cap_label'}
+{/block_decorator}
+{block_decorator name='box' addClass='ow_stdmargin'}
+<div class="css_code">
+{$code}
+</div>
+{/block_decorator}
+{block_decorator name='box_cap' iconClass="ow_ic_write" langLabel='admin+theme_css_edit_css_box_cap_label'}
+{/block_decorator}
+{block_decorator name='box' style='text-align:center;'}
+{form name='add-css'}
+{input name='css' class='edit_css'}
+<br /><br />
+{submit name='submit'}
+<br /><br />
+{/form}
+{/block_decorator}
+

@@ -1,0 +1,43 @@
+{$menu}
+
+<p>
+{text key="fbconnect+configuration_fields_legend"}
+</p>
+<form method="post" action="{$formAction}">
+<table class="ow_table_2 ow_stdmargin ow_automargin ow_wide">
+    <tr>
+        <th width="50%" align="center">{text key="fbconnect+configuration_fields_questions_label"}</th>
+        <th align="center">{text key="fbconnect+configuration_fields_fbfields_label"}</th>
+    </tr>
+    {foreach from=$questionList item=section}
+        <tr>
+            <th colspan="2">{section_lang name=$section.name}</th>
+        </tr>
+        {foreach from=$section.items item=question}
+		    <tr class="{cycle name="view1" values="ow_alt1,ow_alt2"}">
+		        <td class="ow_label">{question_lang name=$question.name}</td>
+		        <td class="ow_value">
+                    {if count($question.fbFields) > 1}
+                        <select name="fb_alias[{$question.name}]">
+                            <option value="">
+                                    Select
+                            </option>
+                            {foreach from=$question.fbFields item=fbf}
+                                <option value="{$fbf}" {if $question.alias == $fbf}selected="selected"{/if}>
+                                    {$fbf}
+                                </option>
+                            {/foreach}
+                        </select>
+                    {else}
+                        {$question.fbFields.0}
+                    {/if}
+                </td>
+		    </tr>
+        {/foreach}
+    {/foreach}
+    <tr><td colspan="3" align="center"><input type="submit" class="ow_button ow_ic_save" value="{text key='fbconnect+save_btn_label'}" /></td></tr>
+</table>
+</form>
+<p>
+{text key="fbconnect+configuration_fields_suggest" questionsUrl=$questions_url}
+</p>

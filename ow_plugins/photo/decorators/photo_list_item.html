@@ -1,0 +1,17 @@
+{style}
+{literal}
+    .ow_photo_list_item_thumb { position: relative; }
+    
+    .ow_photo_list_item_thumb span.ow_lbutton { position: absolute; bottom: 2px; right: 12px; padding: 0px 3px; }
+{/literal}
+{/style}
+
+<div class="ow_photo_list_item ow_small{if isset($data.set_class)} {$data.set_class}{/if}">
+
+    <div class="ow_photo_list_item_thumb">
+        <a href="{$data.href}"><img src="{$data.url}" width="{$data.width}" height="{$data.height}" /></a>
+        {if !empty($displayPrivacy) && $displayPrivacy && $data.privacy != 'everybody'}<span class="ow_lbutton">{text key='privacy+privacy_no_permission_heading'}</span>{/if}
+    </div>
+    
+    {$data.infoString}
+</div>

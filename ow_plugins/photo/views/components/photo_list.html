@@ -1,0 +1,55 @@
+
+{if !$no_content}
+
+	<div class="ow_photo_list ow_stdmargin clearfix">
+	
+	{assign var='alt1' value=false}
+	{assign var='cnt' value=0}
+	
+	{foreach from=$photos item='photo' name='p'}
+
+	    {if $cnt == $count}
+	        {if $alt1}{assign var='alt1' value=false}{else}{assign var='alt1' value=true}{/if}
+	        {assign var='cnt' value=0}
+	    {/if}
+	    
+	    {assign var='cnt' value=$cnt+1}
+	
+	    {capture name='href'}
+	        {url_for_route for="view_photo:[id=>`$photo.id`]"}
+	    {/capture}
+	
+	    {capture name='infoStr'}
+	        <div class="ow_photo_rate">{if $listType == 'toprated'}{if $photo.score}{display_rate avg_rate=$photo.score}{/if}{/if}</div>
+	        {text key='base+by'} {user_link username=$usernames[$photo.userId] name=$names[$photo.userId]}
+	    {/capture}
+	    
+	    {if $cnt == 1}
+	        <div class="clearfix {if $alt1}ow_alt1{else}ow_alt2{/if}">
+	    {/if} 
+
+        {if $listType == 'latest'}{assign var='privacy' value=1}{else}{assign var='privacy' value=0}{/if} 	
+	    {decorator name='photo_list_item'
+	        data=$photo
+	        href=$smarty.capture.href
+	        url=$photo.url
+	        width=$widthConfig
+	        height=$heightConfig
+	        infoString=$smarty.capture.infoStr
+	        set_class="ow_item_set`$count`"
+	        displayPrivacy=$privacy
+	    }
+	    
+	    {if $cnt == $count && $smarty.foreach.p.iteration != 1 || $smarty.foreach.p.last}
+	        </div>
+	    {/if}
+	    
+	{/foreach}
+	
+	</div>
+	
+	{$paging}
+
+{else}
+    <div class="ow_nocontent">{text key='photo+no_photo_found'}</div>
+{/if}

@@ -1,0 +1,54 @@
+{style}
+{literal}
+tr.ow_preference td.ow_label{
+    width:30%
+}
+{/literal}
+{/style}
+{$contentMenu}
+
+{block_decorator name="box" type="empty" addClass="ow_superwide ow_automargin"}
+    {if empty($preferenceList)}
+        {block_decorator name="box" type="empty" addClass="ow_center" style="padding:15px;"}
+             {text key="base+preference_no_items"}
+        {/block_decorator}
+    {else}
+        {form name='preferenceForm'}
+            <table class="ow_table_1 ow_form">
+                {foreach from=$preferenceList key='section' item='preferences'}
+                    {if !empty($section) }
+                        <tr class="ow_name ow_txtleft">
+                            <th colspan="3">
+                                {if !empty($sectionLabels.$section.label)}
+                                    <span class="ow_section_icon {if !empty($sectionLabels.$section.iconClass)} {$sectionLabels.$section.iconClass} {/if}">
+                                        {$sectionLabels.$section.label}
+                                    </span>
+                                {else}
+                                    {$section}
+                                {/if}
+                            </th>
+                        </tr>
+                    {/if}
+                    {foreach from=$preferences item='preference'}
+                        <tr class="ow_preference {cycle name=$section values='ow_alt1,ow_alt2'}">
+                            <td class="ow_label">
+                                {label name=$preference}
+                            </td>
+                            <td class="ow_value">
+                                {input name=$preference}
+                                <div style="height:1px;"></div>
+                                {error name=$preference}
+                            </td>
+                            <td class="ow_desc">
+                                {desc name=$preference}
+                            </td>
+                        </tr>
+                    {/foreach}
+                {/foreach}
+                <tr>
+                        <td colspan="3" class="ow_center">{submit name='preferenceSubmit'}</td>
+                </tr>
+            </table>
+        {/form}
+    {/if}
+{/block_decorator}

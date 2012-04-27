@@ -1,0 +1,65 @@
+
+{if $settings}
+<table class="ow_table_1 ow_small ow_form ow_smallmargin">
+    {foreach from=$settings key=name item=item}
+    <tr class="{cycle name="custom" values="ow_alt2,ow_alt1"}">
+        <td class="ow_label">{$item.label}</td>
+        <td class="ow_value">
+
+            {if $item.presentation == 'number'}
+                <input type="text" name="{$name}" value="{$item.value}" />
+            {elseif $item.presentation == 'text'}
+                <input type="text" name="{$name}" value="{$item.value}" />
+            {elseif $item.presentation == 'textarea'}
+                <textarea name="{$name}" >{$item.value}</textarea>
+            {elseif $item.presentation == 'checkbox'}
+                <input type="checkbox" name="{$name}"{if $item.value} checked="checked"{/if} />
+            {elseif $item.presentation == 'select'}
+                <select name="{$name}">
+                    {foreach from=$item.optionList key=value item=label}
+                        <option value="{$value}"{if $value == $item.value}selected="selected"{/if}>{$label}</option>
+                    {/foreach}
+                </select>
+            {/if}
+            <div id="error_{$name}" class="setting_error ow_error"></div>
+
+        </td>
+    </tr>
+    {/foreach}
+</table>
+{/if}
+
+<div class="ow_box_cap_empty"><h3 class="ow_ic_gear_wheel">{text key="base+widgets_fb_default_settings_label"}</h3></div>
+
+<div class="ow_box ow_box_empty clearfix">
+    <table class="ow_table_1 os_small ow_form ow_smallmargin">
+        <tr class="{cycle name="system" values="ow_alt2,ow_alt1"}">
+            <td class="ow_label">{text key="base+widgets_default_settings_title"}</td>
+            <td class="ow_value">
+                <input type="text" name="title" {if isset($values.title)}value="{$values.title}" beforevalue="{$values.title}"{/if} />
+                <div id="error_title" class="setting_error ow_error"></div>
+            </td>
+        </tr>
+        <tr class="{cycle name="system" values="ow_alt2,ow_alt1"}">
+            <td class="ow_label">{text key="base+widgets_default_settings_show_title"}</td>
+            <td class="ow_value">
+                <input type="checkbox" name="show_title" {if isset($values.show_title) && $values.show_title}checked="checked"{/if} />
+                {text key="base+widgets_default_settings_icon"}:
+                <select class="choose_icon" name="icon" >
+                    {foreach from=$avaliableIcons item=icon}
+                        <option value="{$icon}" {if isset($values.icon) && $values.icon == $icon}selected="selected"{/if} >
+                            {$icon}
+                        </option>
+                    {/foreach}
+                </select>
+            </td>
+        </tr>
+        <tr class="{cycle name="system" values="ow_alt2,ow_alt1"}">
+            <td class="ow_label">{text key="base+widgets_default_settings_wib"}</td>
+            <td class="ow_value">
+                <input type="checkbox" name="wrap_in_box" {if isset($values.wrap_in_box) && $values.wrap_in_box}checked="checked"{/if} />
+            </td>
+        </tr>
+    </table>
+</div>
+

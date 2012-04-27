@@ -1,0 +1,8 @@
+{if $box.show_title}
+    {block_decorator name='box_cap' iconClass=$box.icon label=$box.title addClass="ow_dnd_configurable_component clearfix" type=$box.type}
+    {/block_decorator}
+{/if}
+
+{block_decorator name='box' type=$box.type addClass="ow_stdmargin clearfix"}
+    {$content}
+{/block_decorator}

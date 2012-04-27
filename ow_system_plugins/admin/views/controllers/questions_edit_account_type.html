@@ -1,0 +1,53 @@
+{literal}
+<script>
+function editLangValue(_prefix, _key, _callback){
+	$.post( '{/literal}{url_for for="ADMIN_CTRL_Languages:ajaxEditLanguageValuesForm"}{literal}?prefix='+_prefix+'&key='+_key, {}, function(json){
+		if(document['ajaxLangValueEditForms'] == undefined)
+                {
+                    document['ajaxLangValueEditForms'] = [];
+                }
+
+
+		document['ajaxLangValueEditForms'][_prefix+'-'+_key] = new OW_FloatBox({$title: '{/literal}{text key="admin+questions_edit_account_type_name_title"}{literal}', $contents: json['markup'], width: 556});
+                document['ajaxLangValueEditForms'][_prefix+'-'+_key+'callback'] = _callback;
+
+		OW.addScriptFiles(json['include_js'], function(){ OW.addScript(json['js']); });
+
+	}, 'json');
+}
+</script>
+{/literal}
+
+{$contentMenu}
+
+<div class="ow_automargin">
+<table class="ow_table_2 ow_stdmargin account_type">
+     <tr>
+        <th>{text key='admin+question_column_account_type'}</th>
+        <th>{text key='admin+question_column_exclusive_questions'}</th>
+        <th width="40"></th>
+    </tr>
+    {foreach from=$accountTypes  item='accountType' }
+        {capture name="evenstyle"}{cycle values="ow_alt1,ow_alt2"}{/capture}
+            <tr  width="100%" class="{$smarty.capture.evenstyle} account_type_tr ow_admin_profile_question_dnd_cursor" account_type_name="{$accountType.name}">
+                <td width="70%" class="{$smarty.capture.evenstyle} ow_txtleft account_type_value">{account_type_lang name=$accountType.name }</td>
+                <td width="15%"  class="{$smarty.capture.evenstyle}">{$accountType.questionCount}</td>
+                <td width="15%"  class="{$smarty.capture.evenstyle} ow_nowrap">
+                    <div class="quest_buttons" style="height:20px;">
+                         <a class="ow_lbutton ow_lbutton edit_accont_type" style="display:none;" href="javascript://">{text key='admin+btn_label_edit'}</a>
+                        {if $accountTypeCount > 1 }
+                            <a class="ow_lbutton ow_red delete_accont_type" style="display:none;" href="{$deleteUrlList[$accountType.name]}" >{text key='admin+btn_label_delete'}</a>
+                        {/if}
+                    </div>
+                </td>
+            </tr>
+    {/foreach}
+</table>
+{block_decorator name="box_cap" type='empty' iconClass="ow_ic_add" langLabel='admin+questions_add_new_account_type'}
+{/block_decorator}
+{block_decorator name="box" style="text-align:center;"}
+    {form name="add_account_type_form"}
+        {input name='account_type' style="width:auto;"}&nbsp;{submit class="ow_ic_add" name='account_type_submit'}
+    {/form}
+{/block_decorator}
+</div>

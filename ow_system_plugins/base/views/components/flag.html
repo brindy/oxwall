@@ -1,0 +1,17 @@
+{style}
+{literal}
+.foo ul li{
+	float: left;
+	width: 100px !important;
+}
+{/literal}
+{/style}
+
+<div  style="min-height: 60px; text-align: center;">
+	{form name="flag" style="border: 1px solid green;"}
+		<div class="foo clearfix">
+			{input name="reason" onclick="$('form[name=flag]', this.form).hide();$('div.ajxp', this.form).show(); $(this.form).submit();"}
+		</div>
+	{/form}
+	<div class="ajxp ow_preloader_content" style="min-width: 50px; min-height: 50px; display: none;"></div>
+</div>

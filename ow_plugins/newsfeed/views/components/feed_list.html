@@ -1,0 +1,13 @@
+<li {if count($feed)}style="display: none;"{/if} class="ow_newsfeed_item ow_nocontent newsfeed_nocontent">{text key="newsfeed+empty_feed_message"}</li>
+
+{foreach from=$feed item=section name=f_sections}
+    {if !$smarty.foreach.f_sections.first}
+        <li class="ow_newsfeed_section ow_small ow_smallmargin">
+            <span>{$section.date}</span>
+        </li>
+    {/if}
+
+    {foreach from=$section.list item=item name=f_items}
+        {newsfeed_item action=$item lastItem=$smarty.foreach.f_items.last lastSection=$smarty.foreach.f_sections.last}        
+    {/foreach}
+{/foreach}

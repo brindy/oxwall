@@ -1,0 +1,36 @@
+{style}
+{literal}
+.ow_comments_list .ow_attachment{
+    padding-top:10px;
+}
+.ow_comments_list .comments_view_all{
+    text-align:right;
+    font-size:10px;
+    height:15px;
+}
+{/literal}
+{/style}
+<div id="{$cmpContext}">
+   <div class="ow_comments_list ow_std_margin">
+   		{if isset($noComments)}
+   		<div class="ow_nocontent">{text key="base+comment_no_comments"}</div>
+   		{else}
+        {if !empty($viewAllLink)}<div class="comments_view_all"><a href="javascript://">{$viewAllLink}</a></div>{/if}
+      {foreach from=$comments item='comment'}
+      {decorator name=$decorator addClass='ow_smallmargin' data=$comment infoString="<a href=\"`$comment.profileUrl`\">`$comment.displayName`</a> <span class=\"ow_nowrap ow_tiny\">`$comment.date`</span>"}
+      {/foreach}
+      {if !empty($pages)}
+         <div class="ow_paging clearfix ow_stdmargin">
+         	<span>{text key='base+pages_label'}</span>
+            {foreach from=$pages item='page'}
+            {if !isset($page.pageIndex)}
+            <span>{$page.label}</span>
+            {else}
+            <a href="javascript://" class="page-{$page.pageIndex}{if isset($page.active) && $page.active} active{/if}">{$page.label}</a>
+            {/if}
+            {/foreach}
+         </div>
+      {/if}
+      {/if}
+   </div>
+</div>

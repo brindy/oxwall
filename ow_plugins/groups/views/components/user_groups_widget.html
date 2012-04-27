@@ -1,0 +1,11 @@
+<div class="ow_lp_avatars">
+        {foreach from=$list item=item}
+            <a href="{$item.url}" class="ow_lp_wrapper" title="{$item.title}">
+                <img src="{$item.image}" width="45" />
+            </a>
+        {foreachelse}
+            <div class="ow_nocontent">
+                {text key='groups+user_groups_widget_empty'}
+            </div>
+        {/foreach}
+</div>

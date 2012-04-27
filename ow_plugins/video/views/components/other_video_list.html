@@ -1,0 +1,20 @@
+
+{block_decorator name='box_cap' iconClass='ow_ic_files' langLabel='video+other_video'}{/block_decorator}
+{block_decorator name='box' addClass='ow_small'}
+
+	<div class="ow_other_video_list clearfix">
+	{if $clips}
+		{foreach from=$clips item='clip'}      
+		    <div class="ow_other_video_list_item ow_smallmargin clearfix">
+		        {capture name='url'}{url_for_route for="view_clip:[id=>`$clip.id`]"}{/capture}
+		
+                <div class="ow_other_video_thumb ow_left">
+                    <a href="{$smarty.capture.url}">{if $clip.thumb != 'undefined'}<img src="{$clip.thumb}" />{/if}</a>
+			    </div>
+		        <div class="ow_other_video_item_title"><a href="{$smarty.capture.url}">{$clip.title}</a></div>
+		    </div>
+		{/foreach}
+	{/if}
+	</div>
+	
+{/block_decorator}

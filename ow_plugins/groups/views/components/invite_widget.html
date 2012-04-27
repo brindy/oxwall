@@ -1,0 +1,61 @@
+{style}{literal}
+
+.groups-invite-link
+{
+    text-align:center;
+}
+
+{/literal}{/style}
+
+<script type="text/javascript">
+{literal}
+function GROUPS_InitInviteButton( options )
+{
+    var floatBox, userIdList = options.userList;
+
+    $('#GROUPS_InviteLink').click(
+        function()
+        {
+            floatBox = OW.ajaxFloatBox('BASE_CMP_AvatarUserListSelect', [userIdList],
+            {
+                width:600,
+                height:400,
+                iconClass: 'ow_ic_user',
+                title: options.floatBoxTitle
+            });
+        }
+    );
+
+    OW.bind('base.avatar_user_list_select',
+        function(list)
+        {
+            floatBox.close();
+
+            $.ajax({
+                type: 'POST',
+                url: options.inviteResponder,
+                data: {"groupId": options.groupId, "userIdList": JSON.stringify(list), "allIdList": JSON.stringify(options.userList)},
+                dataType: 'json',
+                success : function(data)
+                {
+                    if( data.messageType == 'error' )
+                    {
+                        OW.error(data.message);
+                    }
+                    else
+                    {
+                        OW.info(data.message);
+                        userIdList = data.allIdList;
+                    }
+                }
+            });
+        }
+    );
+}
+
+{/literal}
+</script>
+
+<div class="groups-invite-link ow_std_margin">
+    {decorator name='button' class='ow_ic_add' type='button' langLabel='groups+invite_btn_label' id='GROUPS_InviteLink'}
+</div>

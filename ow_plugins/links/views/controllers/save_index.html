@@ -1,0 +1,47 @@
+
+<div class="ow_link_add clearfix">
+
+{if !$authMsg}
+    <div class="ow_superwide ow_automargin">
+        {form name="save"}
+        <table class="ow_table_1 ow_form ow_stdmargin">
+           	<tr class="{cycle values='ow_alt2,ow_alt1'}">
+               	<td>
+                    {label name="url"}<br />
+                    {input name="url"}<br />
+                    {error name="url"}                        		
+                </td>
+            </tr>
+            <tr class="{cycle values='ow_alt2,ow_alt1'}">
+                <td>
+                    {label name="title"}<br />
+                    {input name="title"}<br />
+                    {error name="title"}
+                </td>
+            </tr>                        
+            <tr class="{cycle values='ow_alt2,ow_alt1'}">
+                <td>
+                    {label name="description"}<br />
+                    {input name="description"}<br />
+                    {error name="description"}
+                </td>
+            </tr>
+            <tr class="{cycle values='ow_alt2,ow_alt1'}">
+                <td>
+                    {label name="tags"}<br />
+                    {input name="tags"}<br />
+                    {error name="tags"}
+                </td>
+            </tr>
+            <tr>
+                <td class="ow_submit">
+                    <center>{submit name="submit" class="ow_button ow_ic_add ow_green"}</center>
+                </td>
+            </tr>
+        </table>
+        {/form}
+    </div>
+{else}
+    <div class="ow_anno ow_std_margin ow_nocontent">{$authMsg}</div>
+{/if}
+</div>

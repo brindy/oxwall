@@ -1,0 +1,26 @@
+
+{style}
+{literal}
+    .ow_my_gifts .ow_gift_wrapper {
+        margin: 0px 5px 5px 0px;
+        height: 80px;
+        width: 80px;
+        overflow: hidden;
+    }
+    
+    .ow_my_gifts .ow_gift_wrapper img { width: 80px; }
+{/literal}
+{/style}
+
+<div class="clearfix ow_my_gifts">
+{foreach from=$gifts item='gift'}
+	<div class="ow_gift_wrapper">
+	    <div class="ow_gift_holder">
+            <a href="{url_for_route for="virtual_gifts_view_gift:[giftId=>`$gift.dto->id`]"}">
+                <img {if $gift.dto->message != ''}title="{$gift.dto->message}"{/if} src="{$gift.imageUrl}" />
+            </a>
+	    </div>
+	    <div class="ow_gift_helper"></div>
+	</div>
+{/foreach}
+</div>

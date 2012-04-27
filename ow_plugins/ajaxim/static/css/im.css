@@ -1,0 +1,261 @@
+.main_im_tab_container
+{
+	position: relative;
+	z-index: 100;
+}
+
+#im_console
+{
+    float: left;
+}
+
+.contacts_widget .tail
+{
+    background-position: 45px 0;
+}
+
+.contacts_widget .body, .talkbox .ow_tooltip .body
+{
+    border-bottom: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+}
+
+.ow_tooltip .body .cap a
+{
+    margin: 0;
+    padding: 0;
+}
+
+.contacts_widget
+{
+    width: 130px;
+    display: none;
+    position: absolute;
+    padding: 3px;
+    background: transparent;
+    z-index: 100;
+    margin-top: 5px;
+}
+
+.contact
+{
+    cursor: pointer;
+    margin-bottom: 2px;
+    /*-moz-border-radius:5px 5px 5px 5px;
+    background-repeat: no-repeat;
+    padding-bottom: 5px;
+    background-color: #F1F1F1;
+    */
+}
+
+.contact:hover
+{
+    background-color: #FEFEFE;
+}
+
+.contact_avatar
+{
+    float: left;
+    padding-left: 6px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.contact_avatar img
+{
+    width: 22px;
+}
+
+.contact_username
+{
+    /* float: left;*/
+    padding-left: 5px;
+    text-align: left;
+
+    overflow: hidden;
+    padding-top: 3px;
+}
+
+.talkbox
+{
+    position:absolute;
+    width: 300px;
+    height: 110px;
+    display: none;
+    margin-top: 5px;
+}
+
+.talk_box_avatar
+{
+    float: left;
+    background-repeat: no-repeat;
+    margin-left: 5px;
+    padding-top: 3px;
+    padding-right: 3px;
+    background-position: 0% 50%;
+    padding-bottom: 3px;
+    width: 45px;
+}
+
+.message_cap img
+{
+    width: 30px;
+}
+
+#talkbox_contact_info, #talkbox_contact_info .ow_avatar
+{
+    float: left;
+}
+
+.talkbox_username, .talk_box_status
+{
+    float: left;
+    background-repeat: no-repeat;
+    margin-left: 5px;
+    padding-top: 3px;
+    padding-right: 3px;
+    background-position: 0% 50%;
+    padding-bottom: 3px;
+}
+
+.talkbox_username
+{
+    float: left;
+    margin-left: 15px;
+    padding-top: 3px;
+}
+
+.talk_box_cap_panel
+{
+    padding-bottom: 5px;
+}
+
+.talk_box_cap_panel .close_cmd
+{
+    float: right;
+    padding: 3px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 3px;
+}
+
+.talk_box_cap_panel .min_cmd
+{
+    float: right;
+    padding: 3px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 3px;
+}
+
+.talkbox .box
+{
+    height: 200px;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.talkbox .cap
+{
+    height: 56px;
+}
+
+.talkbox_send
+{
+    float: right;
+    margin: 5px;
+}
+
+.talkbox_msg
+{
+    margin-left: 5px;
+}
+
+.im_history_cmd
+{
+    float: left;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    background-repeat: no-repeat;
+}
+
+.talk_box_msg .message_cap
+{
+    float: left;
+    margin: 5px -30px 5px 0px;
+}
+
+.talk_box_msg .message
+{
+    margin-left: 35px;
+    padding-top: 3px;
+}
+
+.talk_box_msg .message a
+{
+	padding: 0;
+	margin: 0;
+    display: inline;
+}
+
+.received
+{
+    color: brown;
+}
+
+.sent
+{
+    color: green;
+}
+
+#main_im_tab_container a.ow_preloader
+{
+    padding-bottom:5px;
+    padding-left:20px;
+    padding-top:5px;
+}
+
+.ow_console .notification_shortcut a.main_tab_contact_click.ow_preloader
+{
+    padding-top: 25px;
+    padding-left: 15px;
+} 
+
+#user_settings_container a
+{
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 5px;
+    padding-left: 40px;
+
+}
+
+#ajaxim_sound_player_audio
+{
+    position: absolute;
+    top: -1000px;
+    left: 0px;
+}
+
+/* DEBUG MODE */
+
+.server_msg_container
+{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    -moz-border-radius:5px 5px 5px 5px;
+    background: #ccc;
+    color: #fff;
+    padding: 10px;
+    opacity: 0.5;
+}
+

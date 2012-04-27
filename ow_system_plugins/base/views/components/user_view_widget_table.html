@@ -1,0 +1,45 @@
+{if $ownerMode}
+    {literal}
+    <style>
+        .ow_edit_profile_link
+        {
+            position: absolute;
+            right: 0px;
+            top: 0px;
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+        $(function(){
+            $(".user_profile_data").hover(
+              function(){
+                $("#edit-profile").fadeIn();
+              },
+              function(){
+                $("#edit-profile").fadeOut();
+              }
+          );
+       });
+    </script>
+    {/literal}
+{/if}
+
+<div class="user_profile_data" style="position:relative">
+ {if $ownerMode}
+     <div style="display: none;" id="edit-profile" class="ow_edit_profile_link">
+            <a class="ow_lbutton" href="{$profileEditUrl}">{text key='base+edit_profile_link'}</a>
+     </div>
+ {/if}
+ <table class="ow_table_3 ow_nomargin">
+    {foreach  from=$questionArray key='section' item='questions'}
+        {if !empty($section) }<tr><th colspan="2" class="ow_section"><span>{text key="base+questions_section_`$section`_label"}</span></th></tr>{/if}
+        {foreach  from=$questions key='sort' item='question'}
+            {if isset( $questionData[$question.name] ) }
+                <tr>
+                    <td class="ow_label" style="width: 20%">{text key="base+questions_question_`$question.name`_label"}</td>
+                    <td class="ow_value">{$questionData[$question.name] }</td>
+                </tr>
+            {/if}
+        {/foreach}
+    {/foreach}
+ </table>
+ </div>

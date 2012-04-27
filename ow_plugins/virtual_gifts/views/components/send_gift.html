@@ -1,0 +1,115 @@
+{style}
+  {literal}
+    .ow_gift_templates {
+        position: relative;
+    }
+    
+    .ow_gift_templates .ow_gift_wrapper {
+        margin: 0px 0px 4px 9px;
+        cursor: pointer;
+        padding-left: 5px;
+    }
+    
+    .ow_gift_templates .ow_gift_checked {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        width: 20px;
+        height: 20px;
+        background-image: url({/literal}{$themeImagesUrl}{literal}ic_ok.png);
+        background-repeat: no-repeat;
+    }
+    
+    .ow_gift_wrapper {
+        height: 110px;
+    }
+  {/literal}
+{/style}
+
+{script}
+  {literal}
+  
+    var $tpl_list = $(".ow_gift_templates .ow_gift_wrapper");
+    var $hidden_input = $("input[name=tplId]");
+    
+    $tpl_list.hover(
+        function(){
+            $(this).addClass("ow_alt1");
+        },
+        function(){
+            $(this).removeClass("ow_alt1");
+        }
+    );
+    
+    $tpl_list.click(function(){
+        $tpl_list.removeClass('ow_alt2');
+        $tpl_list.find(".ow_gift_checked").remove();
+        $(this).append('<div class="ow_gift_checked"></div>');
+        $(this).addClass('ow_alt2');
+        $hidden_input.val($(this).find(".ow_gift_helper").attr("rel"));
+    });
+    
+    var $tabs = $('a[href^=js-call]', '#ow_gift_category_menu');
+    $tabs.click(function(){
+        var $this = $(this);
+        $tabs.parent().removeClass('active');
+        $this.parent().addClass('active');
+        $('.ow_gift_category').hide();
+        $('#gift_cat_' + $this.data('tab_content')).show();
+         
+    }).each(function(){
+        var command = this.href.split(':');
+        $(this).data('tab_content', command[1]);
+        $(this).attr('href', 'javascript://');
+    });
+    
+  {/literal}
+{/script}
+
+<div id="virtualgifts_send_gift_cmp">
+{if empty($authMessage)}
+{if $showPrice}<div class="ow_center ow_smallmargin ow_small">{text key='usercredits+credits_balance'}: <b>{$balance}</b> {text key='usercredits+credits'}</div>{/if}
+
+<div id="ow_gift_category_menu">{if $catSetup && $menu}{$menu}{/if}</div>
+
+{form name='send-gift-form'}
+<div class="ow_gift_templates clearfix">
+    {if $catSetup}
+    {foreach from=$tpls item='cat' key='id' name='c'}
+        <div id="gift_cat_{$id}" class="clearfix ow_smallmargin ow_gift_category"{if !$smarty.foreach.c.first} style="display: none;"{/if}>
+        {foreach from=$cat.tpls item='tpl'}
+            <div class="ow_gift_wrapper">
+                <div class="ow_gift_holder"><img src="{$tpl.imageUrl}" />
+                {if $showPrice && $tpl.price}<div class="ow_small"><b>{$tpl.price}</b> {text key='usercredits+credits'}</div>{/if}</div>
+                <div class="ow_gift_helper" rel="{$tpl.id}"></div>
+            </div>
+        {/foreach}
+        </div>
+    {/foreach}
+    {else}
+		{foreach from=$tpls item='tpl'}
+		<div class="ow_gift_wrapper">
+		    <div class="ow_gift_holder"><img src="{$tpl.imageUrl}" />
+		    {if $showPrice && $tpl.price}<div class="ow_small"><b>{$tpl.price}</b> {text key='usercredits+credits'}</div>{/if}</div>
+		    <div class="ow_gift_helper" rel="{$tpl.id}"></div>
+		</div>
+		{/foreach}
+	{/if}
+</div>
+{error name='tplId'}
+<table class="ow_table_3 ow_nomargin">
+<tr>
+    <td class="ow_label" style="width: 15%">{text key='virtualgifts+message'}</td>
+    <td class="ow_value">{input name='message' class='ow_gift_message_area'}</td>
+</tr>
+<tr>
+    <td class="ow_label"></td>
+	<td class="ow_value" style="border: none">{input name='isPrivate'} {label name='isPrivate'}</td>
+</tr>
+</table>
+<div class="ow_center">{submit name='send' class='ow_ic_mail'}</div>
+{/form}
+{else}
+    <div class="ow_nocontent">{$authMessage}</div>
+{/if}
+</div>

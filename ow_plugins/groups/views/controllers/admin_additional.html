@@ -1,0 +1,30 @@
+{$menu}
+
+{if $isForumAvailable}
+    {if $isForumConnected}
+        {block_decorator name="box_cap" iconClass="ow_ic_forum" langLabel='forum+forum_settings' type='empty'}{/block_decorator}
+
+        {block_decorator name='box' addClass='ow_center'  type='empty'}
+            <p>{text key="forum+forum_already_connected"}</p>
+
+        {/block_decorator}
+
+    {else}
+        {block_decorator name="box_cap" iconClass="ow_ic_forum" langLabel='forum+forum_settings' type='empty'}{/block_decorator}
+
+        {block_decorator name='box' addClass='ow_center'  type='empty'}
+            <p>{text key="forum+connect_forum_to_entity"}</p>
+
+            {capture assign='onclick'}window.location.href='{url_for for="GROUPS_CTRL_Admin:connect_forum"}?isForumConnected=yes'{/capture}
+            {decorator name='button' type='button' id='btn-connect-forum' langLabel='forum+connect_forum_button' class='ow_ic_add' onclick=$onclick }
+
+        {/block_decorator}
+
+    {/if}
+{else}
+
+        {block_decorator name='box' addClass='ow_center'  type='empty'}
+            <p>{text key="base+empty_list"}</p>
+        {/block_decorator}
+
+{/if}

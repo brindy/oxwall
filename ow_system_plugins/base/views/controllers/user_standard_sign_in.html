@@ -1,0 +1,33 @@
+{style}
+{literal}
+.std_sign_in_cont{
+    padding:200px 100px 0;
+}
+.connect_button_list{
+    display:inline;
+}
+.std_sign_in_cont .forgot_pass{
+    text-align:right;
+    padding-bottom:4px;
+    text-transform:lowercase;
+    font-size:11px;
+}
+{/literal}
+{/style}
+<div class="std_sign_in_cont">
+	<div style="width:350px;margin:0 auto;">
+        <h3 style="text-align: center;padding-bottom: 8px;">{$siteName}</h3>
+        {block_decorator name='box_cap' langLabel='base+base_sign_in_cap_label'}{/block_decorator}
+        {block_decorator name='box' style='text-align:center;padding-top:2px;'}
+        <div class="forgot_pass"><a href="{url_for_route for='base_forgot_password'}">{text key='base+forgot_password_label'}</a></div>
+        {form name='sign-in'}
+            {input name='identity' style='width:160px;margin-bottom:5px;'}<br />
+            {input name='password' style='width:160px;margin-bottom:5px;'}<br />
+            {input name='remember'}{label name='remember'}<br />
+            {submit name='submit'}
+        {/form}
+        {/block_decorator}
+        {component class='BASE_CMP_SignInButtonList'}
+        <div class="sign_up_cont" style="text-align: center;"> {text key='base+base_sign_in_or_label'} <a href="{$joinUrl}">{text key='base+join_submit_button_join'}</a></div>
+    </div>
+</div>

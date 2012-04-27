@@ -1,0 +1,54 @@
+
+{capture assign="back_url"}{url_for_route for="admin_pages_main"}{/capture}
+
+{decorator name="button" class="ow_ic_left_arrow" onclick="location.href='`$back_url`';" langLabel="base+pages_back"}<br /><br />
+
+{form name="edit-form"}
+<div class="ow_superwide ow_automargin">
+<table class="ow_form ow_table_1">
+    <tr id="title-tr" class="{cycle values="ow_alt2, ow_alt1"}">
+        <td class="ow_label">
+        	{label name="name"}
+       	</td>
+        <td class="ow_value">
+        	{input name="name"}
+        	<br />{error name="name"}
+        </td>
+      </tr>
+
+    <tr class="{cycle values="ow_alt2, ow_alt1"}">
+        <td class="ow_label">{label name="visible-for"}</td>
+        <td class="ow_value">
+        	{input name="visible-for"}
+        	<br />{error name="visible-for"}
+       </td>
+    </tr>
+
+    <tr id="title-tr" class="{cycle values="ow_alt2, ow_alt1"}">
+        <td class="ow_label">
+        	{label name="url"}
+       	</td>
+        <td class="ow_value">
+        	{input name="url"}<br />
+        	{input name="ext-open-in-new-window"} {label name="ext-open-in-new-window"}
+        	<br />{error name="url"}
+        </td>        
+      </tr>
+
+    <tr>
+    	<td></td>
+        <td style="text-align:center;">
+        	{capture assign="are_you_sure_lbl"}{text key='admin+are_you_sure'}{/capture}
+        	
+        	{submit name="save"}
+        	
+        	<div class="clearfix" >
+				{capture assign="del_js"}if(confirm('{text key='admin+are_you_sure'}')) location.href='{url_for for="ADMIN_CTRL_PagesEditExternal:delete:[id=>`$id`]"}';{/capture}
+				
+        		<span style="float: right; margin-top: -24px;">{decorator name="button" class="ow_red ow_ic_delete" extraString="onclick=\"`$del_js`\"" langLabel="admin+delete_btn_label"}</span>
+        	</div>
+       	</td>
+    </tr>
+</table>
+</div>
+{/form}

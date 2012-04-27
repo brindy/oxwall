@@ -1,0 +1,31 @@
+{style}{literal}
+
+textarea.ow_newsfeed_status_input {
+    height: 50px;
+}
+
+textarea.ow_newsfeed_status_input.invitation {
+    height: 20px;
+}
+
+.newsfeed-attachment-preview
+{
+    width: 95%;
+}
+
+{/literal}{/style}
+
+{form name="newsfeed_update_status"}
+	<div class="form_auto_click">
+	    <div class="ow_smallmargin">{input name="status" class="ow_newsfeed_status_input"}</div>
+
+            <div id="attachment_preview_{$uniqId}" class="newsfeed-attachment-preview ow_smallmargin"></div>
+
+            <div class="ow_submit_auto_click" style="text-align: left;">
+                <div class="clearfix">
+                    <span style="float: right;padding: 0 10px 4px 15px;" >{submit name="save"}</span>
+                    <span style="float: right;" >{$attachment}</span>
+                </div>
+            </div>
+	</div>
+{/form}

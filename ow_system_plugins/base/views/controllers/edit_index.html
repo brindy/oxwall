@@ -1,0 +1,66 @@
+
+{literal}
+<script language="javascript" type="text/javascript">
+    $(function(){
+        $(".unregister_profile_button").click(
+            function() { window.location = {/literal}"{$unregisterProfileUrl}"{literal} }
+        );
+   });
+</script>
+{/literal}
+
+{$contentMenu}
+
+{block_decorator name="box" type="empty" addClass="ow_superwide ow_automargin" }
+    <div style="padding:5px;float:right;">{$changePassword}</div>
+    <br style="clear: both" />
+{/block_decorator}
+
+{block_decorator name="box" type="empty" addClass="ow_superwide ow_automargin"}
+{if isset($editSynchronizeHook)}
+    {block_decorator name="box" addClass="ow_center" iconClass='ow_ic_update' langLabel='base+edit_remote_field_synchronize_title' style="overflow:hidden;"}
+       {foreach from=$editSynchronizeHook item='item'}
+          {$item}
+       {/foreach}
+    {/block_decorator}
+    {block_decorator name="box" type="empty" addClass="ow_center" style="padding:15px;"}
+        {text key="base+join_or"}
+    {/block_decorator}
+{/if}
+
+{form name=editForm}
+    <table class="ow_table_1 ow_form">
+        {foreach from=$questionArray key='section' item='questions'}
+            {if !empty($section) }<tr><th colspan="3">{text key="base+questions_section_`$section`_label"}</th></tr>{/if}
+            {foreach from=$questions item='question'}
+                <tr class="{cycle name=$section values='ow_alt1,ow_alt2'}">
+                    <td class="ow_label">
+                        {label name=$question.name}
+                    </td>
+                    <td class="ow_value">
+                        {input name=$question.name}
+                        <div style="height:1px;"></div>
+                        {error name=$question.name}
+                    </td>
+                    <td class="ow_desc ow_small">
+                        {question_description_lang name=$question.name}
+                    </td>
+                </tr>
+            {/foreach}
+            {if !empty($section)}<tr><td colspan="3"> </td></tr>{/if}
+        {/foreach}
+        <tr>
+                <td colspan="3" class="ow_center">{submit name='editSubmit'}</td>
+        </tr>
+        {if !$isAdmin }
+        <tr>
+                <td colspan="3">
+                    <div style="padding: 5px; float: right;">
+                        {decorator name="button" class="unregister_profile_button ow_ic_delete ow_red" langLabel='base+delete_profile'}
+                    </div>
+                </td>
+        </tr>
+        {/if}
+    </table>
+{/form}
+{/block_decorator}

@@ -1,0 +1,117 @@
+{script}
+{literal}
+$('.admin_menu_cont .menu_item')
+    .mouseover(function(){$('span.menu_items', $(this)).css({display:'block'});$(this).addClass('ow_hover');})
+    .mouseout(function(){$('span.menu_items', $(this)).hide();$(this).removeClass('ow_hover');});
+{/literal}
+{/script}
+{style}
+{literal}
+.admin_notification, .admin_warning{
+    text-align: center;
+	margin-bottom:10px;
+	padding: 10px 0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+    background-color: #dfd;
+	color: #444;
+	text-shadow: #fff 1px 1px 0;
+}
+
+.admin_warning{
+    background-color: #fdd;
+}
+{/literal}
+{/style}
+<div class="ow_header ow_admin_header clearfix">
+	<div class="ow_canvas">
+		<div class="ow_page" style="position:relative;height:105px;">
+	    	<div class="ow_logo" style="margin-top:39px">
+	            <h2 style="font-size:22px;"><a href="{url_for_route for="admin_default"}">Admin Area</a></h2>
+	            <div class="ow_tagline" style="padding: 9px 0 0 2px; font-size: 14px;"><a href="{$siteUrl}" style="color: #DD3300">&laquo; back to site</a></div>
+	        </div>
+            <div style="float: right;margin-top:30px">
+                {component class='BASE_CMP_Console'}
+                <div class="admin_menu_cont clearfix">
+                    <div onclick="window.location = '{$globalMenuData.menu_admin.url}'" class="menu_item{if $activeMenuName == 'menu_admin'} active{/if}">
+                        <span class="icon menu_admin">
+                            <span class="label">{text key='admin+sidebar_menu_admin'}</span>
+                            <span class="menu_items">{if !empty($menu_admin)}{$menu_admin}{/if}</span>
+                        </span>
+                    </div>
+                    <div onclick="window.location = '{$globalMenuData.menu_users.url}'" class="menu_item{if $activeMenuName == 'menu_users'} active{/if}">
+                        <span class="icon menu_users">
+                            <span class="label">{text key='admin+sidebar_menu_users'}</span>
+                            <span class="menu_items">{if !empty($menu_users)}{$menu_users}{/if}</span>
+                        </span>
+                    </div>
+                    <div onclick="window.location = '{$globalMenuData.menu_settings.url}'" class="menu_item{if $activeMenuName == 'menu_settings'} active{/if}">
+                        <span class="icon menu_settings">
+                            <span class="label">{text key='admin+sidebar_menu_settings'}</span>
+                            <span class="menu_items">{if !empty($menu_settings)}{$menu_settings}{/if}</span>
+                        </span>
+                    </div>
+                    <div onclick="window.location = '{$globalMenuData.menu_privacy.url}'" class="menu_item{if $activeMenuName == 'menu_privacy'} active{/if}">
+                        <span class="icon menu_privacy">
+                            <span class="label">{text key='admin+sidebar_menu_privacy'}</span>
+                            <span class="menu_items">{if !empty($menu_privacy)}{$menu_privacy}{/if}</span>
+                        </span>
+                    </div>
+                    <div onclick="window.location = '{$globalMenuData.menu_appearance.url}'" class="menu_item{if $activeMenuName == 'menu_appearance'} active{/if}">
+                        <span class="icon menu_appearance">
+                            <span class="label">{text key='admin+sidebar_menu_appearance'}</span>
+                            <span class="menu_items">{if !empty($menu_appearance)}{$menu_appearance}{/if}</span>
+                        </span>
+                    </div>
+                    <div onclick="window.location = '{$globalMenuData.menu_pages.url}'" class="menu_item{if $activeMenuName == 'menu_pages'} active{/if}">
+                        <span class="icon menu_pages">
+                            <span class="label">{text key='admin+sidebar_menu_pages'}</span>
+                            <span class="menu_items">{if !empty($menu_pages)}{$menu_pages}{/if}</span>
+                        </span>
+                    </div>
+                    <div onclick="window.location = '{$globalMenuData.menu_plugins.url}'" class="menu_item{if $activeMenuName == 'menu_plugins'} active{/if}">
+                        <span class="icon menu_plugins">
+                            <span class="label">{text key='admin+sidebar_menu_plugins'}</span>
+                            <span class="menu_items">{if !empty($menu_plugins)}{$menu_plugins}{/if}</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+		</div>
+    </div>
+</div>
+{if !empty($submenu)}<div class="ow_admin_sub_menu">{$submenu}</div>{/if}
+<div class="ow_page_container ow_admin">
+	<div class="ow_canvas">
+		<div class="ow_page">
+            {if !empty($warnings)}
+            {foreach from=$warnings item='warning'}
+                <div class="admin_warning">{$warning}</div>
+            {/foreach}
+            {/if}
+            {if !empty($notifications)}
+            {foreach from=$notifications item='notification'}
+                <div class="admin_notification">{$notification}</div>
+            {/foreach}
+            <br />
+            {/if}
+		    {if !empty($heading)}<h1 class="ow_stdmargin {$heading_icon_class}">{$heading}</h1>{/if}
+	        <div class="ow_content">
+    	        {$content}
+    	    </div>
+		</div>
+	</div>
+</div>
+<div class="ow_footer ow_admin">
+	<div class="ow_canvas">
+        <div class="ow_page clearfix" style="padding:20px 0;">
+            <div style="float:left;">
+				{if empty($ow_plugin_xp)}<div class="ow_right ow_std_margin ow_small ow_remark">{$softVersion}</div>{/if}
+			</div>
+			<div style="float:right;line-height:15px;font-size:11px;padding-bottom: 30px;">
+				{$bottomPoweredByLink}
+			</div>
+		</div>
+	</div>
+</div>    
+{decorator name='floatbox'}

@@ -1,0 +1,7 @@
+	{foreach name='links' from=$list item="item"}
+	{assign var='id' value=$item->id}
+			{capture assign='info'}
+					{$item->description}
+			{/capture}
+		{decorator name='ic' titleHref=$item->url title=$item->title info=$info toolbar=$tb.$id first=$smarty.foreach.links.first last=$smarty.foreach.links.last}
+	{/foreach}

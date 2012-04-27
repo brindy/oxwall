@@ -1,0 +1,26 @@
+{style}{literal}
+
+.ow_my_avatar_console a {
+    background-position:50% 50%;
+	background-repeat:no-repeat;
+	display:inline-block;
+	height:30px;
+	width:25px;    
+	text-decoration: none;
+}
+
+{/literal}{/style}
+
+<div class="ow_my_avatar_widget">
+    <div class="ow_my_avatar_username ow_center">{$displayName}</div>
+
+	<div class="ow_center">{decorator name='avatar_item' data=$avatar}</div>
+    {if !empty($toolbarItems)}
+		<div class="ow_my_avatar_console ow_center">
+		   {foreach from=$toolbarItems item=item}
+		      <a href="{$item.url}" title="{$item.title}" class="{$item.iconClass}">&nbsp;</a>
+		   {/foreach}
+		</div>
+    {/if}
+	
+</div>

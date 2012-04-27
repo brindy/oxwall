@@ -1,0 +1,36 @@
+{$contentMenu}
+
+<div class="ow_wide ow_automargin">
+{form name="notificationSettingForm"}
+<table class="ow_table_1 ow_form">
+
+    {foreach from=$actions item=plugin}
+	    <tr>
+	        <th class="ow_name ow_txtleft" colspan="2">
+	            <span class="ow_section_icon {$plugin.icon}">{$plugin.label}</span>
+	        </th>
+	    </tr>
+	    {foreach from=$plugin.actions item=action}
+	        <tr class="{cycle name="install" values="ow_alt1,ow_alt2"}">
+		        <td class="ow_label">{input name=$action.action}</td>
+		        <td class="ow_value">{$action.description}</td>
+		    </tr>
+	    {/foreach}
+    {/foreach}
+</table>
+
+<table class="ow_table_1 ow_form">
+        <tr>
+            <th class="ow_name ow_txtleft">
+                <span class="ow_section_icon ow_ic_script">{text key="notifications+schedule_title"}</span>
+            </th>
+        </tr>
+        <tr class="ow_alt1">
+            <td class="ow_value">{input name=schedule}</td>
+        </tr>
+    
+    <tr><td colspan="3" class="ow_submit">{submit name='save' class='ow_ic_save'}</td></tr>
+</table>
+
+{/form}
+</div>

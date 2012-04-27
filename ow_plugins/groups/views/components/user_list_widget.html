@@ -1,0 +1,7 @@
+<div class="ow_lp_avatars">
+        {foreach from=$userIdList item='id'}
+            {decorator name="avatar_item" data=$data[$id]}
+        {foreachelse}
+            <div class="ow_nocontent">{text key='groups+user_list_widget_empty'}</div>
+        {/foreach}
+</div>

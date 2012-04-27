@@ -1,0 +1,129 @@
+
+{block_decorator name="box" type="empty" addClass="ow_superwide ow_automargin"}
+{if isset($notValidInviteCode)}
+    {block_decorator name="box" type="empty" addClass="ow_center" style="padding:15px;"}
+         {text key="base+join_not_valid_invite_code"}
+    {/block_decorator}
+{else}
+    {if $step == 1}
+        {block_decorator name="box" type="empty" addClass="ow_center" style="padding:15px;"}
+            {text key="base+join_promo"}
+        {/block_decorator}
+
+        {if !empty($joinConnectHook)}
+           {block_decorator name='box_cap' iconClass='ow_ic_key' langLabel='base+join_connect_title'}{/block_decorator}
+           {block_decorator name="box" addClass="ow_center" style="overflow:hidden;"}
+               {foreach from=$joinConnectHook item='item'}
+                  {$item}
+               {/foreach}
+           {/block_decorator}
+           {block_decorator name="box" type="empty" addClass="ow_center" style="padding:15px;"}
+                {text key="base+join_or"}
+           {/block_decorator}
+        {/if}
+    {/if}
+    {block_decorator name='box_cap' iconClass='ow_ic_user' langLabel='base+join_form_title'}{/block_decorator}
+    {form name=joinForm}
+        <table class="ow_table_1 ow_form">
+            {if $diaplayAccountType==true}
+            <tr class="{cycle values='ow_alt1,ow_alt2'}">
+                <td class="ow_label">
+                    {label name='accountType'}
+                </td>
+                <td class="ow_value ow_center">
+                    {input name='accountType'}
+                    <div style="height:1px;"></div>
+                    {error name='accountType'}
+                </td>
+                <td class="ow_desc">
+                    {question_description_lang name="accountType"}
+                </td>
+            </tr>
+            <tr><td colspan="3"> </td></tr>
+            {/if}
+            {foreach from=$questionArray key='section' item='questions'}
+                {if !empty($section) }<tr><th colspan="3">{text key="base+questions_section_`$section`_label"}</th></tr>{/if}
+                {foreach from=$questions item='question'}
+                    <tr class="{cycle name=$section values='ow_alt1,ow_alt2'}">
+                        <td class="ow_label">
+                            {label name=$question.name}
+                        </td>
+                        <td class="ow_value">
+                            {input name=$question.name}
+                            <div style="height:1px;"></div>
+                            {error name=$question.name}
+                        </td>
+                        <td class="ow_desc">
+                            {question_description_lang name=$question.name}
+                        </td>
+                    </tr>
+                    {if $question.name=='password'}
+                        <tr class="{cycle name=$section values='ow_alt1,ow_alt2'}">
+                            <td class="ow_label">
+                                {label name='repeatPassword'}
+                            </td>
+                            <td class="ow_value">
+                                {input name='repeatPassword'}
+                                <div style="height:1px;"></div>
+                                {error name='repeatPassword'}
+                            </td>
+                            <td class="ow_desc">
+                                {question_description_lang name='repeatPassword'}
+                            </td>
+                        </tr>
+                    {/if}
+                {/foreach}
+                {if !empty($section)}<tr><td colspan="3"> </td></tr>{/if}
+            {/foreach}
+            {if $isLastStep}
+                {if $display_photo}
+                    <tr><th colspan="3">{text key="base+questions_section_user_photo_label"}</th></tr>
+                    <tr class="{cycle name=userPhoto values='ow_alt1,ow_alt2'}">
+                        <td class="ow_label">
+                            {label name='userPhoto'}
+                        </td>
+                        <td class="ow_value">
+                            {input name='userPhoto'}
+                            <div style="height:1px;"></div>
+                            {error name='userPhoto'}
+                        </td>
+                        <td class="ow_desc">
+                            {question_description_lang name='user_photo'}
+                        </td>
+                    </tr>
+                {/if}
+                
+                {if $display_terms_of_use}
+                    <tr><th colspan="3">{text key="base+questions_section_terms_of_use_label"}</th></tr>
+                    <tr class="{cycle name=userPhoto values='ow_alt1,ow_alt2'}">
+                        <td class="ow_label">
+                            {label name='termOfUse'}
+                        </td>
+                        <td class="ow_value">
+                            {input name='termOfUse'}
+                            <div style="height:1px;"></div>
+                            {error name='termOfUse'}
+                        </td>
+                        <td class="ow_desc">
+                            
+                        </td>
+                    </tr>
+                {/if}
+                <tr><th colspan="3">{text key="base+questions_section_captcha_label"}</th></tr>
+                <tr class="{cycle name=captchaField values='ow_alt1,ow_alt2'}" >
+                    <td colspan="3" class="ow_center">
+                        <div style='padding:10px;'>
+                            {input name='captchaField'}
+                            <div style="height:1px;"></div>
+                            {error name='captchaField'}
+                        </div>
+                    </td>
+                </tr>
+            {/if}
+            <tr>
+                    <td colspan="3" class="ow_center">{submit name='joinSubmit'}</td>
+            </tr>
+        </table>
+    {/form}
+{/if}
+{/block_decorator}

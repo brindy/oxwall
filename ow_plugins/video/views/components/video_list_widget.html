@@ -1,0 +1,135 @@
+
+{script}
+{literal}
+    $(document).ready(function(){
+        var $tb_container = $(".ow_box_toolbar_cont", $("#video_list_widget").parents('.ow_box, .ow_box_empty').get(0));
+
+        $("#video-widget-menu-featured").click(function(){
+            $tb_container.html($("div#video-widget-toolbar-featured").html());
+        });
+
+        $("#video-widget-menu-latest").click(function(){
+            $tb_container.html($("div#video-widget-toolbar-latest").html());
+        });
+
+        $("#video-widget-menu-toprated").click(function(){
+            $tb_container.html($("div#video-widget-toolbar-toprated").html());
+        });
+    });
+{/literal}
+{/script}
+
+<div id="video_list_widget">
+
+    {if $latest || $featured || $toprated} {if isset($menu)}{$menu}{/if} {/if}
+    
+    {capture assign='nocontent'}
+       <div class="ow_nocontent">{text key='video+no_video'}, <a href="{url_for for="VIDEO_CTRL_Add:index"}">{text key='video+add_new'}</a></div>
+    {/capture}
+
+	<div id="{$items.latest.contId}">
+	{if $showTitles}
+	   {foreach from=$latest item='c' name='clips'}
+	   <div class="clearfix ow_smallmargin">
+            <div class="ow_other_video_thumb ow_left">
+                <a href="{url_for_route for="view_clip:[id=>`$c.id`]"}">
+                    {if $c.thumb != 'undefined'}<img src="{$c.thumb}" />{/if}
+                </a>
+            </div>
+            <div class="ow_other_video_item_title ow_small">
+                <a href="{url_for_route for="view_clip:[id=>`$c.id`]"}">{$c.title}</a>
+            </div>
+	   </div>
+	   {foreachelse}
+          {$nocontent}
+	   {/foreach}
+	{else}
+	<div class="clearfix ow_center">
+	{foreach from=$latest item='c' name='clips'}
+		{if $smarty.foreach.clips.iteration == 1}
+		   <div class="ow_smallmargin">{$c.code}</div>
+		{else}
+			<a class="ow_other_video_floated" href="{url_for_route for="view_clip:[id=>`$c.id`]"}" title="{$c.title}">
+			    {if $c.thumb != 'undefined'}<img src="{$c.thumb}" />{/if}
+			</a>
+		{/if}
+    {foreachelse}
+        {$nocontent}		
+	{/foreach}
+	</div>
+	{/if}	
+	</div>
+	
+	{if $featured}
+	<div id="{$items.featured.contId}" style="display: none">
+    {if $showTitles}
+       {foreach from=$featured item='c' name='clips'}
+       <div class="clearfix ow_smallmargin">
+            <div class="ow_other_video_thumb ow_left">
+                <a href="{url_for_route for="view_clip:[id=>`$c.id`]"}">
+                    {if $c.thumb != 'undefined'}<img src="{$c.thumb}" />{/if}
+                </a>
+            </div>
+            <div class="ow_other_video_item_title ow_small">
+                <a href="{url_for_route for="view_clip:[id=>`$c.id`]"}">{$c.title}</a>
+            </div>
+       </div>
+       {foreachelse}
+          {$nocontent}
+       {/foreach}
+    {else}
+    <div class="clearfix ow_center">
+    {foreach from=$featured item='c' name='clips'}
+        {if $smarty.foreach.clips.iteration == 1}
+           <div class="ow_smallmargin">{$c.code}</div>
+        {else}
+	        <a class="ow_other_video_floated" href="{url_for_route for="view_clip:[id=>`$c.id`]"}" title="{$c.title}">
+	            {if $c.thumb != 'undefined'}<img src="{$c.thumb}" />{/if}
+	        </a>
+        {/if}
+    {foreachelse}
+        {$nocontent}
+    {/foreach}
+    </div>
+    {/if}
+    </div>
+    {/if}
+	
+	<div id="{$items.toprated.contId}" style="display: none">
+    {if $showTitles}
+       {foreach from=$toprated item='c' name='clips'}
+       <div class="clearfix ow_smallmargin">
+            <div class="ow_other_video_thumb ow_left">
+                <a href="{url_for_route for="view_clip:[id=>`$c.id`]"}">
+                    {if $c.thumb != 'undefined'}<img src="{$c.thumb}" />{/if}
+                </a>
+            </div>
+            <div class="ow_other_video_item_title ow_small">
+                <a href="{url_for_route for="view_clip:[id=>`$c.id`]"}">{$c.title}</a>
+            </div>
+       </div>
+       {foreachelse}
+          {$nocontent}
+       {/foreach}
+    {else}
+    <div class="clearfix ow_center">
+    {foreach from=$toprated item='c' name='clips'}
+        {if $smarty.foreach.clips.iteration == 1}
+           <div class="ow_smallmargin">{$c.code}</div>
+        {else}
+	        <a class="ow_other_video_floated" href="{url_for_route for="view_clip:[id=>`$c.id`]"}" title="{$c.title}">
+	            {if $c.thumb != 'undefined'}<img src="{$c.thumb}" />{/if}
+	        </a>
+        {/if}
+    {foreachelse}
+        {$nocontent}        
+    {/foreach}
+    </div>
+    {/if}
+    </div>
+	
+	{if $latest}<div id="video-widget-toolbar-latest" style="display: none">{decorator name='box_toolbar' itemList=$toolbars.latest}</div>{/if}
+    {if $featured}<div id="video-widget-toolbar-featured" style="display: none">{decorator name='box_toolbar' itemList=$toolbars.featured}</div>{/if}  
+    {if $toprated}<div id="video-widget-toolbar-toprated" style="display: none">{decorator name='box_toolbar' itemList=$toolbars.toprated}</div>{/if}
+    
+</div>

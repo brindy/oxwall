@@ -1,0 +1,73 @@
+{style}
+{literal}
+    .ow_mailbox_attachment_icon {
+        display: inline-block;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        width: 14px;
+        height: 17px;
+        padding-right:5px;
+    }
+    .mailbox_attachments_label {
+        margin: 15px 0 5px;
+        padding-left: 5px;
+        font-weight: bold;
+    }
+{/literal}
+{/style}
+
+{script}
+{literal}
+    DND_InterfaceFix.fix($(".ow_content"));
+{/literal}
+{/script}
+
+{$mailbox_menu}
+{if $record.total > 0}
+    <div style="text-align: right; margin-bottom: 10px;">
+            {text key='mailbox+conversation_box_info' showing="<span class='outline'>`$record.start`-`$record.end`</span>" total="<span class='outline'>`$record.total`</span>" new="<span class='outline'>`$record.new`</span>" }
+    </div>
+{/if}
+<form id="mailbox-conversation-list-form" method="POST" action="" >
+	<table class="ow_table_1 ow_mailbox">
+           {if $record.total> 0}
+		{foreach from=$conversationList item=conversation}
+			<tr {if $conversation.read==false && $conversation.isOpponentLastMessage==true}class="ow_high2"{else}class="ow_high1"{/if}>
+				<td class="icons">
+					{if $conversation.isOpponentLastMessage==true}
+						<a href="javascript://" class="ow_lbutton ow_green mailbox_new" {if $conversation.read==true}style="display:none;"{/if}>{text key='mailbox+new_conversation_link'}</a>
+					{else}
+						<span class="ic_reply"><span> {* //TODO: insert image src="images/ic_reply.png" *}
+					{/if}
+				</td>
+				<td width="1"><input type="checkbox" name="conversation[{$conversation.conversationId}]" value="{$conversation.conversationId}"></td>
+				<td width="1">{decorator name='avatar_item' data=$opponentsAvatar[$conversation.opponentId]}</td>
+				<td class="mail_info" style="white-space: nowrap;"><a href="{$opponentsUrl[$conversation.opponentId]}">{$opponentsDisplayNames[$conversation.opponentId]}</a>
+				<div class="ow_small ow_remark">{$conversation.timeStamp}</div>
+				</td>
+				<td>{if !empty($attachments[$conversation.conversationId].attachments) && $attachments[$conversation.conversationId].attachments > 0 }<span class="ow_mailbox_attachment_icon ow_ic_attach" >&nbsp;</span>{/if}<a href="{$conversation.url}" class="mail_title">{$conversation.subject}</a>
+					<div class="ow_mailbox_message text ow_remark">{$conversation.text}</div>
+				</td>
+				<td width="50" class="ow_bordertop" style="text-align:center;"><a href="javascript://" url='{$conversation.deleteUrl}' class="ow_lbutton mailbox_delete" style="display:none;">{text key='mailbox+delete_conversation_link'}</a></td>
+			</tr>
+		{/foreach}
+             {else}
+                 <td colspan="7" class="ow_center">
+                        <div style="padding:20px;">{text key='mailbox+no_conversations'}</div>
+                 </td>
+             {/if}
+		<tr class="ow_small">
+			<th>{text key='mailbox+select_all_checkbox'}:</th>
+			<th style="text-align:left"><input type="checkbox" name="all" /></th>
+			<th colspan="5" style="text-align: left;">
+                            {text key='mailbox+selected_label'}
+                            {decorator name="button_list_item" type="submit" buttonName="mark_as_read" class="mailbox_mark_as_read" langLabel="mailbox+mark_as_read_button"}
+                            {decorator name="button_list_item" type="submit" buttonName="mark_as_unread" class="mailbox_mark_as_unread" langLabel="mailbox+mark_as_unread_button"}
+                            {decorator name="button_list_item" type="submit" buttonName="delete" class=" mailbox_delete ow_red" langLabel="mailbox+delete_button"}
+                        </th>
+		</tr>
+	
+	</table>
+</form>
+<div class="ow_paging">{$paging}</div>
+<!-- End of Content Area -->

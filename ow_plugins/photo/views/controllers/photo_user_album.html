@@ -1,0 +1,87 @@
+
+<div class="ow_photo_infobar ow_alt2">
+    {text key='photo+album_by'} {user_link id=$album->userId name=$displayName}{if $lastUpdate}, {text key='photo+album_updated'} {format_date timestamp=$lastUpdate}{/if}
+    <div class="ow_small"><a href="{url_for_route for="photo_user_albums:[user=>$userName]"}">{text key='photo+view_user_albums'}</a></div>
+</div>
+
+<div class="ow_photo_list ow_stdmargin clearfix">
+
+    {assign var='alt1' value=true}
+    {assign var='cnt' value=0}
+    
+    {* Count of items in row *}
+    {assign var='count' value=5}
+
+	{foreach from=$photos item='photo' name='p'}
+	
+        {if $cnt == $count}
+            {if $alt1}{assign var='alt1' value=false}{else}{assign var='alt1' value=true}{/if}
+            {assign var='cnt' value=0}
+        {/if}
+        
+        {assign var='cnt' value=$cnt+1}
+        
+	    {capture name='href'}
+	        {url_for_route for="view_photo:[id=>`$photo.dto->id`]"}
+	    {/capture}
+	
+	    {capture name='infoStr'}
+	        <div class="ow_center ow_photo_info_str">{if $photo.comments_count}<span class="ow_txt_value">{$photo.comments_count}</span> {text key='photo+comments_count'}{/if}</div>
+	    {/capture}
+
+        {if $cnt == 1}
+            <div class="clearfix {if $alt1}ow_alt1{else}ow_alt2{/if}">
+        {/if}
+        	    
+	    {decorator name='photo_list_item'
+	        data=$photo
+	        href=$smarty.capture.href
+	        url=$photo.url
+	        width=$widthConfig
+	        height=$heightConfig
+	        infoString=$smarty.capture.infoStr
+	        set_class="ow_item_set`$count`"}
+
+        {if $cnt == $count && $smarty.foreach.p.iteration != 1 || $smarty.foreach.p.last}
+            </div>
+        {/if}
+        	
+	{foreachelse}
+	    <div class="ow_nocontent">{text key='photo+no_photo_found'}</div>
+	{/foreach}
+
+</div>
+
+<div class="ow_stdmargin clearfix">
+
+    <div class="ow_left ow_wide">{$paging}</div>
+    
+    <div class="ow_right ow_txtright ow_narrow">
+    
+    {if $authorized}
+        {decorator name='button' langLabel='photo+edit_album' id='btn-edit-album' class='ow_ic_edit'}
+        {decorator name='button' langLabel='photo+delete_album' id='btn-delete-album' class='ow_ic_delete'}
+    
+	    <div class="ow_hidden">
+	        <div id="edit_album_form">
+		        {form name='albumEditForm'}
+			        <table class="ow_table_1 ow_form ow_full">
+			        <tr class="ow_alt2">
+			            <td class="ow_label">{text key='photo+album'}</td>
+			            <td class="ow_value">
+			                {input name='albumName'}
+			                {error name='albumName'}
+			            </td>
+			        </tr>           
+			        <tr>
+			            <td colspan="2" class="ow_submit">{submit name='save'}</td>
+			        </tr>
+			        </table>
+		       {/form}    
+	        </div>
+	    </div>
+    {/if}
+    
+    </div>
+    
+</div>

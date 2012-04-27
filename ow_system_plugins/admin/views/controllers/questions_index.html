@@ -1,0 +1,121 @@
+{literal}
+<script>
+function editLangValue(_prefix, _key, _callback){
+	$.post( '{/literal}{url_for for="ADMIN_CTRL_Languages:ajaxEditLanguageValuesForm"}{literal}?prefix='+_prefix+'&key='+_key, {}, function(json){
+		if(document['ajaxLangValueEditForms'] == undefined)
+                {
+                    document['ajaxLangValueEditForms'] = [];
+                }
+
+		document['ajaxLangValueEditForms'][_prefix+'-'+_key] = new OW_FloatBox({$title: '{/literal}{text key="admin+questions_edit_section_name_title"}{literal}', $contents: json['markup'], width: 556});
+                document['ajaxLangValueEditForms'][_prefix+'-'+_key+'callback'] = _callback;
+
+		OW.addScriptFiles(json['include_js'], function(){ OW.addScript(json['js']); });
+
+	}, 'json');
+}
+</script>
+{/literal}
+
+{$contentMenu}
+
+<p>{text key='admin+questions_index_info_txt'}</p>
+
+{form name='qst_account_type_select_form'}
+    {block_decorator name="box" type="normal" addClass="ow_wide ow_center ow_automargin ow_stdmargin"}
+        {label name='accountType'}
+        {input name='accountType'}
+        <a href="{$editAccountTypeUrl}" class="ow_lbutton" style="margin-left:15px;" >{text key="admin+questions_edit_account_types_button"}</a>
+    {/block_decorator}
+{/form}
+
+<p>{text key='admin+questions_index_drag_n_drop_info_txt'}</p>
+
+<div class="ow_admin_profile_questions_list_div">
+    <table class="ow_table_2 ow_smallmargin">
+        <tr>
+            <th class=""  style="width:150px;" ><div style="width:150px;overflow:hidden;">{text key='admin+question_column_question'}</div></th>
+            <th class="" style="width:60px;"><div style="width:60px;overflow:hidden;">{text key='admin+question_column_type'}</div></th>
+            <th class="" style="width:115px;"><div style="width:115px;overflow:hidden;">{text key='admin+question_column_values'}</div></th>
+            <th class=" ow_small ow_lightweigh"  style="width:50px;"><div style="width:50px;overflow:hidden;">{text key='admin+question_column_require'}</div></th>
+            <th class=" ow_small ow_lightweight" style="width:27px;"><div style="width:27px;overflow:hidden;">{text key='admin+question_column_sign_up'}</div></th>
+            <th class=" ow_small ow_lightweight" style="width:39px;"><div style="width:39px;overflow:hidden;">{text key='admin+question_column_profile_edit'}</div></th>
+            <th class=" ow_small ow_lightweight" style="width:29px;"><div style="width:29px;overflow:hidden;">{text key='admin+question_column_view'}</div></th>
+            <th class=" ow_small ow_lightweight" style="width:40px;"><div style="width:40px;overflow:hidden;">{text key='admin+question_column_search'}</div></th>
+            <td style="width:62px;"></td>
+        </tr>
+    </table>
+
+    {foreach from=$questionsBySections key='section' item='questions' }
+    <table class="ow_table_2 ow_smallmargin ow_admin_profile_questions_list {if !$section }no_section{/if}" sectionName={if $section }"{$section}"{else}"no_section"{/if}>
+        <tr class="question_section_tr">
+            <th class="section_value {if $section}ow_admin_profile_question_dnd_cursor{/if}" colspan="8"><div style="width:700px;overflow:hidden;" >{if $section}{text key="base+questions_section_`$section`_label"}{else}{text key="base+questions_no_section_label"}{/if}</div></th>
+            <th class="ow_nowrap delete_edit_buttons" style="height:20px;width:75px;">
+
+                <div class="quest_buttons" style="height:20px;width:75px;">
+                    {if $section}
+                        <a href="javascript://" class="ow_lbutton edit_sectionNameLang" style="display:none;" >{text key='admin+btn_label_edit'}</a>
+                        <a href="{$sectionDeleteUrlList[$section]}" class="ow_lbutton ow_red section_delete_button" style="display:none;" >{text key='admin+btn_label_delete'}</a>
+                    {/if}
+                </div>
+
+            </th>
+        </tr>
+       {if isset($questions)}
+           {foreach from=$questions item='question' }
+                  {capture name="evenstyle"}{cycle name="acc_`$section`" values="ow_alt1,ow_alt2"}{/capture}
+                  <tr class="question_tr ow_admin_profile_question_dnd_cursor" question_name="{$question.name}" style="width:150px;">
+                    <td class="{$smarty.capture.evenstyle} ow_txtleft" style="width:150px;"><div style="width:150px;overflow:hidden;"  >{text key="base+questions_question_`$question.name`_label"}</div></td>
+                    <td class="{$smarty.capture.evenstyle} ow_small"  style="width:60px;"><div  style="width:60px;">{text key="base+questions_question_presentation_`$question.presentation`_label"}</div></td>
+                    <td class="{$smarty.capture.evenstyle} ow_small" style="width:115px;">
+                        {if isset($questionValues[$question.name].values)}
+
+                            <center><a class="question_values" href="javascript://">{text key="admin+questions_values_count" count=$questionValues[$question.name].count}</a></center>
+
+                            <div style="padding:0 0 0 15px;text-align:left;display:none;width:100px;overflow:hidden;"  >
+                                <ul style="list-style-type:disc;">
+                                    {foreach from=$questionValues[$question.name].values item='value'}
+                                            <li>{text key="base+questions_question_`$question.name`_value_`$value->value`"}</li>
+                                    {/foreach}
+                                </ul>
+                            </div>
+                        {else}
+                            <div style="width:115px;"></div>
+                        {/if}
+                    </td>
+                    <td class="{$smarty.capture.evenstyle}" style="width:50px;"><div class="{if $question.required}ow_marked_cell{/if}" style="width:50px;">&nbsp;</div></td>
+                    <td class="{$smarty.capture.evenstyle}" style="width:27px;"><div class="{if $question.onJoin}ow_marked_cell{/if}" style="width:27px;">&nbsp;</div></td>
+                    <td class="{$smarty.capture.evenstyle}" style="width:39px;"><div class="{if $question.onEdit}ow_marked_cell{/if}" style="width:39px;">&nbsp;</div></td>
+                    <td class="{$smarty.capture.evenstyle}" style="width:29px;"><div class="{if $question.onView}ow_marked_cell{/if}" style="width:29px;">&nbsp;</div></td>
+                    <td class="{$smarty.capture.evenstyle}" style="width:40px;"><div class="{if $question.onSearch}ow_marked_cell{/if}" style="width:40px;">&nbsp;</div></td>
+                    <td class="{$smarty.capture.evenstyle} ow_nowrap delete_edit_buttons ow_center" style="height:20px;width:75px;">
+                        <div class="quest_buttons" style="height:20px;width:75px;">
+                            <input type="hidden" value="{$question.id}">
+                            <a href="{$question.questionEditUrl}" class="ow_lbutton question_edit_button" style="display:none;">{text key='admin+btn_label_edit'}</a>
+                            {if $question.base!=1 && $question.removable==1}<a href="{$question.questionDeleteUrl}" class="ow_lbutton ow_red question_delete_button" style="display:none;">{text key='admin+btn_label_delete'}</a>{/if}
+                        </div>
+                    </td>
+                 </tr>
+
+           {/foreach}
+        {/if}
+        <tr class="question_tr no_question" style="display:none;">
+            <td colspan="9"></td>
+        </tr>
+    </table>
+    {/foreach}
+</div>
+<div class="ow_txtright ow_stdmargin">
+    {decorator name='button' class="ow_ic_add add_new_question_button" langLabel='admin+questions_add_new_question_button'}
+</div>
+
+{block_decorator name="box_cap" type="empty" langLabel="admin+questions_profile_question_sections_title"}{/block_decorator}
+{block_decorator name="box" type="empty"}
+        <p>{text key='admin+questions_section_info_txt'}</p>
+        {block_decorator name="box" type="normal" addClass="ow_stdmargin ow_wide ow_automargin ow_center"}
+                {form name="qst_add_section_form"}
+                    <div style="display:inline;" >{label name='section_name'}: </div><div style="display:inline;" >{input name='section_name'}</div>
+                    {decorator name='button' type="submit" buttonName="qst_new_section" class="ow_ic_add" langLabel='admin+questions_add_new_section_button'}<br><div style="color:red;">{error name='section_name'}</div>
+                {/form}
+        {/block_decorator}
+{/block_decorator}

@@ -1,0 +1,65 @@
+{* `Floatbox` decorator template *}
+
+{style}{literal}
+
+.floatbox_nooverflow {
+    overflow: hidden;
+}
+
+.floatbox_canvas {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 102;
+    overflow-y: auto;
+}
+
+.floatbox_canvas_sub {
+    height: 0px;
+    overflow: visible;
+}
+
+.floatbox_canvas_sub .floatbox_container {
+    border-width: 6px;
+}
+
+.floatbox_body {
+    overflow-y: auto;
+}
+
+.floatbox_canvas .floatbox_container {
+    margin: 20px auto;
+    position: static;
+}
+
+.floatbox_canvas .floatbox_container .clearfix:after
+{
+    content: " ";
+}
+
+{/literal}{/style}
+
+<div style="display: none" id="floatbox_prototype">
+
+    <div class="floatbox_canvas">
+        <div class="floatbox_container">
+            <div class="floatbox_header">
+                <div class="ow_box_cap_empty clearfix floatbox_cap">
+                                    <div class="ow_box_cap_right">
+                                            <div class="ow_box_cap_body">
+                                <h3 class="ow_ic_gear_wheel floatbox_title"></h3>
+                                    <div class="ow_box_cap_icons clearfix">
+                                        <a title="close" class="ow_ic_delete close" href="javascript://"></a>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+            </div>
+            <div class="floatbox_body"></div>
+            <div class="floatbox_bottom"></div>
+        </div>
+    </div>
+
+</div>

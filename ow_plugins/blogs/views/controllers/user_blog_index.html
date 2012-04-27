@@ -1,0 +1,39 @@
+<div class="clearfix">
+    <div class="ow_superwide" style="float:left;">
+        {foreach from=$list item='post'}
+            {assign var='id' value=$post.dto->getId()}
+
+                    {block_decorator name="box_cap" label=$post.dto->getTitle() type='empty' href=$post.href}{/block_decorator}
+
+                    {block_decorator name="box" type="empty" addClass="ow_stdmargin ow_stdpadding" toolbar=$tb[$id]}
+                        {$post.text}{if $post.truncated}... <a class="ow_lbutton" href="{blog_post_url id=$post.dto->getId()}">{text key='blogs+more'}</a>{/if}
+
+
+                    {if !empty($post.parts) && $post.parts|@count>1}
+                        <br />
+                        <a href="{blog_post_url id=$post.dto->getId()}">{text key="blogs+read_more"}</a>&nbsp;&raquo;
+                    {/if}
+                    {/block_decorator}
+        {foreachelse}
+            {text key='base+empty_list'}	                    
+        {/foreach}
+
+        <div class="ow_stdmargin">{$paging}</div>
+
+    </div>
+
+    <div class="ow_supernarrow" style="float:right;">
+    {block_decorator name="box_cap" langLabel="blogs+blog_archive_lbl_archives" icon_class="ow_ic_clock"}{/block_decorator}
+
+       {block_decorator name="box"}
+          <ul style="list-style-type:disc;list-style-position:inside;">
+            <li><a href="{url_for_route for="user-blog:[user=>`$username`]"}">{text key="base+all"}</a></li>
+            {foreach from=$archive key='year' item='months'}
+                {foreach from=$months item='month'}
+                    <li><a href="{url_for_route for="user-blog:[user=>$username]"}?month={$month}-{$year}">{text key="base+month_`$month`"} {$year}</a> </li>
+                {/foreach}
+            {/foreach}
+          </ul>     
+       {/block_decorator}
+    </div>
+</div>

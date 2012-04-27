@@ -1,0 +1,43 @@
+
+{if !$no_content}
+
+	<div class="ow_video_list ow_stdmargin clearfix">
+	
+	    {assign var='alt1' value=true}
+	    {assign var='cnt' value=0}
+	
+		{foreach from=$clips item='clip' name='c'}
+		
+	        {if $cnt == $count}
+	            {if $alt1}{assign var='alt1' value=false}{else}{assign var='alt1' value=true}{/if}
+	            {assign var='cnt' value=0}
+	        {/if}
+	        
+	        {assign var='cnt' value=$cnt+1}
+		
+	        {assign var='userId' value=$clip.userId}
+	
+	        {if $cnt == 1}
+	            <div class="clearfix {if $alt1}ow_alt1{else}ow_alt2{/if}">
+	        {/if} 
+	                
+		    {decorator name='video_list_item'
+		        data=$clip
+		        listType=$listType
+		        username=$usernames[$userId]
+	            displayName=$displayNames[$userId]
+	        }
+	        
+            {if $cnt == $count && $smarty.foreach.c.iteration != 1 || $smarty.foreach.c.last}
+                </div>
+            {/if}
+	        
+	    {/foreach}
+	    
+	</div>
+	
+    {$paging}
+    
+{else}
+    <div class="ow_nocontent">{$no_content}</div>
+{/if}

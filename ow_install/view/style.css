@@ -1,0 +1,258 @@
+body
+{
+    background: transparent url('img/bg.png');
+    font-size: 16px;
+    font-family: "Lucida Grande", Tahoma;
+    color: #666;
+    margin: 0;
+}
+
+img
+{
+	vertical-align: middle;
+}
+
+ul li
+{
+	margin-bottom: 15px;
+}
+
+input[type=text]
+{
+    font-size: 16px;
+    color: #000;
+    padding: 8px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 350px;
+    background: transparent url('img/inputbg.gif') left top;
+}
+
+input[type=submit]
+{
+    font-size: 18px;
+    color: #fff;
+    border: none;
+    background: transparent url('img/button.png') no-repeat center center;
+    width: 132px;
+    height: 47px;
+    padding-right: 25px;
+    text-shadow: #999 -1px -1px 0;
+}
+
+h1
+{
+    margin-top: 0;
+    color: #000;
+}
+
+p
+{
+	line-height: 1.4;
+}
+
+div.wrapper
+{
+    background: transparent url('img/wrapper.png') repeat-x left top;
+    padding-top: 20px;
+    min-height: 550px;
+}
+
+div.body_wrapper
+{
+    margin: 0 auto;
+    width: 800px;
+}
+
+div.body_top
+{
+    background: transparent url('img/body-top.png') no-repeat center bottom;
+    height: 100px;
+    position: relative;
+}
+
+div.logo_container
+{
+	position: absolute;
+	background: transparent url('img/oxwall-logo.png') no-repeat left top;
+	left: 35px;
+	top: 0px;
+	height: 63px;
+	width: 63px;
+}
+
+div.top_pointer
+{
+	position: absolute;
+	bottom: 16px;
+	left: 52px;
+	height: 15px;
+	width: 28px;
+	background: transparent url('img/top-pointer.png') no-repeat left bottom;
+}
+
+div.body_top h1
+{
+	position: absolute;
+	top: 12px;
+	left: 115px;
+	color: #fff;
+	text-shadow: #000 2px 2px 0;
+}
+
+div.body
+{
+    background: transparent url('img/body.png') repeat-y center top;
+    padding: 0 35px 15px 35px;
+    min-height: 300px;
+}
+
+div.body_bottom
+{
+    background: transparent url('img/body-bottom.png') no-repeat center top;
+    height: 69px;
+}
+
+div.steps
+{
+    top: 10px;
+    color: #aaa;
+    text-align: center;
+    font-size: 18px;
+    line-height: 50px;
+    text-shadow: #333 -1px -1px 0;
+}
+
+div.steps span.activepointer
+{
+    background: transparent url('img/activepointer.png') no-repeat center top;
+    height: 50px;
+    /*padding-top: 14px;*/
+    display: inline-block;
+}
+
+div.steps span.item
+{
+    margin: 0 30px 0 35px;
+    padding-right: 18px;
+    background: transparent url('img/arrow.png') no-repeat right 70%;
+}
+
+div.steps span.borderleft
+{
+    border-left: 1px solid #888;
+}
+
+div.steps span.borderright
+{
+    border-right: 1px solid #444;
+}
+
+div.steps span.active
+{
+    color: #f93;
+    text-shadow: #333 -1px -1px 0;
+    background-image: url('img/arrow-active.png');
+}
+
+table.form
+{
+    border-spacing: 6px;
+    width: 100%;
+}
+
+table.form td
+{
+    padding: 4px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+table.form td.error {
+    background-color: #FF7F7F;
+}
+
+td.label
+{
+    text-align: right;
+    width: 20%;
+}
+
+td.value
+{
+    text-align: left;
+    width: 358px;
+}
+
+td.description
+{
+    font-size: 13px;
+    color: #999;
+}
+
+.feedback_msg
+{
+	text-align: center;
+	margin: 0 40px 15px 40px;
+	padding: 10px 0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+div.error
+{
+	background-color: #fdd;
+	color: #444;
+	text-shadow: #fff 1px 1px 0;
+}
+
+ul.directories {
+    margin: 0 20px 20px 20px;
+    font-size: 13px;
+}
+
+.directories .directory {
+    padding: 2px 0px;
+}
+
+textarea.config {
+	width: 100%;
+}
+
+table.plugin_table
+{
+	border-spacing: 8px;
+}
+
+.plugin_title
+{
+	color: #000;
+}
+
+.plugin_desc
+{
+	font-size: 13px;
+}
+
+.small
+{
+	font-size: 13px;
+}
+
+.red
+{
+	color: #f00;
+}
+
+.high
+{
+	color: #f63;
+}
+
+.feedback_error
+{
+	font-size: 13px;
+    padding: 5px 10px;
+    text-align: left;
+}

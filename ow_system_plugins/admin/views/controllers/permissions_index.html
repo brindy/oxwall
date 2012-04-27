@@ -1,0 +1,80 @@
+<div class="ow_superwide ow_automargin ow_stdmargin">
+{form name='privacy_settings'}
+<table class="ow_table_1 ow_form">
+    <tr class="{cycle values='ow_alt2,ow_alt1'}">
+		<td class="ow_label">{label name='user_approve'}</td>
+		<td class="ow_value">{input name='user_approve'}</td>
+		<td class="ow_desc"></td>
+	</tr>
+	<tr class="{cycle values='ow_alt2,ow_alt1'}">
+		<td class="ow_label">{label name='who_can_join'}</td>
+		<td class="ow_value">{input name='who_can_join'}</td>
+		<td class="ow_desc"></td>
+	</tr>
+    <tr class="{cycle values='ow_alt2,ow_alt1'}" style="display:none;">
+		<td class="ow_label">{label name='who_can_invite'}</td>
+		<td class="ow_value">{input name='who_can_invite'}</td>
+		<td class="ow_desc"></td>
+	</tr>
+	<tr class="{cycle values='ow_alt2,ow_alt1'}">
+		<td class="ow_label">{label name='guests_can_view'}</td>
+        <td class="ow_value">
+            <div class="clearfix">
+                <div style="float: left;width: 50%;">{input name='guests_can_view'}</div>
+                <div style="float: left;width: 50%;padding-top: 35px;">{input name='password'}</div>
+            </div>
+        </td>
+		<td class="ow_desc ow_small">{desc name='guests_can_view'}</td>
+	</tr>
+	<tr>
+		<td></td><td class="ow_center">{submit name='save' class='ow_button ow_ic_save'}</td>
+	</tr>
+</table>
+{/form}
+</div>
+
+
+
+<!--
+<div class="ow_superwide ow_automargin ow_stdmargin">
+<table class="ow_table_1 ow_form">
+	<tr class="{cycle values="ow_alt2,ow_alt1"}">
+		<td class="ow_label">{text key='admin+permissions_index_who_can_join'}</td>
+		<td class="ow_value">
+			<input type="radio" name="whojoin" id="whojoin1" checked /> <label for="whojoin1">{text key='admin+permissions_index_anyone_can_join'}</label><br />
+
+			<input type="radio" name="whojoin" id="whojoin2" /> <label for="whojoin2">{text key='admin+permissions_index_by_invitation_only_can_join'}</label><br />
+		</td>
+		<td class="ow_desc"></td>
+	</tr>
+	<tr class="{cycle values="ow_alt2,ow_alt1"}">
+		<td class="ow_label">{text key='admin+permissions_index_who_can_invite'}</td>
+		<td class="ow_value">
+
+			<input type="radio" name="whoinvite" id="whoinvite1" checked /> <label for="whoinvite1">{text key='admin+permissions_index_all_users_can_invate'}</label><br />
+			<input type="radio" name="whoinvite" id="whoinvite2" /> <label for="whoinvite2">{text key='admin+permissions_index_admin_only_can_invate'}</label><br />
+		</td>
+		<td class="ow_desc"></td>
+	</tr>
+	<tr class="{cycle values="ow_alt2,ow_alt1"}">
+		<td class="ow_label">{text key='admin+permissions_index_mandatory_member_approve'}</td>
+
+		<td class="ow_value"><input type="checkbox" /></td>
+		<td class="ow_desc ow_small">{text key='admin+permissions_index_moders_approve_members_manually'}</td>
+	</tr>
+	<tr class="{cycle values="ow_alt2,ow_alt1"}">
+		<td class="ow_label">{text key='admin+permissions_index_guests_can_view_site'}</td>
+		<td class="ow_value">
+
+			<input type="radio" name="gview" id="gview1" checked /> <label for="gview1">{text key='admin+permissions_index_yes'}</label><br />
+			<input type="radio" name="gview" id="gview2" /> <label for="gview2">{text key='admin+permissions_index_no'}</label><br />
+			<input type="radio" name="gview" id="gview3" /> <label for="gview3">{text key='admin+permissions_index_with_password'}</label> <span class="ow_small"><input type="text" class="ow_text" name="gviewpassword" style="width:100px" /></span>
+		</td>
+		<td class="ow_desc ow_small">{text key='admin+permissions_idex_if_not_yes_will_override_settings'}</td>
+	</tr>
+	<tr>
+		<td></td><td class="ow_center"><input type="submit" class="ow_button ow_ic_save" value="{text key='admin+permissions_index_save'}" /></td>
+	</tr>
+</table>
+</div>
+-->

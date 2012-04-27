@@ -1,0 +1,101 @@
+{style}
+{literal}
+    .ow_mailbox_attachment_icon {
+        display: inline-block;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        width: 14px;
+        height: 17px;
+    }
+    .mailbox_attachments_label {
+        margin: 15px 0 5px;
+        padding-left: 5px;
+        font-weight: bold;
+    }
+{/literal}
+{/style}
+
+
+{script}
+{literal}
+    $('#toggle_attach_link').click(function(){
+        $('#attach_file_inputs').toggle();
+    });
+
+    DND_InterfaceFix.fix($(".ow_mailbox_message"));
+{/literal}
+{/script}
+
+{$mailbox_menu}
+ 
+ <div class="ow_superwide ow_automargin ow_mailbox_conversation">
+     <table class="ow_table_3 ow_form" style="text-align:center;width:100%;">
+         <tr>
+             <td class="ow_label" style="width:30%;">{text key='mailbox+conversation_label'}</td>
+             <td class="ow_value" style="text-align:left;"><h3>{$conversation.subject}</h3></td>
+         </tr>
+         <tr>
+             <td class="ow_label">{text key='mailbox+between'}</td>
+             <td class="ow_value" style="text-align:left;"><a {if $conversation.userUrl}href="{$conversation.userUrl}"{/if}>{text key='mailbox+you'}</a> {text key='mailbox+and'} <a {if $conversation.opponentUrl}href="{$conversation.opponentUrl}"{/if}>{$conversation.opponentDisplayName}</a></td>
+         </tr>
+     </table>
+    {block_decorator name="box" type="empty" addClass="ow_stdmargin"}
+ 	{foreach from=$messageList item=message}
+            {if $message.senderUrl}
+                {decorator name='ipc' addClass='ow_smallmargin ow_mailbox_message' avatar=$avatars[$message.senderId] data=$message infoString="<a href='`$message.senderUrl`'>`$message.senderDisplayName`</a>&nbsp;<span class='ow_tiny'>`$message.timeStamp`</span>"}
+            {else}
+                {decorator name='ipc' addClass='ow_smallmargin ow_mailbox_message' avatar=$avatars[$message.senderId] data=$message infoString="<a>`$message.senderDisplayName`</a>&nbsp;<span class='ow_tiny'>`$message.timeStamp`</span>"}
+            {/if}
+
+            {if !empty($attachmentList[$message.id])}
+                <div class='ow_ipc_info ow_small ow_smallmargin'>
+                    <div class='mailbox_attachments_label'>{text key='mailbox+attachments'}:</div>
+                    {foreach from=$attachmentList[$message.id] item='attm'}
+                        <span class='ow_mailbox_attachment'>
+                            <span class='ow_mailbox_attachment_icon ow_ic_attach'>&nbsp;</span>
+                            {if $attm.downloadUrl != ''}<a href='{$attm.downloadUrl}'>{$attm.fileName}</a>{else}{$attm.fileName}{/if} ({$attm.fileSize/1024|string_format:"%.1f"}Kb)
+                        </span><br />
+                    {/foreach}
+                </div>
+            {/if}
+        {/foreach}
+    {/block_decorator}
+
+    {if $writeMessage==true}
+    {block_decorator name="box_cap" iconClass="ow_ic_write" langLabel='mailbox+compose_message'}{/block_decorator}
+    {block_decorator name="box" addClass='ow_stdmargin'}
+         <div class="form_auto_click" style="text-align:center;">
+                {form name="mailbox-add-message-form" }
+                    <div>
+                    {input name="message"}<br />
+                    {error name="message"}
+                    </div>
+
+                    {if $enableAttachments}
+                        <div class="ow_submit_auto_click" style="padding-top:5px;">
+                            <span class="ow_mailbox_attachment_icon ow_ic_attach"></span>
+                            <span><a href="javascript://" id="toggle_attach_link">{text key='mailbox+attach_files'}</span></a><br /><br />
+                            <div class="ow_hidden ow_smallmargin" id="attach_file_inputs">
+                                {input name='attachments'}
+                            </div>
+                        </div>
+                    {/if}
+                    <div class="ow_center ow_submit_auto_click" style="padding-top: 5px;">{submit name="add"}</div>
+               {/form}
+         </div>
+    {/block_decorator}
+    {/if}
+	 {block_decorator name="box" type="empty" addClass="ow_txtright" style="padding:5px 0;"}
+	    <form id="mailbox-conversation-form" method="POST" action="{$conversation.deleteUrl}" >
+	       <input type="hidden" name="conversation" value="{$conversation.conversationId}" />
+	            {if $conversation.isOpponentLastMessage==true}
+	                    <span class="mailbox_mark_unread">{decorator name="button" buttonName="mark_unread" class="ow_ic_push_pin" langLabel="mailbox+keep_unread_button"}</span>
+	                    <!-- input type="button" name="mark_unread" class="ow_ic_push_pin mailbox_mark_unread" value="{text key='mailbox+keep_unread_button'}" -->
+	            {/if}
+	        <span class="mailbox_delete">{decorator name="button_list_item" type="submit" buttonName="delete" class="ow_red" langLabel="mailbox+delete_conversation_button"}</span>
+	    </form>
+	 {/block_decorator}
+ </div>
+
+
+ <!-- End of Content Area -->

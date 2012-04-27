@@ -1,0 +1,77 @@
+{style}
+{literal}
+.ow_attachments a{
+    background:url({/literal}{$wsImageUrl}{literal}) -164px -4px no-repeat;
+    width:20px;
+    height:20px;
+    overflow:hidden;
+    cursor:pointer;
+    text-decoration:none;
+    float:left;
+}
+
+.ow_attachments a.video{
+    background:url({/literal}{$wsImageUrl}{literal}) -184px -4px no-repeat;
+}
+
+.ow_attachments input[type=file]{
+    opacity:0;
+    cursor:pointer;
+	float:right;
+	filter: alpha(opacity=0);
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=0)";
+}
+
+.attachment_preloader{
+    background:url({/literal}{$themeImagesUrl}ajax_preloader_content.gif{literal}) 50% 50% no-repeat;
+}
+
+.item_loaded{
+    border:1px solid #ccc;
+    padding:3px;
+}
+
+.remove_attachment span{
+    float:left;
+    font-size:9px;
+    line-height:9px;
+}
+
+.remove_attachment span.close{
+    float:right;
+    padding:4px;
+}
+
+.remove_attachment a{
+    cursor:pointer;
+    font-size:14px;
+    font-weight:bold;
+    color:#aaa;
+}
+
+.remove_attachment a:hover{
+    text-decoration:none;
+    color:#666;
+}
+
+.ow_attachments .buttons{
+	padding-top:5px;
+}
+
+{/literal}
+{/style}
+<div class="ow_attachments" id="{$uid}">
+  <span class="buttons clearfix">
+      <a class="image" href="javascript://" title="{text key='base+attch_photo_button_label'}"></a>
+      <a class="video" href="javascript://" title="{text key='base+attch_video_button_label'}"></a>
+  </span>
+  <div style="display: none;">
+      <div id="video_code_{$uid}">
+      {text key='base+ws_video_textarea_label'}
+      <textarea style="height: 140px;"></textarea>
+      <div style="padding-top:10px;text-align: center;">
+        {decorator name="button" langLabel='base+attch_video_add_button_label'}
+      </div>
+      </div>
+  </div>
+</div>

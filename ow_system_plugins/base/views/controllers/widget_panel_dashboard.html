@@ -1,0 +1,36 @@
+{$contentMenu}
+{if ($isAdmin || $isModerator) && ($disaprvdCount + $flags|@count) > 0}
+
+	{block_decorator name='box_cap' langLabel='base+moderator_panel' type='empty'}{/block_decorator}
+	
+	{block_decorator name='box' type='empty' addClass='ow_stdmargin'}
+		<table width="100%">
+			<tr>
+				{if $disaprvdCount > 0}
+				<td>
+					<div class="ow_smallmargin">{text key="base+for_approval"}</div>
+					<ul class="ow_regular">
+						<li >
+							<a href="{url_for_route for='users-waiting-for-approval'}">{text key='base+users' count=$disaprvdCount}</a> <span class="ow_lbutton ow_green">{$disaprvdCount}</span>
+						</li>
+					</ul>							
+				</td>
+				{/if}
+				{if $flags|@count > 0}
+				<td>
+					<div class="ow_smallmargin">{text key="base+flagged_content"}</div>
+					<ul class="ow_regular">
+							{foreach from=$flags item='flag'}
+							<li>
+								<a href="{url_for for="BASE_CTRL_Flags:index:[type =>`$flag.type`]"}">{text key="`$flag.langKey`"}</a> <span class="ow_lbutton ow_red">{$flag.count}</span>
+							</li>
+						{/foreach}
+					</ul>			
+				</td>
+				{/if}
+			</tr>
+		</table>
+	{/block_decorator}
+{/if}
+
+{$componentPanel}

@@ -1,0 +1,70 @@
+{style}{literal}
+.ow_wrap_normal{
+    white-space: normal;
+}
+{/literal}{/style}
+
+{if $addNew_isAuthorized}
+    <div class="ow_right">{decorator name='button' class='ow_ic_add' id='btn-add-new-post' langLabel='blogs+add_new'}</div>
+    {literal}
+    <script>
+    	$(function(){
+    		$('#btn-add-new-post').click(function(){location.href='{/literal}{url_for_route for="post-save-new"}{literal}'})
+    	})
+    </script>
+    {/literal}
+{/if}
+	{$menu}
+      <div class="clearfix">
+
+         <div class="ow_superwide" style="float:left;">
+
+			{if $isBrowseByTagCase}       
+				{if $tag}
+	         	<div class="ow_anno ow_stdmargin ow_center ow_ic_warning">
+					{text key="blogs+results_by_tag" tag=$tag}
+				</div>
+				{else}
+					{$tagCloud}				
+				{/if}
+         	{/if}
+                
+            {if $showList}
+            <div class="ow_blogs_list">
+            {foreach from=$list item='post'}
+            
+				{assign var=dto value=$post.dto}
+
+				{*-- decorator data*}
+
+				{assign var=userId value=$dto->getAuthorId()}
+
+				{capture assign='info_string'}
+					<a href="{blog_post_url id=$post.dto->getId()}">{$dto->getTitle()}</a>
+				{/capture}
+
+				{capture assign='content'}
+					{$post.text}{if $post.showMore}... <a class="ow_lbutton" href="{blog_post_url id=$post.dto->getId()}">{text key='blogs+more'}</a>{/if}
+				{/capture}
+				{assign var='id' value=$dto->getId()}
+
+				{*~~ decorator data*}
+
+            	{decorator name='ipc' infoString=$info_string addClass="ow_stdmargin" content=$content toolbar=$toolbars[$id] avatar=$avatars[$userId]}
+            {foreachelse}
+            	{text key='base+empty_list'}
+            {/foreach}
+
+            {if $paging}<center>{$paging}</center>{/if}
+            </div>
+            {/if}
+        </div>    
+
+         <div class="ow_supernarrow" style="float:right;">
+         	{$tagSearch}
+         	{if $list|@count > 0}
+	         	{$tagCloud}
+         	{/if}
+         </div>
+
+      </div>

@@ -1,0 +1,121 @@
+{script}
+{literal}
+document.flag = function(type, id, title, url, langKey){
+    if(typeof(document.addRoleStorage) === 'undefined'){
+        document.storage = [];
+    }
+
+    $.post( '{/literal}{url_for for="BASE_CTRL_Flag:form"}{literal}', {type: type, id: id, title: title, url: url, langKey: langKey}, function(json){
+        if( typeof(json.isFlagged) != 'undefined' ){
+            OW.warning("{/literal}{text key="base+flag_already_flagged"}{literal}");
+            return;
+        }
+
+        document.storage['flag-panel'] = {
+            fb: new OW_FloatBox({$title: '{/literal}{text key='base+flag_as'}{literal}', $contents: json['markup'], width: '315px'})
+        }
+
+        OW.addCss(json.css);
+
+        OW.addScriptFiles(json['include_js'], function(){ 
+            OW.addScript(json['js']);
+        });
+
+    }, 'json');
+}
+{/literal}
+{/script}
+
+{style}
+{literal}
+    .photo_preview_image {
+        max-width: 100%;
+    }
+{/literal}
+{/style}
+
+<div class="clearfix">
+	<div class="ow_superwide ow_left">
+	
+		{block_decorator name='box' type='empty' addClass='ow_stdmargin ow_center' toolbar=$toolbar}
+		    <img src="{$url}" alt="" class="photo_preview_image" />
+		{/block_decorator}
+			
+	    <div class="ow_stdmargin">{$photo->description}</div>
+	
+	    {$comments}
+	</div>
+
+    <div class="ow_supernarrow ow_right">
+    
+        {block_decorator name='box_cap' iconClass='ow_ic_picture' langLabel='photo+photo'}{/block_decorator}
+        {block_decorator name='box' addClass='ow_small ow_stdmargin'}
+            <table class="ow_table_3 ow_nomargin">
+                <tr>
+                    <td class="ow_label">{text key='photo+album'}</td>
+                    <td>
+                        {capture name='url'}{url_for_route for="photo_user_album:[user=>$ownerName, album=>`$album->id`]"}{/capture}
+                        <a href="{$smarty.capture.url}">{$album->name}</a><br />
+                        {text key='photo+photo_index'} <span class="ow_txt_value">{$photoIndex}</span> {text key='photo+of'} <span class="ow_txt_value">{$photoCount}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ow_label">{text key='base+by'}</td>
+                    <td>{user_link id=$album->userId name=$ownerDisplayName}</td>
+                </tr>
+                <tr>
+                    <td class="ow_label">{text key='photo+photo_added'}</td>
+                    <td>{format_date timestamp=$photo->addDatetime}</td>
+                </tr>
+            </table>
+        {/block_decorator}
+
+        {if $previousPhoto || $nextPhoto}
+        {block_decorator name='box' addClass='ow_small ow_stdmargin clearfix'}
+            {if $previousPhoto}
+            <a class="ow_left ow_photo_prev ow_ic_left_arrow" title="{text key='photo+previous'}" href="{$previousPhoto.href}">
+                <img src="{$previousPhoto.url}" width="45" height="45" alt="" />
+            </a>
+            {/if}
+
+            {if $nextPhoto}
+            <a class="ow_right ow_photo_next ow_ic_right_arrow" title="{text key='photo+next'}" href="{$nextPhoto.href}">
+                <img src="{$nextPhoto.url}" width="45" height="45" alt="" />
+            </a>
+            {/if}
+        {/block_decorator}
+        {/if}
+
+        {$rate}
+
+        {$tags}
+    </div>
+</div>
+      
+{if $ownerMode || $moderatorMode}
+<div class="ow_hidden">
+    <div id="photo_edit_form">
+    
+    {form name='photoEditForm'}
+        <table class="ow_table_1 ow_form">
+            <tr class="ow_alt2">
+                <td class="ow_label">{label name='album'}</td>
+                <td class="ow_value">{input name='album'} {error name='album'}</td>
+            </tr>
+            <tr class="ow_alt1">
+                <td class="ow_label">{label name='description'}</td>
+                <td class="ow_value">{input name='description'} <br /> {error name='description'}</td>
+            </tr>
+            <tr class="ow_alt2">
+                <td class="ow_label">{label name='tags'} <br /><span class="ow_small">{text key='photo+tags_desc'}</span></td>
+                <td class="ow_value">{input name='tags'}</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="ow_submit">{submit name='edit' class='ow_ic_save'}</td>
+            </tr>  
+        </table>
+        {/form}
+        
+    </div>
+</div>
+{/if}

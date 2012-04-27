@@ -1,0 +1,103 @@
+
+{style}
+  {literal}
+    .ow_gift_wrapper {
+        margin: 0 0 20px 23px;
+        height: 135px;
+    }
+  {/literal}
+{/style}
+
+{$menu}
+
+<div class="ow_gift_templates ow_superwide ow_automargin">
+{if $templates}
+    {block_decorator name='box_cap' iconClass='ow_ic_heart' langLabel='virtualgifts+template_list'}{/block_decorator}
+    {block_decorator name='box' addClass='ow_stdmargin clearfix'}
+    <div class="ow_stdmargin">
+    {if $categoriesSetup}
+        <ul class="ow_regular">
+        {foreach from=$templates item='cat'}
+            <li><b>{$cat.title}</b><br /><br />
+            <div class="clearfix ow_smallmargin">
+            {foreach from=$cat.tpls item='tpl'}
+            <div class="ow_gift_wrapper">
+                <div class="ow_gift_holder">
+                    <img class="gift_image" src="{$tpl.imageUrl}" height="80" /><br /><input type="checkbox" value="{$tpl.id}" /><br />
+                    <span class="ow_lbutton gift_edit_btn" rel="{$tpl.id}">{text key='admin+btn_label_edit'}</span>
+                    <span class="ow_lbutton gift_delete_btn" rel="{$tpl.id}">{text key='admin+delete_btn_label'}</span><br />
+                    {if $setPrice}<div class="ow_small"><b>{$tpl.price}</b> {text key='usercredits+credits'}</div>{/if}
+                </div>
+                <div class="ow_gift_helper" rel="{$tpl.id}"></div>
+            </div>
+            {/foreach}
+            </div>
+            </li>
+        {/foreach}
+        {if $uncategorized}
+            <li><b>{text key='virtualgifts+uncategorized'}</b><br /><br />
+            <div class="clearfix ow_smallmargin">
+            {foreach from=$uncategorized item='tpl'}
+            <div class="ow_gift_wrapper">
+                <div class="ow_gift_holder">
+                    <img class="gift_image" src="{$tpl.imageUrl}" height="80" /><br /><input type="checkbox" value="{$tpl.id}" /><br />
+                    <span class="ow_lbutton gift_edit_btn" rel="{$tpl.id}">{text key='admin+btn_label_edit'}</span>
+                    <span class="ow_lbutton gift_delete_btn" rel="{$tpl.id}">{text key='admin+delete_btn_label'}</span><br />
+                    {if $setPrice}<div class="ow_small"><b>{$tpl.price}</b> {text key='usercredits+credits'}</div>{/if}
+                </div>
+                <div class="ow_gift_helper" rel="{$tpl.id}"></div>
+            </div>
+            {/foreach}
+            </div>
+            </li>
+        {/if}
+        </ul>
+    {else}
+        <div class="clearfix">
+	    {foreach from=$templates item='tpl'}
+	    <div class="ow_gift_wrapper">
+	        <div class="ow_gift_holder">
+	            <img class="gift_image" src="{$tpl.imageUrl}" height="80" /><br /><input type="checkbox" value="{$tpl.id}" /><br />
+	            <span class="ow_lbutton gift_edit_btn" rel="{$tpl.id}">{text key='admin+btn_label_edit'}</span>
+	            <span class="ow_lbutton gift_delete_btn" rel="{$tpl.id}">{text key='admin+delete_btn_label'}</span><br />
+	            {if $setPrice}<span class="ow_remark ow_small">{text key='usercredits+price'}: <b>{$tpl.price}</b></span>{/if}
+	        </div>
+	        <div class="ow_gift_helper"></div>
+	    </div>
+	    {/foreach}
+	    </div>
+    {/if}
+    </div>
+    <input type="checkbox" id="check_all_tpls" /><label for="check_all_tpls">{text key='base+check_all'}</label> | {text key='base+with_selected'}
+    {decorator name='button' langLabel='admin+btn_label_edit' class='ow_ic_edit' id='btn_edit_common'} 
+    {decorator name='button' langLabel='admin+delete_btn_label' class='ow_mild_red ow_ic_delete' id='btn_delete_common'}
+    {/block_decorator}
+{/if}
+</div>
+
+<div class="ow_wide ow_automargin">
+{block_decorator name='box_cap' langLabel='virtualgifts+add_template' iconClass='ow_ic_add'}{/block_decorator}
+{block_decorator name='box' addClass='ow_stdmargin'}
+{form name='add-template-form'}
+    <table class="ow_table_3">
+        <tr>
+        <td class="ow_label">{label name='file'}</td>
+        <td class="ow_value">{input name='file'}</td>
+        </tr>
+        {if $categoriesSetup}
+        <tr>
+        <td class="ow_label">{label name='category'}</td>
+        <td class="ow_value">{input name='category'}</td>
+        </tr>
+        {/if}
+        {if $setPrice}
+        <tr>
+        <td class="ow_label">{label name='price'}</td>
+        <td class="ow_value">{input name='price' class='ow_settings_input'} {text key='usercredits+credits'}</td>
+        </tr>
+        {/if}
+    </table>
+    <div class="ow_center">{submit name='add' class='ow_ic_add'}</div>
+{/form}
+{/block_decorator}
+</div>

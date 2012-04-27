@@ -1,0 +1,156 @@
+{literal}
+<script>
+function editLangValue(_prefix, _key, title,_callback){
+	$.post( '{/literal}{url_for for="ADMIN_CTRL_Languages:ajaxEditLanguageValuesForm"}{literal}?prefix='+_prefix+'&key='+_key, {}, function(json){
+		if(document['ajaxLangValueEditForms'] == undefined)
+                {
+                    document['ajaxLangValueEditForms'] = [];
+                }
+			
+
+		document['ajaxLangValueEditForms'][_prefix+'-'+_key] = new OW_FloatBox({$title: title, $contents: json['markup'], width: 556});
+                document['ajaxLangValueEditForms'][_prefix+'-'+_key+'callback'] = _callback;
+
+		OW.addScriptFiles(json['include_js'], function(){ OW.addScript(json['js']); });
+
+	}, 'json');
+}
+</script>
+{/literal}
+{literal}
+    <script language="javascript" type="text/javascript">
+        $(function(){
+            $("#edit_question_add_value_button").click(
+                function() {
+                        window.addValueBox = new OW_FloatBox({$title: '{/literal}{text key='admin+questions_add_question_values_title'}{literal}',
+                        $contents: $('#add-qst-values-div'),
+                        height: '300px',
+                        width: '480px'});
+                }
+            ) 
+       });
+    </script>
+{/literal}
+
+{script}
+    {literal}
+      $(function(){
+            $("form[name='qst_edit_form'] select[name='qst_answer_type']").change(
+               function(){ this.form.submit(); }
+            );
+       });
+   {/literal}
+{/script}
+
+{$contentMenu}
+{form name='qst_edit_form'}
+<input type="hidden" id="edit_questionId" name="questionId" value="{$question->id}">
+<input type="hidden" id="edit_questionName" name="questionName" value="{$question->name}">
+	<table class="ow_table_1 ow_form ow_admin_edit_profile_question">
+            
+            	<tr class="{cycle values='ow_alt2,ow_alt1'} tr_qst_name">
+		        <td class="ow_label">
+                            {text key="admin+questions_question_name_label"}
+		        </td>
+		        <td class="ow_value">
+                            <a href="javascript://" id="edit_questionNameLang">{$questionLabel}</a>
+		        </td>
+		        <td class="ow_desc ow_small">
+		        </td>
+		 </tr>
+
+                 <tr class="{cycle values='ow_alt2,ow_alt1'} tr_qst_name">
+		        <td class="ow_label">
+                            {text key="admin+questions_edit_question_description_label"}
+		        </td>
+		        <td class="ow_value">
+                            <a href="javascript://"  id="edit_questionDescriptionLang" >{$questionDescription}</a>
+		        </td>
+		        <td class="ow_desc ow_small">
+		        </td>
+		 </tr>
+
+		{foreach from=$formData key='formEl' item='value'}
+		    <tr class="{cycle values='ow_alt2,ow_alt1'} tr_{$formEl}">
+		        <td class="ow_label">
+		            {label name=$formEl}
+		        </td>
+		        <td class="ow_value">
+                            {input name=$formEl}
+                            <br/>
+                            {error name=$formEl}
+		        </td>
+		        <td class="ow_desc ow_small">{desc name=$formEl}</td>
+		    </tr>
+                    {if $formEl=='qst_answer_type' && ( $question->type=='select' || $question->type=='multiselect' ) && $question->presentation!='date'}
+                         <tr class="{cycle values='ow_alt2,ow_alt1'} tr_{$formEl}">
+                            <td class="ow_label">
+                                <label>{text key='admin+question_possible_values_label'}</label>
+                            </td>
+                            <td class="ow_value">
+                                <div class="ow_smallmargin">{text key='admin+questions_admin_existing_values'}: <span class="ow_highlight ow_small" style="padding: 1px 3px;">{text key='admin+questions_admin_dragndrop_reorder'}</span></div>
+                                <div class="question_values ow_smallmargin" >
+                                     <div style="cursor:move; display:none;" class="clearfix question_value_block_template">
+                                              <div class="quest_value ow_left" style="max-width:335px;" >
+                                              </div>
+                                               <div class="quest_buttons ow_left">
+                                                    <a class="ow_lbutton question_value_edit" href="javascript://">{text key='admin+btn_label_edit'}</a>
+                                                    <a class="ow_lbutton ow_red question_value_delete" href="javascript://"  >{text key='admin+btn_label_delete'}</a>
+                                               </div>
+                                    </div>
+                                    {foreach from=$questionValues item='value' }
+
+
+                                        <div style="cursor:move;" class="clearfix question_value_block" question_value="{$value->value}">
+                                              <div class="quest_value ow_left" style="max-width:335px;" >
+                                                  {text key="base+questions_question_`$value->questionName`_value_`$value->value`"}
+                                              </div>
+                                               <div class="quest_buttons ow_left">
+                                                    <a class="ow_lbutton question_value_edit"  href="javascript://">{text key='admin+btn_label_edit'}</a>
+                                                    <a class="ow_lbutton ow_red question_value_delete" href="javascript://"  >{text key='admin+btn_label_delete'}</a>
+                                               </div>
+                                        </div>
+                                    {/foreach}
+                                </div>
+               
+                                {decorator name="button" id="edit_question_add_value_button" class="ow_ic_add" langLabel='admin+questions_admin_add_new_values'}
+                                <input type="hidden" id="question_values_order" name="question_values_order" />
+                            </td>
+                            <td class="ow_desc ow_small"></td>
+                        </tr>
+                    {/if}
+                {/foreach}
+
+                <tr class="tr_qst_submit" >
+                    <td colspan="3" class="ow_submit">
+                            {submit name='qst_submit'}
+                    </td>
+		</tr>
+	</table>
+{/form}
+<div style="display:none;">
+    <div id="add-qst-values-div">
+        {form name='add_qst_values_form'}
+            <table class="ow_table_1 ow_form" style="margin:0px;">
+                <tr>
+                    <td class="ow_label" style="width:25%;">
+                        {label name='qst_add_values'}
+                    </td>
+                    <td class="ow_value">
+                        <div class="ow_small ow_smallmargin">
+                            {desc name='qst_add_values'}
+                        </div>
+                        {input name='qst_add_values'}
+                        <br/>
+                        {error name='qst_add_values'}
+                    </td>
+                </tr>
+                <tr class="tr_qst_submit" >
+                    <td colspan="3" class="ow_submit">
+                            {submit name='add_qst_submit'}
+                    </td>
+                </tr>
+            </table>
+        {/form}
+    </div>
+</div>

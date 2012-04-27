@@ -1,0 +1,3441 @@
+
+/********************************************************************************
+  *    
+  *     Filename:        base.css 
+  *     Description:     Oxwall Club Theme Base CSS File
+  *     Version:         1.0.0
+  *     
+  *     -- FILE STRUCTURE: -- 
+  *
+  *     [ 1] CSS Defaults Reset          __reset 
+  *     [ 2] Base Elements               __base
+  *     [ 3] Masterpage & Page Layout    __layout 
+  *     [ 4] Forms                       __forms
+  *     [ 5] Common Blocks               __blocks 
+  *     [ 6] Standard Listings           __listings 
+  *     [ 7] Tables                      __tables
+  *     [ 8] Messages & Notifications    __messages
+  *     [ 9] Thumbnails & Icons          __icons
+  *     [10] Menus                       __menus   
+  *     [11] Pagination                  __pagination
+  *     [12] Typography                  __typography
+  *     [13] Misc                        __misc
+  *     [14] Clearfix                    __clearfix
+  *     [15] Plugin Styles               __plugins
+  *     [16] Admin Styles                __admin         
+  *
+  *   
+ ********************************************************************************/
+
+/*========================================================
+        [1] CSS Defaults Reset      __reset
+  ========================================================*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+html {
+	height: 100%;
+}
+
+body{
+    line-height: 1; /* TODO delete */
+}
+
+ol, ul{
+    list-style: none; /* TODO delete */
+}
+
+blockquote, q{
+    quotes: none; 
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after{
+    content: '';
+    content: none;
+}
+
+table{ 
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* remember to define focus styles! */
+:focus{
+    outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins{
+    text-decoration: none;
+}
+
+del{
+    text-decoration: line-through;
+}
+
+/*========================================================
+        [2] Base Elements       __base
+  ========================================================*/
+
+body, html
+{
+    font-family: "Lucida Grande", "Verdana", "Tahoma"; /** OW_Control type:font, section:1. General Settings, key:commonFontFamily, label:Font  **/
+    color: #333; /** OW_Control type:color, section:2. Colors, key:textColor, label: - Text **/
+    font-size: 12px; /** OW_Control type:text, section:1. General Settings, key:commonFontSize, label:Font size **/
+    line-height: 18px;
+    background-color: #9eb5ba; /** OW_Control type:color, section:1. General Settings, key:footerColor, label:Footer background **/
+    min-height: 100%;
+    background-image: url(images/shadow.png);
+    background-repeat: no-repeat; 
+    background-position: center 20px;
+}
+
+a
+{
+    color: #36c; /** OW_Control type:color, key:linkColor, section:2. Colors, label: - Links **/
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+a:hover img{
+    text-decoration: none;
+}
+
+p{
+    text-indent: 0;
+}
+
+h1, h2, h3, h4, h5{
+    color: #ef9300; /** OW_Control type: color, key: titleColor, label: - Titles, section: 2. Colors **/
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    background-repeat: no-repeat;
+    background-position: left center;
+    font-size: 22px;
+    line-height: 23px;
+    padding-left: 22px;
+    text-shadow: 1px 1px 0 #FFFFFF;
+}
+
+h2{
+    font-size: 18px;
+}
+
+h3{
+    font-size: 14px;
+}
+
+h4{
+    font-size: 13px;
+    margin-bottom: 10px;
+    text-transform: none;
+}
+
+table{
+    border: none;
+}
+
+img{
+    border: 0;
+    vertical-align: middle;
+}
+
+th, td{
+    padding: 2px 5px;
+    vertical-align: top;
+}
+
+th{
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+hr{
+    background-color: #ccc;
+    border: none;
+    height: 1px;
+    margin: 5px 5px 15px 5px;
+}
+
+/*========================================================
+        [3] Masterpage & Page Layout        __layout
+  ========================================================*/
+
+/* ---- Page Layout styles ---- */
+
+.ow_canvas
+{
+    margin: 0 auto;
+    width: 920px;
+}
+
+.ow_page{
+    margin: 0 auto;
+    padding: 0 18px;
+}
+
+.ow_header{
+    background: transparent url('images/head_bg_l.png') no-repeat left bottom;
+    height: 110px; /** OW_Control type:text, key:headerHeight, section:1. General Settings, label: Page header height **/
+    margin: 15px auto 0px;
+    padding-left: 12px;
+    width: 988px;
+}
+
+.ow_header .ow_canvas{
+    background: transparent url('images/head_bg_r.png') no-repeat right bottom;
+    padding-right:12px;
+    width: auto;
+}
+
+.ow_header .ow_page{
+    background: #ccc url('images/head_bg_c.gif') repeat-x;
+    height: 110px;
+}
+
+.ow_header .ow_logo{
+    float: left;
+    margin: 23px 0 0 0px;
+}
+
+.ow_header .ow_logo h2{
+    font-size: 28px;
+    text-shadow: 1px 1px 0 #FFFFFF;
+    text-transform: uppercase;
+}
+
+.ow_header .ow_logo .ow_tagline
+{
+    font-size: 11px;
+    color: #999;
+    padding: 2px 0 0 18px;
+    text-shadow: 0px 1px 0 #FFFFFF;
+    background: url(images/tagline_point.png) no-repeat 0 center;
+    margin-top: 10px;
+    height: 14px;
+    line-height: 12px;
+}
+
+.ow_header .ow_logo a
+{
+    color: #7cb315; /** OW_Control type:color, key:siteTitleColor, section:2. Colors, label: Site title color **/
+    text-decoration: none;
+}
+
+.ow_header .ow_search{
+    float: right;
+    padding: 5px;
+}
+
+.ow_page_container .ow_page
+{
+    padding: 35px 18px 18px; 
+    min-height: 400px;
+    color: #333;
+    background: #fff;
+    
+}
+
+.ow_content a
+{
+    color: #36c; /** OW_Control key: linkColor **/
+}
+
+.ow_footer
+{
+    background:url('images/bottom_l.png') no-repeat left top;
+    color: #aaa;
+    height: 88px;
+    margin: 0 auto;
+    width: 956px;
+    padding-left: 44px;
+    margin-bottom:10px; 
+}
+
+.ow_footer .ow_canvas{
+    background:url('images/bottom_r.png') no-repeat right top;
+    padding-right:44px; 
+    height:88px;
+    width: auto;
+}
+
+.ow_footer .ow_page{
+    background:url('images/bottom_c.png') repeat-x;
+    height:88px;
+}
+
+.ow_footer a
+{
+    color: #fff;
+}
+
+.ow_sidebar{
+    float: right;
+    width: 168px;
+}
+
+.ow_footer .ow_copyright{
+    float: left;
+    font-size:11px;
+    line-height: 1;
+}
+
+h1.page_title{
+    background: url(images/ic_file.png) no-repeat left 50%;
+    color: #dd3300;
+    margin-bottom: 20px;
+    padding-left: 22px;
+}
+
+.ow_column
+{
+    width: 49%;
+}
+
+.ow_narrow{
+    width: 39%;
+}
+
+.ow_wide{
+    width: 59%;
+}
+
+.ow_superwide{
+    width: 75%;
+}
+
+.ow_supernarrow{
+    width: 23%;
+    font-size: 11px;
+}
+
+.ow_left{
+    float: left;
+}
+
+.ow_right{
+    float: right;
+}
+
+.ow_center{
+    text-align: center;
+}
+
+.ow_txtleft,
+table td.ow_txtleft{
+    text-align: left;
+}
+
+.ow_txtcenter{
+    text-align: center;
+}
+
+.ow_txtright{
+    text-align: right;
+}
+
+.ow_hidden{
+    display: none;
+}
+
+.ow_visible{
+    display: block;
+}
+
+.ow_nocontent{
+    padding: 20px 0px;
+    text-align: center;
+}
+
+table.ow_nomargin,
+div.ow_nomargin
+{
+    margin-bottom:0px;
+}
+
+.ow_nowrap{
+    white-space: nowrap;
+}
+
+ul.ow_regular
+{
+    list-style: outside;
+    list-style-image: url(images/li.png);
+    margin-bottom: 12px;
+}
+
+ul.ow_regular li
+{
+    line-height: 1.4;
+    margin: 0 0 3px 19px;
+    
+}
+
+.ow_preloader{
+    background: url(images/ajax_preloader_button.gif) no-repeat center center;
+}
+
+.ow_preloader_content{
+    background: url(images/ajax_preloader_content.gif) no-repeat center center;
+}
+
+
+.ow_page_layout_scheme{
+    width: 580px;
+}
+
+.ow_page_layout_scheme a{
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: 1px solid #FFFFFF;
+    display: block;
+    float: left;
+    height: 103px;
+    margin: 2px;
+    padding: 5px;
+    width: 100px;
+}
+
+.ow_page_layout_scheme a.active, 
+.ow_page_layout_scheme a:hover{
+    background-color: #CCFFCC;
+    border: 1px solid #CCCCCC;
+}
+
+.ow_item_set2{ width: 49%; }
+.ow_item_set3{ width: 33%; }
+.ow_item_set4{ width: 25%; }
+.ow_item_set5{ width: 20%; }
+
+
+/* ---- End of Page Layout styles ---- */
+
+
+/* ---- Sidebar styles ---- */
+/* empty */
+/* ---- End of Sidebar styles ---- */
+
+
+/* ---- Page Console styles ---- */
+
+.ow_console{
+    font-size: 11px;
+    height: 30px;
+    margin-top: 11px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 99;
+}
+
+.console_item{
+	background: transparent url(images/console_item_bg_r.png) no-repeat right; 
+    float:left;
+    height:30px;
+    margin:0 0 0 1px;
+    padding:0px 9px 0 14px;
+    height: 32px;
+}
+
+.console_item .fake_node{
+	background: transparent url(images/console_item_bg.png) no-repeat;
+	height:32px;
+	padding: 0 6px 0 11px;
+}
+
+.ow_console .wackwall_link{
+    background: url(images/console-w.png) no-repeat 50% 50%;
+    display: block;
+    height: 30px;
+    width: 35px;
+}
+
+.ow_console .wackwall_link:hover{
+    text-decoration:none;
+}
+
+.ow_console .common_shortcuts a{
+    background-position:50% 50%;
+    background-repeat: no-repeat;
+    display:inline-block;
+    height:30px;
+    width:25px;
+}
+
+.ow_console .common_shortcuts a:hover{
+    text-decoration:none;
+}
+
+.ow_console .notification_shortcut{
+    padding:0 7px;
+}
+
+.ow_console .notification_shortcut a{
+    background-position:0 50%;
+    background-repeat:no-repeat;
+    display:block;
+    padding: 5px 0 5px 20px;
+    text-decoration:none;
+}
+
+/*
+.ow_console_body{
+    margin: 0px auto;
+    width: 1000px;
+    padding: 3px 0px;
+}
+
+.ow_console .link_cont{
+    padding-left: 6px;
+    padding-top: 3px;
+}
+
+.ow_console .link_cont a{
+    background: url(images/console-w.png) no-repeat;
+    display: block;
+    height: 24px;
+    width: 18px;
+}
+
+.ow_vert_delimiter{
+    border-left: 1px solid #999;
+    border-right: 1px solid #ccc;
+    display: inline-block;
+    height: 17px;
+}
+
+.ow_console input[type=text],
+.ow_console input[type=password]{
+    width: 33%;
+}
+*/
+/* ---- End of Page Console styles ---- */
+
+
+/*========================================================
+        [4] Forms        __forms
+  ========================================================*/
+
+/* ---- Form Elements styles ---- */
+
+input[type=text], 
+input[type=password], 
+textarea,
+select,
+div.jhtmlarea{
+    background-image: url(images/inputbg.gif); /** OW_Control type:image, section:3. Other styles, key:inputBg, label:Input background **/
+    border: 1px solid #bbb;
+    color: #333;
+    font-family: "Lucida Grande", "Verdana";
+    font-size: 13px;
+    padding: 4px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+div.jhtmlarea{
+    padding: 0;
+}
+
+html body .ow_sidebar *,
+html body .ow_console *{
+    font-size: 11px;
+}
+
+select{
+    background-image: none;
+}
+
+textarea{
+    height: 100px;
+    width: 95%;
+}
+
+input[type=text], 
+input[type=password]{
+    width: 95%;
+}
+
+html body.ow input[type=submit],
+html body.ow input[type=button]{
+    padding: 3px 3px 8px 10px;
+    color: #491100; /** OW_Control type:color, section:2. Colors, key:buttonText, label:Button text **/
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    height: 24px;
+    background-image: none;
+    background-repeat: no-repeat;
+    font-family: inherit;
+}
+
+/* temp hack for decorating buttons in FF */
+body:not(:-moz-handler-blocked) html body.ow input[type=submit],
+body:not(:-moz-handler-blocked) html body.ow input[type=button]{
+    padding-top: 2px;
+    padding-left: 8px;
+}
+
+.console_item .common_ajax_form input[type=submit]{
+    padding: 0px 2px 5px 8px;
+    height: 24px;
+}
+
+.console_item .common_ajax_form{
+	padding: 4px 0;
+}
+
+input[type=submit].ow_green,
+input[type=button].ow_green,
+input[type=submit].ow_red,
+input[type=button].ow_red
+{
+    text-shadow: none;
+}
+
+html body.ow input[type=submit],
+html body.ow input[type=button]{
+    background-color: transparent;
+    margin: 0px;
+    border: none;
+}
+
+html body.ow span.ow_button{
+    background-color: transparent;
+    background-image: url('images/button_r.png');
+    background-repeat: no-repeat;
+    background-position: center right;
+    display: inline-block;
+    height: 24px;
+    padding-right: 6px;
+}
+
+span.ow_button span{
+    background-image: url('images/button.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 24px;
+}
+
+
+body.ow input.ow_inprogress {
+    background-image: url(images/ajax_preloader_button.gif);
+}
+
+*+html input[type=submit],
+*+html input[type=button]{
+    overflow: visible;
+}
+
+input[type=submit]:hover,
+input[type=button]:hover{
+    /* empty */
+}
+
+input[type=submit].submit{
+    background-color: #00aa00;
+    color: #fff;
+}
+
+input[type=submit].alert{
+    background-color: #ff6666;
+    color: #fff;
+}
+
+input[type=submit].submit:hover{
+    /* empty */
+}
+
+input[type=submit].alert:hover{
+    /* empty */
+}
+
+ul.ow_radio_group li{
+    float:left;
+}
+
+ul.ow_checkbox_group li{
+    float:left;
+}
+
+textarea.invitation, 
+input[type=text].invitation, 
+input[type=password].invitation{
+    color:#999;
+}
+
+.form_auto_click textarea.invitation{
+    height:50px;
+}
+
+form .error{
+    color:red;
+}
+
+form input[type=text].hasDatepicker{
+    width: 87%;
+}
+
+form br.ow_no_height{
+    line-height: 0;
+}
+
+.color_input input[type=text]{
+    width:70%;
+}
+
+.ow_multiselect select{
+    width: 120px;
+    padding: 2px;
+}
+
+.ow_multiselect input[type=button]{
+    padding-left: 20px;
+}
+
+
+.form_auto_click .ow_submit_auto_click{
+    display:none;
+}
+
+/* ---- End of Form Elements styles ---- */
+
+/* wysiwyg styles */
+
+body.htmlarea_styles{
+    font-family: "Lucida Grande", "Verdana", "Tahoma"; /** key:commonFontFamily  **/
+    color: #333;
+    font-size: 13px; /** key:commonFontSize **/
+    line-height: 18px;
+    
+}
+
+body.htmlarea_styles ul{
+    
+}
+
+body.htmlarea_styles ol{
+    
+}
+
+body.htmlarea_styles a{
+    
+}
+
+body.htmlarea_styles p{
+    margin:0;
+}
+
+
+/* wysiwyg styles end */
+
+
+/* ---- Form Table styles ---- */
+
+/*
+table.ow_info{
+}
+
+table.ow_info th{
+    background: url(images/button_menu_bg.gif) repeat-x;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+table.ow_info td.name{
+    border-right: 1px solid #eee;
+    color: #666;
+    text-align: right;
+}
+
+table.ow_info td.value{
+    border-left: 1px solid #fff;
+}
+*/
+
+/* ---- End of Form Table styles ---- */
+
+
+/*========================================================
+        [5] Common Blocks        __blocks
+  ========================================================*/
+
+.ow_box_cap_empty
+{
+    background: transparent url('images/box-cap-empty-left.png') no-repeat left center;
+    padding-left: 5px;
+    height: 35px;
+    margin-bottom: 15px;
+}
+
+.ow_box_cap_empty .ow_box_cap_right
+{
+    background: transparent url('images/box-cap-empty-right.png') no-repeat right center;
+    padding-right: 5px;
+    height: 35px;
+}
+
+.ow_box_cap_empty .ow_box_cap_body
+{
+    background: transparent url('images/box-cap-empty.png') repeat-x left center;
+    height: 35px;
+}
+
+.ow_box_cap h3,
+.ow_box_cap_empty h3{
+    background-image: url(images/ic_file.png);
+    background-repeat: no-repeat;
+    background-position: 4px 50%;
+    padding: 7px 0 7px 27px;
+    text-shadow: #fff 1px 1px 0;
+    height: 18px;
+    overflow: hidden;
+}
+
+.ow_box_cap
+{
+    background: transparent url('images/box-cap-empty-left.png') no-repeat left center;
+    padding-left: 5px;
+    height: 31px;
+}
+
+.ow_box_cap .ow_box_cap_right
+{
+    background: transparent url('images/box-cap-empty-right.png') no-repeat right center;
+    height: 31px;
+    padding-right: 5px;
+}
+
+.ow_box_cap .ow_box_cap_body
+{
+    background: transparent url('images/box-cap-empty.png') repeat-x left center;
+    height: 31px;
+}
+
+.ow_box{
+    background-color: #F7F6F4;
+    margin-bottom: 8px;
+    padding: 10px 10px 8px 10px;
+    position: relative;
+}
+
+.ow_box_empty{
+    position: relative;
+}
+
+.ow_box .bottom_toolbar, .ow_box_mod .bottom_toolbar{
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    font-size: 10px;
+    padding: 0 5px;
+    text-align: right;
+}
+
+.ow_box_bottom_left
+{
+    background: transparent url('images/box-bottom-left.png') no-repeat left center;
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    left: -1px;
+    bottom:-3px;
+}
+
+.ow_box_bottom_right
+{
+    background: transparent url('images/box-bottom-right.png') no-repeat right center;
+    height: 5px;
+    width: 5px;
+    position: absolute;
+    right: -1px;
+    bottom:-3px;
+}
+
+.ow_box_bottom_body
+{
+    background: transparent url('images/box-bottom.png') repeat-x;
+    height: 5px;
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    bottom:-3px;    
+}
+
+
+/*========================================================
+        [6] Standard Listings        __listings
+  ========================================================*/
+
+/* ---- Item Picture Content ---- */
+
+.ow_ipc_picture{
+    float: left;
+    margin-right: -45px;
+    width: 45px;
+}
+
+.ow_ipc_picture img{
+    width: 45px;
+    height: 45px;
+}
+
+.ow_ipc_info{
+    margin-left: 53px;
+}
+
+.ow_ipc_header{
+    padding: 2px 5px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.ow_box .ow_ipc_header
+{
+    border: 1px solid #ddd;
+    border-bottom: none;
+    border-right: none;
+}
+
+.ow_ipc_header, th{
+    background-color: #edfecf; /** OW_Control key:owAlt2 **/
+}
+
+/* ---- Mini Item Picture Content ---- */
+
+.ow_mini_ipc_picture{
+    float: left;
+    margin-right: -32px;
+    width: 32px;
+}
+
+.ow_mini_ipc_picture .ow_avatar img,
+.ow_mini_ipc_picture img{
+    width: 32px;
+    height: 32px;
+}
+
+.ow_mini_ipc_info{
+    margin-left: 40px;
+}
+
+.ow_mini_ipc_info .mipc_url{
+    font-weight: bold;
+}
+
+.ow_mini_ipc_toolbar{
+	font-size:10px;
+}
+
+/* ---- Item Content ---- */
+
+.ow_ic_header
+{
+    margin-bottom: 5px;
+}
+
+.ow_ic_description
+{
+    margin-bottom: 5px;
+}
+
+.ow_ic_toolbar
+{
+    margin-bottom: 5px;
+}
+
+th,
+.ow_content_menu,
+.ow_content_menu li a,
+.ow_highbox_table .ow_highbox,
+.ow_page .ow_highbox,
+.ow_sidebar,
+.ow_table_3 td
+{
+    border-color: #ccc; /** OW_Control type:color, section:2. Colors, key:borders, label:Borders **/
+}
+
+.ow_ipc_content{
+    padding: 0px 5px 5px 5px;
+}
+
+.ow_ipc_toolbar{
+    font-size: 11px;
+    float: left;
+    padding: 0 5px;
+}
+
+.ow_box_toolbar
+{
+    padding: 2px 7px;
+    margin-top: 5px;
+    font-size: 11px;
+    float: right;
+    white-space: nowrap;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.ow_box_empty .ow_box_toolbar
+{
+    background: #C0E97A;
+    text-shadow: #edfecf 1px 1px 0;
+}
+
+.ow_box .ow_box_toolbar
+{
+    background: #fff;
+    border: 1px solid #ddd;
+    border-right: none;
+    border-bottom: none;
+}
+
+.ow_avatar_list{
+    text-align: center;
+}
+
+.ow_avatar_list a{
+    margin-bottom: 0px;
+    margin-right: 1px;
+}
+
+/* tooltip */
+.ow_tooltip .tail{
+    display:inline-block;
+    padding-left: 50px;
+}
+
+.ow_tooltip .tail span{
+    display:block;
+	border:7px dashed transparent;
+    border-bottom-color:#edfecf; /** OW_Control key:owAlt2 **/
+	border-bottom-style:solid;
+	border-bottom-width:10px;
+	border-top-width:0;
+}
+
+.ow_tooltip .body{
+    background:#edfecf; /** OW_Control key:owAlt2 **/
+    padding:5px;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius: 5px;
+}
+
+/* ---- Item Voted Content ---- */
+
+.ow_ivc_box{
+}
+
+.ow_ivc_voteupdown{
+	background-repeat: no-repeat;
+	background-position: center 5px;
+    float: left;
+    margin-right: -50px;
+    padding: 0px 5px 5px;
+    text-align: center;
+}
+
+.ow_ivc_content{
+    margin-left: 75px;
+}
+/*
+.ow_ivc_origin{
+   background-repeat: no-repeat;
+   margin-bottom: 8px;
+   padding: 2px 0px 2px 20px;
+}
+
+
+.ow_ivc_toolbar .ow_comments,
+.ow_ivc_toolbar .ow_tags,
+.ow_ivc_toolbar .ow_voteup,
+.ow_ivc_toolbar .ow_votedown{
+    background-repeat: no-repeat;
+    display: inline-block;
+    margin-left: 5px;
+    padding: 0px 0px 2px 20px;
+}
+*/
+/* ---- Listing Picture ---- */
+
+.ow_lp_picture{
+    float: left;
+    margin: 0 1px 1px 0;
+}
+
+.ow_lp_wrapper{
+    /*float: left;
+    overflow: hidden;
+    text-align: center;*/
+}
+
+.ow_lp_avatars{
+    text-align:center;
+}
+
+.ow_lp_avatars.ow_mini_avatar{
+    text-align:left;
+}
+
+.ow_lp_avatars .ow_lp_wrapper{
+    display: inline-block;
+    margin: 0 1px 1px 0;
+    width: 45px;
+}
+
+.ow_lp_avatars.ow_mini_avatar .ow_lp_wrapper{
+    width: 32px;
+}
+
+.ow_lp_albums .ow_lp_wrapper{
+    width: 75px;
+    float: left;
+    margin-right: 6px;
+}
+
+.ow_lp_photos .ow_lp_wrapper{
+    width: 75px;
+    margin: 0 3px 3px 0;
+    display: inline-block;
+    float: none;
+}
+
+.ow_lp_avatars img{
+    width: 45px;
+    height: 45px;
+    /*display: block;*/
+}
+
+.ow_lp_avatars .ow_avatar{
+    margin: 1px;
+}
+
+.ow_mini_avatar .ow_avatar, .ow_avatar.ow_mini_avatar,
+.ow_mini_avatar .ow_avatar img, .ow_avatar.ow_mini_avatar img{
+    width: 32px;
+    height: 32px;
+}
+
+a.avatar_list_more_icon{
+    width: 25px;
+    height: 32px;
+    display: inline-block;
+    margin: 0 1px;
+    background: #edfecf url(images/more_icon.png) no-repeat 50% 50%;
+}
+
+.ow_lp_photos img,
+.ow_lp_albums img{
+    width: 75px;
+    height: 75px;
+    /*display: block;*/
+}
+
+.ow_lp_label{
+    margin-left: 80px;
+}
+
+/* ---- User List ---- */
+
+.ow_user_list
+{
+}
+
+.ow_user_list .ow_item_set3{
+    width: 32%;
+}
+
+.ow_user_list_item{
+    float: left;
+    padding: 10px;
+    padding-right: 0px;
+}
+
+.ow_user_list_picture{
+    float: left;
+    margin-right: -45px;
+    width: 45px;
+}
+
+.ow_user_list_picture img{
+    width: 45px;
+    height: 45px;
+}
+
+.ow_user_list_data{
+    margin-left: 53px;
+}
+
+/*========================================================
+        [7] Tables        __tables
+  ========================================================*/
+
+.ow_table_1,
+.ow_table_2,
+.ow_table_3{
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.ow_table_1 th{
+    
+}
+
+.ow_table_1 td,
+.ow_table_2 td{
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.ow_table_1 td .text{
+    color: #999;
+}
+
+.ow_table_2{
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+
+.ow_table_2 td{
+    text-align: center;
+}
+
+.ow_table_3{
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+.ow_table_3 td{
+    border-left-width: 1px;
+    border-left-style: solid;
+    vertical-align: top;
+}
+
+.ow_table_3 td.ow_label{
+    border: none;
+    color: #666;
+    text-align: right;
+}
+
+.ow_table_3 td.ow_value{
+    width: 50%;
+    padding-left: 10px;
+}
+
+.ow_table_4{
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+.ow_table_4 td{
+    vertical-align: top;
+}
+
+.ow_table_4 td.ow_label{
+    border: none;
+    color: #666;
+    text-align: right;
+}
+
+.ow_table_4 td.ow_value{
+    padding-left: 10px;
+}
+
+th.ow_section{
+    border: 0 none;
+    padding: 15px 0;
+    text-align: center;
+    background: transparent;
+}
+
+th span.ow_section_icon{
+    background-repeat: no-repeat;
+    padding-left: 22px;
+}
+
+th.ow_section span{
+    background: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    text-shadow: #fff 1px 1px 0;
+    font-weight: normal;
+}
+
+table.ow_form td.ow_label{ 
+    color: #666;
+    text-align: right;
+    width: 20%;
+}
+
+table.ow_form td.ow_desc{
+    width: 25%;
+    color: #666666;
+    font-size: 11px;
+}
+
+table.ow_form td.ow_submit{
+    text-align: center;
+}
+
+
+/*========================================================
+        [8] Messages & Notifications        __messages
+  ========================================================*/
+
+
+/*========================================================
+        [9] Thumbnails & Icons        __icons
+  ========================================================*/
+
+img.thumb{
+    width: 100px;
+}
+
+html body div .ow_ic_add{ background-image: url(images/ic_add.png); }
+html body div .ow_ic_aloud{ background-image: url(images/ic_aloud.png); }
+html body div .ow_ic_app{ background-image: url(images/ic_app.png); }
+html body div .ow_ic_attach{ background-image: url(images/ic_attach.png); }
+html body div .ow_ic_birthday{ background-image: url(images/ic_birthday.png); }
+html body div .ow_ic_bookmark{ background-image: url(images/ic_bookmark.png); }
+html body div .ow_ic_calendar{ background-image: url(images/ic_calendar.png); }
+html body div .ow_ic_cart{ background-image: url(images/ic_cart.png); }
+html body div .ow_ic_chat{ background-image: url(images/ic_chat.png); }
+html body div .ow_ic_clock{ background-image: url(images/ic_clock.png); }
+html body div .ow_ic_comment{ background-image: url(images/ic_comment.png); }
+html body div .ow_ic_cut{ background-image: url(images/ic_cut.png); }
+html body div .ow_ic_dashboard{ background-image: url(images/ic_dashboard.png); }
+html body div .ow_ic_delete{ background-image: url(images/ic_delete.png); }
+html body div .ow_ic_down_arrow{ background-image: url(images/ic_down_arrow.png); }
+html body div .ow_ic_edit{ background-image: url(images/ic_edit.png); }
+html body div .ow_ic_female{ background-image: url(images/ic_female.png); }
+html body div .ow_ic_file{ background-image: url(images/ic_file.png); }
+html body div .ow_ic_files{ background-image: url(images/ic_files.png); }
+html body div .ow_ic_flag{ background-image: url(images/ic_flag.png); }
+html body div .ow_ic_folder{ background-image: url(images/ic_folder.png); }
+html body div .ow_ic_forum{ background-image: url(images/ic_forum.png); }
+html body div .ow_ic_friends{ background-image: url(images/ic_friends.png); }
+html body div .ow_ic_gear_wheel{ background-image: url(images/ic_gear_wheel.png); }
+html body div .ow_ic_heart{ background-image: url(images/ic_heart.png); }
+html body div .ow_ic_help{ background-image: url(images/ic_help.png); }
+html body div .ow_ic_house{ background-image: url(images/ic_house.png); }
+html body div .ow_ic_info{ background-image: url(images/ic_info.png); }
+html body div .ow_ic_key{ background-image: url(images/ic_key.png); }
+html body div .ow_ic_left_arrow{ background-image: url(images/ic_left_arrow.png); }
+html body div .ow_ic_lens{ background-image: url(images/ic_lens.png); }
+html body div .ow_ic_link{ background-image: url(images/ic_link.png); }
+html body div .ow_ic_lock{ background-image: url(images/ic_lock.png); }
+html body div .ow_ic_mail{ background-image: url(images/ic_mail.png); }
+html body div .ow_ic_male{ background-image: url(images/ic_male.png); }
+html body div .ow_ic_mobile{ background-image: url(images/ic_mobile.png); }
+html body div .ow_ic_moderator{ background-image: url(images/ic_moderator.png); }
+html body div .ow_ic_monitor{ background-image: url(images/ic_monitor.png); }
+html body div .ow_ic_move{ background-image: url(images/ic_move.png); }
+html body div .ow_ic_music{ background-image: url(images/ic_music.png); }
+html body div .ow_ic_new{ background-image: url(images/ic_new.png); }
+html body div .ow_ic_ok{ background-image: url(images/ic_ok.png); }
+html body div .ow_ic_online{ background-image: url(images/ic_online.png); }
+html body div .ow_ic_picture{ background-image: url(images/ic_picture.png); }
+html body div .ow_ic_plugin{ background-image: url(images/ic_plugin.png); }
+html body div .ow_ic_push_pin{ background-image: url(images/ic_push_pin.png); }
+html body div .ow_ic_reply{ background-image: url(images/ic_reply.png); }
+html body div .ow_ic_right_arrow{ background-image: url(images/ic_right_arrow.png); }
+html body div .ow_ic_rss{ background-image: url(images/ic_rss.png); }
+html body div .ow_ic_save{ background-image: url(images/ic_save.png); }
+html body div .ow_ic_script{ background-image: url(images/ic_script.png); }
+html body div .ow_ic_server{ background-image: url(images/ic_server.png); }
+html body div .ow_ic_star{ background-image: url(images/ic_star.png); }
+html body div .ow_ic_tag{ background-image: url(images/ic_tag.png); }
+html body div .ow_ic_trash{ background-image: url(images/ic_trash.png); }
+html body div .ow_ic_unlock{ background-image: url(images/ic_unlock.png); }
+html body div .ow_ic_up_arrow{ background-image: url(images/ic_up_arrow.png); }
+html body div .ow_ic_update{ background-image: url(images/ic_update.png); }
+html body div .ow_ic_user{ background-image: url(images/ic_user.png); }
+html body div .ow_ic_video{ background-image: url(images/ic_video.png); }
+html body div .ow_ic_warning{ background-image: url(images/ic_warning.png); }
+html body div .ow_ic_write{ background-image: url(images/ic_write.png); }
+
+
+.ow_icon_control{
+    background-repeat: no-repeat;
+    display: inline-block;
+    padding: 0px 0 2px 20px;
+    line-height: 15px;
+}
+
+html body div .ow_miniic_comment{ background-image: url(images/miniic_comment.png); }
+html body div .ow_miniic_heart{ background-image: url(images/miniic_heart.png); }
+html body div .ow_miniic_delete{ background-image: url(images/miniic_x.png); }
+
+.ow_miniicon_control{
+    background-repeat: no-repeat;
+    display: inline-block;
+    padding: 1px 0 2px 14px;
+    line-height: 9px;
+}
+
+.ow_box_cap_icons
+{ 
+    margin-top: -26px;
+}
+
+span.ow_icon{
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+
+.ow_marked_cell{
+    background-image: url(images/ic_ok.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.ow_box_cap_icons a.close{
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    float: right;
+    width: 20px;
+    height: 20px;
+}
+
+
+/*========================================================
+        [10] Menus        __menus
+  ========================================================*/
+
+/* ---- Main Menu styles ---- */
+
+.ow_main_menu{
+    position: absolute;
+    top: 73px;
+    right: 0px;
+    padding-bottom: 2px;
+    z-index: 1;
+}
+
+.ow_main_menu li{
+    float: left;
+    padding: 0;
+    background: transparent url(images/menu_l.png) no-repeat left;
+    margin-right: 3px;
+}
+
+.ow_main_menu li a{
+    color: #491100; /** OW_Control type:color, key:menuColor, section:2. Colors, label:Menu item **/
+    display: block;
+    padding: 0px 2px 0px;
+    text-decoration: none;
+    background: transparent url(images/menu_r.png) no-repeat right;
+}
+
+.ow_main_menu li a span{
+    background: transparent url(images/menu_c.gif) repeat-x;
+    display: inline-block;
+    line-height: 33px;
+    padding: 0px 8px;
+}
+
+.ow_main_menu li.active,
+.ow_main_menu li:hover
+{
+    background: transparent url('images/menu_active_l.png') no-repeat left;
+}
+
+.ow_main_menu li.active a, 
+.ow_main_menu li a:hover{
+    color: #fff; /** OW_Control key: titleColor **/
+    background: transparent url('images/menu_active_r.png') no-repeat right;
+}
+
+.ow_main_menu li.active a span, 
+.ow_main_menu li:hover a span, 
+.ow_main_menu li a:hover span{
+    background: transparent url('images/menu_active_c.gif') repeat-x;
+    display: inline-block;
+    line-height: 33px;
+    padding: 0px 8px;
+}
+
+.ow_main_menu li.active a 
+{
+    font-weight: bold;
+}
+
+.ow_box .ow_box_menu{
+    border-bottom: 1px solid #d3d3d3;
+    margin: -10px;
+    margin-bottom: 10px;
+    text-align: right;
+    padding-right: 5px;
+}
+
+.ow_box_menu a{
+    display: inline-block;
+    font-size:11px;
+    margin-right: 5px;
+    color: #666;
+    text-shadow: #fff 1px 1px 0;
+}
+
+.ow_box_empty .ow_box_menu{
+    float: right;
+    margin: -15px 10px 9px 10px;
+    background: #f5f4f4;
+    padding-left: 5px;
+    border-radius: 0 0 5px 5px;
+    -moz-border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+}
+
+.ow_box_menu a.active,
+.ow_box_menu a:hover{
+    color:#CF3513; /** OW_Control key:titleColor **/
+    text-decoration:none;
+}
+
+/* ---- End of Main Menu styles ---- */
+
+
+/* ---- Content Menu styles ---- */
+
+.ow_content_menu{
+    background:transparent url(images/content_menu_line.gif) repeat-x bottom;
+}
+
+.ow_content_menu a{
+	color:#491100;
+}
+
+.ow_content_menu li.active a{
+	color: #fff;
+}
+
+.ow_content_menu a.active{
+	color:#fff;
+}
+
+.ow_content_menu_wrap{
+    margin-bottom:20px;
+}
+
+.ow_content_menu li{
+    float: left;
+    background: transparent url(images/cont_menu_left.png) no-repeat left;
+    padding-left: 8px;
+    height: 31px;
+    margin-right: 2px;
+}
+
+.ow_content_menu li a{
+    display: block;
+    background: transparent url(images/cont_menu_right.png) no-repeat right;
+    padding-right: 12px;
+    height: 31px;
+}
+
+.ow_content_menu span{
+    background-image: url(images/ic_file.png);
+    background-position: 8px 50%;
+    background-repeat: no-repeat;
+    padding: 7px 10px 5px 29px;
+    display: block;
+}    
+
+.ow_content_menu li.active,
+.ow_content_menu li:hover {
+    background: transparent url(images/cont_menu_active_left.png) no-repeat left;
+    padding-left: 8px;
+    height: 31px;
+}
+
+.ow_content_menu li.active a,
+.ow_content_menu li a:hover,
+.ow_content_menu li:hover a {
+    background: transparent url(images/cont_menu_active_right.png) no-repeat right;
+    text-decoration: none;
+    height: 31px;
+}
+
+
+/* ---- End of Content Menu styles ---- */
+
+
+/* ---- Button List styles ---- */
+
+ul.ow_bl{
+    padding: 0;
+}
+
+ul.ow_bl li{
+    float: right;
+    list-style: none;
+    margin-left: 5px;
+}
+
+ul.ow_bl a{
+    display: block;
+    background: url(images/consolebg.png) repeat-x center left;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    color: #666;
+    padding: 5px 7px;
+    text-decoration: none;
+    text-shadow: #f6f6f6 0px 1px 0;
+}
+
+ul.ow_bl a:hover {
+    background-color: #999;
+    text-shadow: none;
+    color: #fff;
+}
+
+
+span.ow_blitem {
+    background: url('images/consolebg.png') repeat-x center left;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    text-decoration: none;
+    padding: 0px;
+}
+
+html body.ow span.ow_blitem input[type="submit"],
+html body.ow span.ow_blitem input[type="button"] {
+    border: none;
+    padding: 0px;
+    background: none;
+    color: #666;
+    font-weight: normal;
+    padding: 4px 6px;
+    height: auto;
+    font-size: 11px;
+    text-shadow: #f6f6f6 0px 1px 0;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+html body.ow span.ow_blitem:hover, 
+html body.ow span.ow_blitem input:hover {
+    background-image: none;
+    background-color: #999;
+    text-shadow: none;
+    color: #fff;
+}
+/* ---- End of Button List styles ---- */
+
+
+/* ---- Footer Menu styles ---- */
+
+.ow_footer_menu{
+    font-size: 11px;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* ---- End of Footer Menu styles ---- */
+
+
+/* ---- Inventory Line styles ---- */
+
+.ow_inventory_line{
+}
+
+
+/*========================================================
+        [11] Pagination        __pagination
+  ========================================================*/
+  
+.ow_paging{
+    font-size: 11px;
+}
+
+.ow_paging a{
+    background: #e0e0e0;
+    padding: 4px 8px;
+    text-decoration: none;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.ow_paging a.active, 
+.ow_paging a:hover{
+    background: #87BC00;
+    color: #fff;
+}
+
+
+/*========================================================
+        [12] Typography        __typography
+  ========================================================*/
+
+.ow_small{
+    font-size: 11px;
+    line-height: 14px;
+}
+
+.ow_highlight{
+    background: #aaffaa;
+}
+
+.ow_std_margin{
+    margin-bottom: 25px;
+}
+
+.ow_normal{
+    font-size: 13px;
+}
+
+html body .ow_sidebar .ow_tiny,
+html body .ow_console .ow_tiny,
+.ow_tiny {
+    font-size: 9px;
+}
+
+.ow_stdmargin{
+    margin-bottom: 30px;    
+}
+
+.ow_smallmargin{
+    margin-bottom: 10px;
+}
+
+.ow_outline{
+    color: #dd3300;
+    font-weight: bold;
+}
+
+.ow_lightweight{
+    font-weight: normal;
+}
+
+.ow_txt_value {
+    font-weight: bold;
+    color: #d30; /** OW_Control type:color, section:2. Colors, key:txtValue, label:Numeric values **/
+}
+
+.ow_remark {
+    color: #888; /** OW_Control type:color, section:2. Colors, key:remarkColor, label:Remark text **/
+}
+
+.ow_alt1,
+tr.ow_alt1 td{
+    background-color: #C0E97A; /** OW_Control type:color, section:2. Colors, key:owAlt1, label:Alternate color #1 **/
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.ow_alt2,
+tr.ow_alt2 td{
+    background-color: #edfecf; /** OW_Control type:color, section:2. Colors, key:owAlt2, label:Alternate color #2 **/
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.ow_high1{
+    background-color: #fff; /** OW_Control type:color, section:2. Colors, key:owHigh1, label:Highlighted item #1 **/
+}
+
+.ow_high2{
+    background-color: #eee; /** OW_Control type:color, section:2. Colors, key:owHigh2, label:Highlighted item #2 **/
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.ow_add_content{
+    background-color: #eee; /** OW_Control key:owHigh2 **/
+}
+
+a.ow_lbutton,
+span.ow_lbutton
+{
+    background: #999;
+    color: #fff;
+    font-weight: bold;
+    padding: 1px 3px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    text-shadow: none;
+}
+
+html body a.ow_lbutton,
+html body span.ow_lbutton
+{
+    font-size: 8px;
+}
+
+.ow_lbutton:hover{
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.ow_disabled{
+    background: #ccc;
+}
+
+.info{
+    margin-bottom: 8px;
+}
+
+html body .ow_green{
+    background-color: #33CC33;
+    border-color: #00AA00;
+    color: #fff;
+}
+
+html body .ow_red{
+    background-color: #ff6666;
+    border-color: #aa6666;
+}
+
+html body .ow_mild_red{
+    background-color: #ffaaaa;
+}
+
+html body .ow_mild_green{
+    background-color: transparent;
+}
+
+.ow_automargin{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ow_autowidth,
+table.ow_form td.ow_autowidth{
+    width: auto;
+}
+
+.ow_anno
+{
+    background:#DDDDAA url(images/ic_warning.png) no-repeat scroll 15px 45%;
+    border:1px solid #CCCC99;
+    padding:10px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.outline{
+    color: #dd3300;
+    font-weight: bold;
+}
+
+input[type=text].ow_inputready, 
+textarea.ow_inputready {
+    color: #999999;
+}
+
+
+/*========================================================
+        [13] Misc        __misc
+  ========================================================*/
+  
+.clr{
+    clear: both;
+}
+
+.ow_column_equal_fix{
+   padding-bottom: 20001px !important;
+   margin-bottom: -20000px !important;
+}
+
+/*========================================================
+        [14] Clearfix        __clearfix
+  ========================================================*/
+
+.clearfix{
+    zoom: 1;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+ 
+.clearfix {
+    display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+    display: block;
+}
+ 
+*html .clearfix {
+    height: 1%;
+}
+
+
+/*========================================================
+        [15] Plugin Styles        __plugins
+  ========================================================*/
+
+/* ---- Base plugin styles ---- */
+
+.ow_add_content{
+    background-image: url(images/ic_add.png);
+    background-repeat: no-repeat;
+    background-position: center 8px;
+    float:left;
+    margin: 0 1px 1px 0;
+    overflow:hidden;
+    padding:28px 0 6px;
+    text-align:center;
+    width:49%;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.ow_add_content:hover{
+    text-decoration:none;
+}
+
+/* ---- End of base plugin styles ---- */
+
+/* ---- Forum styles ---- */
+
+.ow_forum{
+    text-align: center;
+    width: 100%;
+}
+
+.ow_forum .ow_name{
+    text-align: left;
+    width: 563px;
+}
+
+.ow_forum .ow_topics{
+    width: 55px;
+}
+
+.ow_forum .ow_replies{
+    width: 55px;
+}
+
+.ow_forum .ow_action{
+    white-space: nowrap;
+    width: 70px;
+}
+
+.ow_forum_topic .ow_author{
+    width: 20%;
+}
+
+.ow_forum_topic .ow_posts{
+    text-align: center;
+    width: 1%;
+}
+
+.ow_forum_topic .ow_views{
+    text-align: center;
+    width: 1%;
+}
+
+.ow_forum_topic .ow_icon{
+    line-height: 14px;
+    text-align: center;
+    width: 8%;
+}
+
+body.htmlarea_styles blockquote.ow_quote,
+blockquote.ow_quote{
+    margin: 10px 0 10px 40px;
+    background: #f0f0f0;
+    border-left: 2px solid #ccc;
+    padding: 2px 5px;
+}
+
+body.htmlarea_styles blockquote.ow_quote .ow_author,
+blockquote.ow_quote .ow_author{
+    border-bottom: 1px solid #ccc;
+    font-size: 11px;
+    display: inline-block;
+    padding: 2px 0;
+    width: 98%;    
+}
+
+.ow_forum_topic_posts .ow_post_comment{
+    background-repeat: no-repeat;
+    font-style: italic;
+    font-size: 11px;
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.ow_forum_post_area{
+    height: 240px;
+}
+
+.ow_forum_status{
+    font-style: italic;
+}
+
+/* ---- Forum sortable ---- */
+.forum_placeholder{
+    border: 1px dashed #999;
+    background-color: #FFF9DB;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+tr.forum_placeholder td{
+    background-color: #FFF9DB;
+    border: 1px dashed #999;
+    height: 45px;
+    width: 100%;
+}
+
+.forum_section{
+    cursor: move;
+}
+
+.forum_section_tr{
+    height: 41px;
+}
+
+/* ---- End of Forum styles ---- */
+
+
+/* ---- Mailbox styles ---- */
+
+table.ow_mailbox{
+    width: 100%;
+}
+
+table.ow_mailbox td{
+    border-top: 1px solid #ccc;
+}
+table.ow_mailbox td{
+    border-top: 1px solid #ccc;
+}
+
+tr.ow_alt2 .mail_title{
+    font-weight: bold;
+}
+
+table.ow_mailbox td.mail_info{
+    white-space: nowrap;
+    width: 150px;
+}
+
+table.ow_mailbox td.icons{
+    text-align: center;
+    width: 30px;
+}
+
+span.ic_reply{
+    background: url(images/ic_reply.png) no-repeat;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+
+/* ---- End of Mailbox styles ---- */
+
+
+/* ---- Blogs styles ---- */
+
+.ow_blogpost_compose textarea{
+    height: 235px;
+}
+
+/* ---- End of Blogs styles ---- */
+
+
+/* ---- Rates Styles ---- */
+
+.inactive_rate_list, .active_rate_list {
+    background: url(images/stars.png) no-repeat 0 -13px;
+    width: 65px;
+    height: 13px;
+    text-align: left;
+    display: inline-block;
+}
+
+.active_rate_list {
+    background-position: 0 0;
+}
+
+.rates_cont a.rate_item {
+    background: url(images/stars.png) no-repeat 0 -13px;
+    cursor: pointer;
+    float: left;
+    height: 13px;
+    text-decoration: none;
+    width: 13px;
+}
+
+.rates_cont a.active {
+    background-position: 0 0;
+}
+
+.rates_cont{
+    margin: 0 auto;
+    width: 65px;
+}
+
+.ow_rate_score{
+    font-size: 20px;
+}
+
+/* ---- End of Rates Styles ---- */
+
+
+/* ---- Video styles ---- */
+
+.ow_video_player{
+    text-align: center;    
+}
+
+.ow_video_description{
+    margin: 8px 0 20px; 
+}
+
+.ow_video_list_item{
+    float: left; 
+    height: 165px;
+    padding: 15px;
+    width: 145px; 
+}
+
+.ow_other_video_item_title{
+    margin-left: 80px;
+    padding-left: 5px;
+}
+
+.ow_video_thumb{
+    background: #fff url(images/video-no-video.png) no-repeat center center;
+    display: block;
+}
+
+.ow_video_thumb,
+.ow_video_list_item img{
+    height: 109px;
+    width: 145px;
+}
+
+.ow_other_video_thumb{
+    background: #fff url(images/video-no-video.png) no-repeat center center;
+    display: block;
+    margin-right: -80px;
+}
+
+.ow_other_video_thumb,
+.ow_other_video_thumb img,
+.ow_other_video_floated img{
+    height: 60px;
+    width: 80px;
+}
+
+.ow_other_video_floated{
+    display: inline-block;
+    background: #fff url(images/video-no-video.png) no-repeat center center;
+    margin-bottom: 4px;
+    width: 80px;
+    height: 60px;
+    vertical-align: middle;
+}
+
+.ow_video_item_title{
+    font-weight: bold;
+    padding-bottom: 3px;
+}
+
+.ow_video_item_rate{
+    height: 15px;
+    text-align: center;
+}
+
+.ow_video_infobar{
+    padding: 10px;
+    text-align: right;
+}
+
+/* ---- End of Video styles ---- */
+
+
+/* ---- Avatar styles ---- */
+
+.ow_change_avatar .avatar_current{
+    border-right: 1px solid #CCCCCC;
+    padding-right: 3px; 
+}
+
+.ow_change_avatar .ow_avatar_preview{
+    border-left: 1px solid #CCCCCC;
+}
+
+.ow_change_avatar .avatar_crop{
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.ow_avatar_crop .jcrop-holder{
+    margin: 0px auto;
+}
+
+.ow_avatar_preview div{
+    margin: 0px auto;
+}
+
+.ow_avatar {
+    position: relative;
+    display: inline-block;
+    width: 45px; 
+    height: 45px;
+}
+
+.ow_avatar img{
+    width: 45px; 
+    height: 45px;
+    vertical-align: bottom;
+}
+
+.ow_mini_avatar .ow_avatar, .ow_avatar.ow_mini_avatar{
+    width: 32px; 
+    height: 32px;
+}
+
+.ow_avatar_label {
+    font-size: 7px;
+    display: inline-block;
+    position: absolute;
+    line-height: 10px; 
+    text-transform: uppercase;
+    bottom: 0px;
+    background-color: #999;
+    right: 0;
+    color: #fff;
+    font-weight: bold;
+    padding: 0px 2px;
+    border-radius: 3px 0px 0px 0px;
+    -moz-border-radius: 3px 0px 0px 0px;
+    -webkit-border-radius: 3px 0px 0px 0px;
+}
+
+html body .ow_sidebar .ow_avatar_label {
+    font-size: 7px;
+}
+
+/* ---- Photo styles ---- */
+
+.ow_photo_prev{
+    background-repeat: no-repeat;
+    background-position: right center;
+    text-align: left;
+    width: 35%; 
+}
+
+.ow_photo_next{
+    background-repeat: no-repeat;
+    background-position: left center;
+    text-align: right;
+    width: 35%; 
+}
+
+.ow_photo_list_item{
+    float: left; 
+    height: 165px;
+    padding: 11px 0px;
+    text-align: center; 
+}
+
+.ow_photo_info_str{
+    padding-top: 5px;
+}
+
+.ow_photo_infobar{
+    padding: 10px;
+    text-align: right;
+}
+
+.ow_photo_rate{
+    height: 15px;
+    text-align: center;
+}
+
+/*
+ * button_list narrow
+ */
+ul.ow_bl_narrow{
+    border-top: 1px solid #ccc;
+    padding: 0;
+}
+
+ul.ow_bl_narrow li{
+    list-style: none;
+}
+
+ul.ow_bl_narrow li a{
+    background: none;
+    border-bottom: 1px solid #ccc;
+    display: block;
+    padding: 5px 7px;
+    text-decoration: none;
+}
+
+ul.ow_bl_narrow li a:hover{
+    background: #999;
+    color: #fff;
+}
+
+/* ---- Newsfeed ---- */
+
+.ow_newsfeed_section{
+    list-style-image: none;
+    margin: 15px 0;
+}
+
+.ow_newsfeed_section span{
+    background: #f0f0e2;
+    padding: 5px 10px;
+    text-shadow: #fff 1px 1px 0;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+/* ---- User Avatar Console styles ---- */
+
+.ow_avatar_console{
+    position: relative;
+    background: url(images/avatar-bg.gif) repeat-x center center;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 5px;
+}
+
+.ow_avatar_console .ow_avatar_image{
+    height: 190px;
+    width: 190px;
+}
+
+.ow_avatar_change{
+    position: absolute;
+    right: 4px; 
+    top: 2px;
+}
+
+.ow_avatar_console_links {
+    background: #F0F0F0;
+    display: block;
+    padding: 5px 10px;
+    border-top: 1px solid #FFFFFF;
+}
+
+
+/* ---- Suggest field styles ---- */
+
+.ac_results {
+    padding: 0px;
+    border: 1px solid #BBB;
+    background-color: #FFF;
+    overflow: hidden;
+    z-index: 105;
+    position: absolute;
+    display: none;
+    width: 100%;
+    top: -1px;
+}
+
+.ac_results ul {
+    list-style-position: outside;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ac_results iframe {
+    display:none;/*sorry for IE5*/
+    display/**/:block;/*sorry for IE5*/
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:-1;
+    filter:mask();
+    width:3000px;
+    height:3000px;
+}
+
+.ac_list_container{
+    width: 97%;
+    position: relative;
+}
+
+.ac_results li {
+    margin: 0px;
+    padding: 4px 5px;
+    cursor: pointer;
+    display: block;
+    width: 98%;
+    font: menu;
+    font-size: 12px;
+    overflow: hidden;
+}
+.ac_loading {
+    background : url('http://ow2/ow_static/plugins/forum/js/indicator.gif') right center no-repeat;
+}
+
+.ac_over {
+    background-color: #F0F0F0;
+}
+
+.ac_match{
+    font-weight: bold;
+}
+
+.ow_suggest_field {
+    position: relative;
+}
+
+.ow_suggest_invitation {
+    position: absolute;
+    right: 17px;
+    top: 7px;
+    width: 12px;
+    height: 12px;
+    background: url(images/miniic_corner.png) no-repeat center center;
+}
+
+/* ow custom tips */
+.ow_tip{
+	display:inline-block;
+	position:absolute;
+    z-index: 10005;
+    color:#fff; /** OW_Control type:color, section:2. Colors, key:tooltipTextColor, label:Tooltip text color **/
+}
+
+.ow_tip_arrow{
+	display:inline-block;
+	position:absolute;
+}
+
+.ow_tip_arrow span{
+	display:block;
+	border:7px dashed transparent;
+}
+
+.ow_tip_right .ow_tip_arrow span{
+	border-right-color:#666; 
+	border-right-style:solid;
+	border-right-width:10px;
+	border-left-width:0;
+}
+
+.ow_tip_right .ow_tip_arrow{
+	top:50%;
+	margin-top:-7px;
+	left:0;
+}
+
+.ow_tip_right .ow_tip_box{
+	margin-left:10px;
+}
+
+.ow_tip_left .ow_tip_arrow span{
+	border-left-color:#666; 
+	border-left-style:solid;
+	border-left-width:10px;
+	border-right-width:0;
+}
+
+.ow_tip_left .ow_tip_arrow{
+	top:50%;
+	margin-top:-7px;
+	right:0;
+}
+
+.ow_tip_left .ow_tip_box{
+	margin-right:10px;
+}
+
+.ow_tip_bot .ow_tip_arrow span{
+	border-bottom-color:#666;
+	border-bottom-style:solid;
+	border-bottom-width:10px;
+	border-top-width:0;
+}
+
+.ow_tip_bot .ow_tip_arrow{
+	left:50%;
+	margin-left:-7px;
+	top:0;
+}
+
+.ow_tip_bot .ow_tip_box{
+	margin-top:10px;
+}
+
+.ow_tip_top{
+	position:absolute;
+}
+
+.ow_tip_top .ow_tip_arrow span{
+	border-top-color:#666;
+	border-top-style:solid;
+	border-top-width:10px;
+	border-bottom-width:0;
+}
+
+.ow_tip_top .ow_tip_arrow{
+	left:50%;
+	margin-left:-7px;
+	bottom:0;
+}
+
+.ow_tip_top .ow_tip_box{
+	margin-bottom:10px;
+}
+
+.ow_tip_box{
+	border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    padding:5px;
+	background-color:#666;
+	color:#fff;
+    font-size: 11px;
+}
+
+/*========================================================
+        [16] Admin Styles        __admin
+  ========================================================*/
+
+/* ---- Admin Menu styles ---- */
+
+.ow_page_container.ow_admin .ow_page
+{
+    min-height: 300px;
+}
+
+table.ow_admin_footer
+{
+    margin-top: 15px;
+    font-size: 11px;
+    line-height: 1.25;
+}
+
+table.ow_admin_footer div.group
+{
+    margin-bottom: 20px;
+}
+
+table.ow_admin_footer h3
+{
+    font-size: 11px;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    margin-top: 0;
+}
+
+table.ow_admin_footer a
+{
+    color: #aaa;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 2px;
+    margin-right: 1px;
+}
+
+table.ow_admin_footer a:hover
+{
+    color: #fff;
+    margin-left: 1px;
+    margin-right: 0;
+}
+
+
+div.admin_menu_cont{
+    margin-top: 10px;
+}
+
+.ow_admin_header .ow_console{
+    float: none;
+}
+
+div.ow_admin_header{
+    height: 115px;
+}
+
+div.admin_menu_cont .menu_item{
+    float:left;
+    margin-left:10px;
+    cursor: pointer;
+}
+
+div.admin_menu_cont .menu_item:hover{
+    text-decoration: none;
+}
+
+div.admin_menu_cont .menu_item .label{
+    color:#666;
+    font-size:11px;
+    font-weight:normal;
+    text-align: center;
+    display: block;
+    height: 35px;
+    text-shadow: #fff 0px 1px 0;
+}
+
+div.admin_menu_cont .menu_item .menu_items{
+    display:none;
+    position: absolute;
+    z-index: 10;
+}
+
+div.admin_menu_cont .menu_item span.icon{
+    display: block;
+    padding-top: 42px;
+    width: 88px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: -88px 0;
+    height:46px;
+    line-height: 14px;
+}
+
+div.admin_menu_cont .menu_item.active span.label,
+div.admin_menu_cont .menu_item:hover span.label{
+    color: #CF3513;
+}
+
+div.admin_menu_cont .menu_item .menu_admin{
+    background-image:url(images/dashboard.png);
+}
+
+div.admin_menu_cont .menu_item .menu_users{
+    background-image:url(images/users.png);
+}
+
+div.admin_menu_cont .menu_item .menu_settings{
+    background-image:url(images/settings.png);
+}
+
+div.admin_menu_cont .menu_item .menu_privacy{
+    background-image:url(images/privacy.png);
+}
+
+div.admin_menu_cont .menu_item .menu_appearance{
+    background-image:url(images/appearance.png);
+}
+
+div.admin_menu_cont .menu_item .menu_pages{
+    background-image:url(images/pages.png);
+}
+
+div.admin_menu_cont .menu_item .menu_plugins{
+    background-image:url(images/plugins.png);
+}
+
+.admin_menu_cont div.active{
+    background:url(images/menu-active.png) no-repeat center bottom;
+}
+
+.admin_menu_cont .menu_item.active .menu_admin,
+.admin_menu_cont .menu_item:hover .menu_admin,
+.admin_menu_cont .menu_item.active .menu_users,
+.admin_menu_cont .menu_item:hover .menu_users,
+.admin_menu_cont .menu_item.active .menu_settings,
+.admin_menu_cont .menu_item:hover .menu_settings,
+.admin_menu_cont .menu_item.active .menu_privacy,
+.admin_menu_cont .menu_item:hover .menu_privacy,
+.admin_menu_cont .menu_item.active .menu_appearance,
+.admin_menu_cont .menu_item:hover .menu_appearance,
+.admin_menu_cont .menu_item.active .menu_pages,
+.admin_menu_cont .menu_item:hover .menu_pages,
+.admin_menu_cont .menu_item.active .menu_plugins,
+.admin_menu_cont .menu_item:hover .menu_plugins{
+    background-position: 0 0;
+}
+
+.ow_admin_sub_menu{
+    background: #f3f3f3;
+    height: 30px;
+    border-bottom: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.ow_admin_sub_menu{
+    text-align: center;
+}
+
+.ow_admin_sub_menu li{
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.ow_admin_sub_menu a{
+    color: #666;
+    font-size: 11px;
+}
+
+.ow_admin_sub_menu .ow_admin_menu li.active a,
+.ow_admin_sub_menu .ow_admin_menu a:hover{
+    color: #CF3513;
+    background: none;
+}
+
+.ow_admin_sub_menu .ow_admin_menu li.active{
+    background: url(images/admin-submenu-active.png) no-repeat center bottom;
+    height: 41px;
+}
+
+div.admin_menu_cont
+
+.ow_admin_menu a{
+    background: #eee;
+    font-size: 11px;
+    display: block;
+    padding: 6px 10px;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #ddd;
+    text-shadow: #fff 0px 1px 0;
+}
+
+.ow_admin_menu a:hover, 
+.ow_admin_menu li.active a{
+    /*background: #ffcc99 url(images/admin-menu-bg.png) no-repeat right center;
+    border-left: 1px solid #999;*/
+    color: #000;
+    text-decoration: none;
+    background-color: #e6e6e6;
+}
+
+.css_code
+{
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+/* ---- End of Admin Menu styles ---- */
+
+
+/* ---- Admin Content styles ---- */
+
+.ow_admin_content{
+    float: right;
+    width: 830px;
+}
+
+.ow_admin_content .ow_box_cap_2{
+    background: url(images/h2bg.png) repeat-x center;
+    height: 20px;
+    padding-left: 10px;
+    padding-top: 4px;
+}
+
+.ow_admin_content .ow_box_cap_2 h3{
+    background-color: #fff;
+    display: inline;
+    font-size: 15px;
+    padding-right: 5px;
+}
+
+.ow_admin_content .ow_box_2{
+    margin-bottom: 8px;
+}
+
+.ow_admin_content .ow_box{
+    background: #eee;
+    /*margin-bottom: 8px;*/
+    padding: 5px;
+}
+
+/* ---- End of Admin Content styles ---- */
+
+
+/* ---- Admin Sidebar styles ---- */
+
+.ow_admin_sidebar{
+    float: left;
+    padding: 0;
+    width: 170px;
+    margin: 0;
+}
+
+.ow_admin_sidebar .ow_box_cap{
+    background: #ddd;
+    border-bottom: 1px solid #aaa;
+    height: 16px;
+    padding: 5px 5px 6px 10px;
+}
+
+.ow_admin_menu_cont .ow_box_cap h3{
+    background: none;
+    color: #dd3300;
+    float: left;
+    font-size: 13px;
+        padding-left:0;
+        padding-top:0;
+        line-height:15px;
+    text-transform: none;
+}
+
+.ow_admin_sidebar .ow_box_cap a.close,
+.ow_admin_sidebar .ow_box_cap a.open{
+    background: url(images/icon-arrow-down.png) no-repeat;
+    float: right;
+    height: 16px;
+    margin-top: 1px;
+    width: 16px;
+}
+
+.ow_admin_sidebar .ow_box_cap a.open{
+    background: url(images/ic_arrow-right.png) no-repeat;
+}
+
+.ow_admin_sidebar .ow_box{
+    background: url(images/box-body-bg.png) repeat;
+
+}
+
+/* ---- End of Admin Sidebar styles ---- */
+
+/* ---- Admin Profile Questions styles ---- */
+
+.ow_admin_edit_profile_question{
+}
+
+.ow_admin_edit_profile_question .quest_value{
+    margin: 2px 10px 2px 0px; 
+    padding: 2px 5px; 
+    background: #ccc;
+}
+
+.ow_admin_edit_profile_question .question_values{
+    padding: 4px 0px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+td.delete_edit_buttons,
+th.delete_edit_buttons{
+    width: 11%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+th.delete_edit_buttons{
+    line-height: 16px;
+}
+
+.ow_admin_profile_question_dnd_cursor{
+    cursor:move;
+}
+
+/* ---- Admin Theme styles ---- */
+
+.themes_select .active .fake{
+    background:url(images/checked_template.png) no-repeat 4px 4px;
+}
+
+.theme_control_desc{
+    background:url(images/question.png) no-repeat 50% 50%;
+    display:inline-block;
+    width:20px;
+    height: 20px;
+}
+
+.theme_control_desc_body{
+    display:none;
+    background: #ccc;
+    border: 1px solid #000;
+    position: absolute;
+}
+
+/*--------------------------------------------------------------------
+        [?] Custom pages declarations TODO remove
+---------------------------------------------------------------------*/
+
+
+/* !!!admin pages styles */
+
+.ow_admin_content{
+    width: 815px;
+}
+
+
+/*  pages and menus */
+.ow_navbox{
+    background:url(images/buttonbg.png) repeat-x center;
+    float:left;
+    font-size:11px;
+    height:18px;
+    margin-right:5px;
+    margin-bottom:5px;
+    padding:4px 5px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.ow_navbox a.move{
+    color:#333;
+    font-weight:bold;
+}
+
+.ow_navbox a.move:hover{
+    cursor:move;
+    text-decoration:none;
+}
+
+.ow_navbox a.edit{
+    background:url(images/arrow-up-down.png) no-repeat 10px 10px;
+    cursor:pointer;
+}
+
+.ow_navbox a.edit:hover{
+    text-decoration:none;
+}
+
+.guest_item{
+    background-color:#aaffaa;
+}
+
+.member_item{
+    background-color:#ffaaaa;
+}
+
+.ow_main_menu_scheme,
+.ow_bottom_menu_scheme{
+    float: left;
+    height: 100px;
+    margin-right: 10px;
+    width: 100px; 
+}
+
+.ow_main_menu_scheme{
+    background: url(images/admin-pages-menu-main.jpg) no-repeat;
+}
+
+.ow_bottom_menu_scheme{
+    background: url(images/admin-pages-menu-bottom.jpg) no-repeat;
+}
+
+.ow_dash_help_box{
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 31%;
+    height: 105px;
+}
+
+.ow_dash_help_box h3{
+    padding: 4px 0 4px 20px;
+    background: transparent no-repeat left center;
+}
+
+.ow_dash_help_box a{
+    display: block;
+}
+
+
+/* user dashboard settings */
+
+.ow_dragndrop_panel {
+    background: #fff;
+    /*padding: 0px 10px 10px;*/
+    margin-top: 5px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.ow_dashboard_box{
+    background: #FFFFFF;
+    padding: 5px 10px 10px 10px;
+    margin-top: 5px;
+}
+
+.ow_dnd_schem_item{
+    background:#F0F0F0 url(images/ic_file.png) no-repeat 10px 50%;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border:1px solid #ccc;
+    cursor:move;
+    /*float:left;*/
+    height:30px;
+    margin:2px 4px 2px 0;
+    padding:0 5px 0 33px;
+    /*width:157px;*/
+    position: relative;
+    font-size: 11px;
+}
+
+.ow_dnd_schem_item span.ow_label{
+    float:left;
+    overflow:hidden;
+    padding-top:5px;
+    /*white-space:nowrap;*/
+    /*width:80px;*/
+    height: 20px;
+}
+
+.ow_dnd_schem_item span.action{
+    /*float:right;*/
+    line-height:15px;
+    overflow:hidden;
+    width:70px;
+    position: absolute;
+    right: 4px;
+}
+
+.ow_dnd_helper {
+    border: 1px dashed #000;
+}
+
+.ow_dnd_freezed .ow_dnd_schem_item {
+    background-color: #FFAAAA;
+}
+
+.ow_dragndrop_sections .ow_highbox{
+    margin-top: 6px;
+}
+
+.ow_dnd_placeholder {
+    height: 10px;
+    border: 1px dashed #999999;
+    background-color: #FFF;
+}
+
+.ow_dnd_preloader {
+    height: 30px;
+}
+
+.ow_dnd_configurable_component .control {
+    display: inline-block;
+    width: 18px;
+    height: 16px;
+    text-decoration: none;
+    background-position: center;
+    background-repeat: no-repeat; 
+} 
+      
+.ow_dnd_configurable_component .ow_box_icons
+{
+    float: right;
+    padding: 8px 2px 0 0;
+}
+
+.ow_dnd_configurable_component h3 {
+    float: left;
+}
+
+.ow_dnd_content_components{
+   padding: 10px 0;
+   width: 74%;
+}
+
+.ow_dnd_clonable_components {
+   border-left: 1px solid #ccc;
+   padding: 10px 0 10px 10px;
+   width: 24%;
+}
+
+/* Dnd Slider */
+.ow_dnd_slider {
+    /*background:url(images/h2bg.png) repeat-x center;*/
+    height: 6px;
+    background-color: #ddd;
+    position: relative;
+    margin: 10px 3px 0;
+    cursor: pointer;
+}
+
+.ow_dnd_slider_pusher {
+    float: left;
+    height: 1px;   
+}
+
+.ow_dnd_slider_marker {
+   width: 10px;
+   height: 1px;
+   float: left;
+}
+
+.ow_dnd_slider_marker_point {
+    position: absolute;
+    width: 0px;
+    height: 6px;
+    border-left: 1px solid #999;
+    border-right: 1px solid #FFF;
+    top: 0;
+}
+
+.ow_dnd_slider_handle {
+    position: absolute;
+    top: -5px;
+    width: 22px;
+    height: 16px;
+    cursor: move;
+    z-index: 50;
+    background: transparent url(images/ic_move_horizontal.png) no-repeat center;
+}
+
+.ow_dnd_slider_helper {
+}
+
+.ow_dnd_slider_in_move {
+    opacity: 0.5;
+    filter: alpha(opacity = 50);
+}
+
+.ow_dragndrop_sections .top_section,
+.ow_dragndrop_sections .left_section,
+.ow_dragndrop_sections .right_section,
+.ow_dragndrop_sections .bottom_section,
+.ow_dragndrop_sections .sidebar_section{
+    background-position: center 7px;
+    background-repeat: no-repeat;
+}
+
+.ow_dragndrop_sections .top_section { background-image: url(images/dnd-label-top.png) }
+.ow_dragndrop_sections .left_section { background-image: url(images/dnd-label-column1.png) }
+.ow_dragndrop_sections .right_section { background-image: url(images/dnd-label-column2.png) }
+.ow_dragndrop_sections .bottom_section { background-image: url(images/dnd-label-bottom.png) }
+.ow_dragndrop_sections .sidebar_section { background-image: url(images/dnd-label-sidebar.png) }
+
+.ow_dragndrop_panel .ow_dnd_schem_item{
+   width: 195px;
+}
+    
+.ow_dragndrop_sections .ow_highbox{
+   margin-top: 6px;
+}
+
+.ow_highbox_table{
+}
+
+.ow_highbox_table .ow_highbox,
+.ow_highbox,
+.ow_add_content:hover
+{
+    background-color: #EDFECF; /** OW_Control type:color, section:2. Colors, key:highboxBg, label:Highlighted box color **/
+}
+
+.ow_highbox
+{
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    text-shadow: #fff 1px 1px 0;
+    padding: 5px;
+}
+
+.ow_dragndrop_sections .ow_highbox {
+    padding: 0;
+}
+
+.join_now_widget
+{
+    background-image: url('images/ic_warning.png');
+    padding: 10px;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+}
+
+.ow_highbox,
+.ow_highbox_table .ow_highbox
+{
+    border:1px solid #eee;
+    border-top: none;
+    border-left: none;
+}
+
+.ow_highbox_table .ow_highbox
+{
+    height:50px;
+    padding:10px;
+}
+
+.ow_highbox_table .ow_highbox .ow_dnd_schem_item{
+    float:none;
+    margin-bottom:4px;
+    margin-right:0;
+    width:auto;
+}
+
+input[type=text].ow_settings_input{
+    width: 40px;
+}
+
+
+/* color picker */
+.special_block_top {
+    width: 252px;
+    height: 7px;
+}
+
+.special_block_mid {
+    width: 238px;
+    padding: 0 7px 5px;
+        margin: 0 auto;
+}
+
+.special_block_bot {
+    width: 252px;
+    height: 19px;
+}
+
+.colorCode {
+    width: 68px;
+}
+
+table.colorPicker {
+    border-collapse: separate !important;
+    border-spacing: 3px !important;
+}
+
+table.colorPicker td {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+}
+
+/* FloatBox implementation */
+#floatbox_overlay {
+    position: fixed;
+    z-index: 100;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+.floatbox_overlayMacFFBGHack {background: url(images/macFFBgHack.png) repeat;}
+.floatbox_overlayBG {
+    background-color: #000;
+    filter: alpha(opacity=75);
+    -moz-opacity: 0.75;
+    opacity: 0.75;
+}
+
+*html #floatbox_overlay { /* ie6 hack */
+    position: absolute;
+    height: expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px');
+}
+
+#floatbox_HideSelect {
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    border: none;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+}
+
+*html #floatbox_HideSelect { /* ie6 hack */
+    position: absolute;
+    height: expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px');
+}
+
+.floatbox_container {
+    position: fixed;
+    z-index: 102;
+        background: #fff;
+    border: 4px solid #525252;
+    width: 300px;
+}
+
+.floatbox_header {
+    padding: 4px;
+    text-align: left;
+}
+
+.floatbox_header a.close_btn {
+    margin: 2px;
+        background: url(images/ow-ic-close.png) no-repeat;
+}
+
+.floatbox_body {
+    padding: 4px;
+    text-align: left;
+}
+
+.floatbox_bottom {
+    padding: 4px;
+    text-align: center;
+}
+
+.floatbox_header .ow_box_cap_empty,
+.floatbox_header .ow_box_cap_empty .ow_box_cap_right,
+.floatbox_header .ow_box_cap_empty .ow_box_cap_body{
+    background: none;
+}
+
+/* FloatBox implementation */
+
+/* ow msg */
+
+.ow_message_cont{
+    left: 50%;
+    margin-left: -300px;
+    position: fixed;
+    top:0;
+    width: 600px;
+    z-index: 1000;
+    margin-top: 100px;
+}
+
+.ow_message_node{
+    font-size:13px;
+    font-weight:bold;
+    margin:5px 0;
+    padding:8px;
+    text-align:center;
+    overflow: auto;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.ow_message_cont .error{
+    background:#E33C3C;
+    border:1px solid #EF0000;
+    color:#FFFFFF;
+}
+
+.ow_message_cont .warning{
+    background:#FFE04F;
+    border:1px solid #E4C224;
+    color:#666;
+}
+
+.ow_message_cont .info{
+    background:#4CA33D;
+    border:1px solid #428F35;
+    color:#FFFFFF;
+}
+
+.ow_message_node a.close_button {
+    background:url(images/ic_delete.png) no-repeat 50% 50%;
+    float:right;
+    height:16px;
+    width:16px;
+}
+
+/**/
+
+
+/* thickbox 8aa */
+.ow_preloader_content_cont{
+    width: 30px;
+    height: 30px;
+}
+/* ~thickbox 8aa */
+
+
+/* ---- Captcha styles ---- */
+
+span.ic_refresh{
+    background: url(images/ic_refresh.png) no-repeat;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+
+/* ---- End of Captcha styles ---- */
+
+.alignleft{
+    float: left;
+}
+
+.alignright{
+    float: right;
+}
+.aligncenter{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/*----------------------------------------------------------------------BASE_ADD--------------------------------------------------------------------------------*/
+
+.ow_canvas
+{
+    width: 1000px;
+}
+
+html body .ow_canvas .ow_page
+{
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+html body .ow_page_container .ow_page
+{
+    padding-top: 30px;
+}
+
+.index_customize_box
+{
+    width: 975px;
+}
+
+.ow_video_list_item{
+    padding: 10px 8px;
+}
+
+.fullsize-photo{display: none;}
+
+.ow_cursor_pointer {
+    cursor: pointer;
+}
+
+.ow_break_word{
+    word-wrap:break-word;
+}

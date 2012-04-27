@@ -1,0 +1,7 @@
+<div style="padding-top: 1px;">
+    <select id="select_language" onchange='location.href="{$url_with_params}"+this.value;'>
+        {foreach from=$languages item="language"}
+          <option value="{$language.id}" {if $language.is_current == 1}selected="selected"{/if} >{$language.label}</option>
+        {/foreach}
+    </select>
+</div>

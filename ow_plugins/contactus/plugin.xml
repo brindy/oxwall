@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+	<name>Contact Us</name>
+	<key>contactus</key>
+	<description>"Contact us" page with the ability to choose departments (email addresses)</description>
+    <author>Oxwall Foundation</author>
+    <authorEmail>plugins@oxwall.org</authorEmail>
+	<authorUrl>http://www.oxwall.org/foundation</authorUrl>
+	<developerKey>e547ebcf734341ec11911209d93a1054</developerKey>
+    <build>3483</build>
+    <copyright>(C) 2010 Oxwall Foundation. All rights reserved.</copyright>
+	<license>The BSD License</license>
+    <licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
+</plugin>

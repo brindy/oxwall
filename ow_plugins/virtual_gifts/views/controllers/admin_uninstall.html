@@ -1,0 +1,20 @@
+
+<div class="ow_automargin ow_wide">
+{if $inprogress}
+    {block_decorator name='box_cap' iconClass='ow_ic_clock' langLabel='virtualgifts+uninstall_inprogress'}{/block_decorator}
+    {block_decorator name='box'}
+        {text key='virtualgifts+uninstall_inprogress_desc'}
+    {/block_decorator}
+{else}
+	{block_decorator name='box_cap' iconClass='ow_ic_warning' langLabel='virtualgifts+delete_content_warning'}{/block_decorator}
+	{block_decorator name='box'}
+	<form id="form_delete" method="post">
+	    <input type="hidden" name="action" value="delete_content" />
+	    <div class="ow_smallmargin">{text key='virtualgifts+delete_content_desc'}</div>
+	    <div class="ow_center">
+	    {decorator name='button' type='submit' id='btn-delete-content' langLabel='virtualgifts+delete_content' class='ow_ic_delete'}
+	    </div>
+	</form>
+	{/block_decorator}
+{/if}
+</div>

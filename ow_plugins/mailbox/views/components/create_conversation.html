@@ -1,0 +1,85 @@
+{style}
+{literal}
+    .ow_mailbox_attachment_icon {
+        display: inline-block;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        width: 14px;
+        height: 17px;
+    }
+    .mailbox_attachments_label {
+        margin: 15px 0 5px;
+        padding-left: 5px;
+        font-weight: bold;
+    }
+{/literal}
+{/style}
+
+{script}
+{literal}
+    $('#toggle_attach_link').click(function(){
+        $('#attach_file_inputs').toggle();
+    });
+{/literal}
+{/script}
+
+{* if $writeMessage==true}
+	<input alt="#TB_inline?height=250&width=480&inlineId=create-conversation-div&title={text key='mailbox+compose_message'}&icon_class=ow_ic_add" title="" class="thickbox" type="button" value="{text key='mailbox+create_conversation_button'}" />
+{else}
+	<input title="" class="mailbox_create_conversation_button" type="button" value="{text key='mailbox+create_conversation_button'}" />
+{/if *}
+
+
+
+<div id="create-conversation-div" style="display:none;">
+    {* box label="Create Conversation" mod="empty" icons="delete" cap_icon="ow_ic_write" *}
+        {form name="mailbox-create-conversation-form" }
+                <div id="uploadOutput"></div>
+                <table class="ow_table_1 ow_form">
+                    <tr class="ow_alt2 mailbox_conversation">
+                        <td class="ow_label">{text key='mailbox+to'}</td>
+                        <td class="ow_value"><img src="{$interlocutorAvatarUrl}" /><div style="padding-left:10px;display:inline;">{$interlocutorDisplayName}</div></td>
+                    </tr>
+                    <tr class="ow_alt2 mailbox_conversation">
+                        <td class="ow_label">{label name='subject'}</td>
+                        <td class="ow_value">{input name="subject"}<br/>{error name="subject"}</td>
+                    </tr>
+                    <tr class="ow_alt2 mailbox_conversation">
+                        <td class="ow_label">{label name='message'}</td>
+                        <td class="ow_value">
+                            {input name="message"}{error name="message"}
+         
+                        </td>
+                    </tr>
+                    <tr class="ow_alt2 mailbox_conversation">
+                        <td class="ow_label"></td>
+                        <td class="ow_value">
+                            {if $enableAttachments}
+                                <div class="ow_submit_auto_click" style="padding-top:5px;">
+                                    <span class="ow_mailbox_attachment_icon ow_ic_attach"></span>
+                                    <a href="javascript://" id="toggle_attach_link" >{text key='mailbox+attach_files'}</a><br /><br />
+                                    <div class="ow_hidden ow_smallmargin" id="attach_file_inputs">
+                                        {input name='attachments'}
+                                    </div>
+                                </div>
+                            {/if}
+                        </td>
+                    </tr>
+                    <tr class="captcha" {if $displayCaptcha==false} style='display:none;' {/if}>
+                        <td colspan="2" class="ow_center">
+                            <div style="padding:10px;">{text key='mailbox+please_enter_captcha'}</div>
+                        </td>
+                    </tr>
+                    <tr class="ow_alt1 captcha" {if $displayCaptcha==false} style='display:none;' {/if}>
+                        <td colspan="2" class="ow_center">
+                            {input name="captcha"}<br/>{error name="captcha"}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ow_submit" colspan="2">{submit name="send"}</td>
+                    </tr>
+                </table>
+                
+         {/form }
+    {*box*}
+</div>

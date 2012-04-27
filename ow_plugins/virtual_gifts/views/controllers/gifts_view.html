@@ -1,0 +1,29 @@
+
+{if isset($noPermission)}
+    <div class="ow_anno ow_std_margin ow_nocontent">{$noPermission}</div>
+{else}
+	<div class="ow_narrow ow_automargin">
+        <div class="ow_stdmargin ow_center"><img src="{$gift.imageUrl}" /></div>
+        
+        {capture assign='infoString'}
+            <a href="{$senderUrl}">{$senderName}</a>
+            <span class="ow_nowrap ow_tiny">{format_date timestamp=$gift.dto->sendTimestamp}</span>
+        {/capture}
+        {capture assign='content'}
+            <div class="ow_smallmargin">{if $gift.dto->message != ''}{$gift.dto->message}{/if}</div>
+        {/capture}
+	    {decorator name='ipc'
+	        addClass='ow_stdmargin'
+	        infoString=$infoString
+	        avatar=$senderAvatar
+	        content=$content
+	        toolbar=$toolbar
+	    }
+	</div>
+	
+	{if $sendToFriends}
+	<div class="ow_wide ow_automargin ow_center">
+        {decorator name='button' id='send_gift_btn' langLabel='virtualgifts+send_this_gift' class='ow_ic_heart'}
+	</div>
+	{/if}
+{/if}

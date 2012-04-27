@@ -1,0 +1,36 @@
+{if !empty($list)}
+	{foreach from=$list item='link'}
+	
+		{*-- decorator data*}
+		{assign var="dto" value=$link.dto}
+		{assign var=userId value=$dto->getUserId()}
+		{assign var=id value=$dto->id}
+		
+		{capture assign='info_string'}
+			<a href="{$dto->url}">{$link.dto->getTitle()}</a></span>
+		{/capture}
+	
+		{capture assign='content'}
+			{capture assign="moreLink"}<a class="ow_lbutton" href="{url_for_route for="link:[id=>`$id`]"}">{text key='links+more'}</a>{/capture}
+			<div class="ow_small ow_smallmargin">
+				<span class="ow_txt_value">
+					{$commentInfo[$id]}
+				</span>
+				<a href="{url_for_route for="link:[id=>`$id`]"}">
+					{text key='links+comments'}
+				</a>
+			</div>
+			<div class="ow_smallmargin">{$dto->description|truncate:100:"... `$moreLink`"}</div>
+
+		{/capture}
+	
+		{*~~ decorator data*}
+	
+		{decorator name='ipc' addClass='ow_smallmargin' infoString=$info_string content=$content avatar=$avatars[$userId] toolbar=$tbars[$id]}
+	{/foreach}
+{else}
+	<div class="ow_nocontent">
+		{capture assign ='addnewurl'}{url_for_route for='link-save-new'}{/capture}
+		{text key="links+index_widget_empty"} <a href="{$addnewurl}">{text key='links+add_new'}</a>
+	</div>
+{/if}

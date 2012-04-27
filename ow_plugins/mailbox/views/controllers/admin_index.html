@@ -1,0 +1,26 @@
+{form name='configSaveForm'}
+
+<table class="ow_table_1 ow_form">
+    <tr>
+        <th class="ow_name ow_txtleft" colspan="3">
+            <span class="ow_section_icon ow_ic_gear_wheel">{text key='mailbox+general_settings'}</span>
+        </th>
+    </tr>
+    <tr class="ow_alt1">
+        <td class="ow_label">{text key='mailbox+enable_attachments'}</td>
+        <td class="ow_value">
+            {input name='enableAttachments'}<br /> {error name='enableAttachments'}
+        </td>
+        <td class="ow_desc ow_small"></td>
+    </tr>
+    <tr class="ow_alt1">
+        <td class="ow_label">{text key='mailbox+upload_max_file_size'}</td>
+        <td class="ow_value">
+            {input name='uploadMaxFileSize'} {text key='mailbox+mb'} <span class="ow_small">{text key='base+max_upload_filesize' value=$maxUploadMaxFilesize}</span><br /> {error name='uploadMaxFileSize'}
+        </td>
+        <td class="ow_desc ow_small"></td>
+    </tr>
+    <tr><td colspan="3" class="ow_submit">{submit name='save' class='ow_ic_save'}</td></tr>
+</table>
+
+{/form}

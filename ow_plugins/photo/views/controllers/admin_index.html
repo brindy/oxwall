@@ -1,0 +1,114 @@
+
+{script}
+{literal}
+    $("#button-delete-fullsize").click(function(){    
+        
+        OW.inProgressNode("#button-delete-fullsize");
+        if ( confirm( OW.getLanguageText('photo', 'delete_fullsize_confirm') ) )
+        {
+            $.post( '{/literal}{url_for for="PHOTO_CTRL_Admin:deleteFullsize"}{literal}', { }, function(data){
+                if ( data.res ) {
+                    OW.activateNode("#button-delete-fullsize");
+                    $("#delete-fullsize-btn-node").hide();
+                    OW.info(data.msg);
+                }
+		    }, 'json');
+        }
+        else {
+            OW.activateNode("#button-delete-fullsize");
+        }
+    });
+{/literal}
+{/script}
+
+{$menu}
+
+{form name='configSaveForm'}
+
+<table class="ow_table_1 ow_form">
+    <tr>
+        <th class="ow_name ow_txtleft" colspan="3">
+            <span class="ow_section_icon ow_ic_up_arrow">{text key='photo+upload_settings'}</span>
+        </th>
+    </tr>
+    <tr class="ow_alt{cycle values='1,2'}">
+        <td class="ow_label">{label name='acceptedFilesize'}</td>
+        <td class="ow_value">{input name='acceptedFilesize' class='ow_settings_input'} Mb <span class="ow_small">{text key='photo+upload_ini_value' value=$iniValue}</span> {error name='acceptedFilesize'}</td>
+        <td class="ow_desc ow_small">{text key='photo+accepted_filesize_desc'}</td>
+    </tr>
+    <tr class="ow_alt{cycle values='1,2'}">
+        <td class="ow_label">{label name='advancedUpload'}</td>
+        <td class="ow_value">
+            {input name='advancedUpload'}
+        </td>
+        <td class="ow_desc ow_small">{text key='photo+advanced_upload_desc'}</td>
+    </tr>
+    <tr class="ow_alt{cycle values='1,2'}">
+        <td class="ow_label">{label name='storeFullsize'}</td>
+        <td class="ow_value">
+            {input name='storeFullsize'}
+            <span id="delete-fullsize-btn-node"{if $storeFullsize || $fullsizeCount == 0} style="display: none"{/if}>
+                {if $fullsizeCount > 0}
+                {capture assign='btn_label'}{text key='photo+delete_fullsize_photos' count=$fullsizeCount}{/capture}
+                &nbsp;{decorator name='button' label=$btn_label class='ow_ic_delete' id='button-delete-fullsize'}
+                {/if}
+            </div>
+        </td>
+        <td class="ow_desc ow_small"></td>
+    </tr>
+    <tr id="fullsize_res_config" class="ow_alt{cycle values='1,2'}" {if !$storeFullsize}style="display: none"{/if}>
+        <td class="ow_label">{label name='fullsizeResolution'}</td>
+        <td class="ow_value">
+            {input name='fullsizeResolution' class='ow_settings_input'} px {error name='fullsizeResolution'}
+        </td>
+        <td class="ow_desc ow_small">{text key='photo+fullsize_resolution_desc'}</td>
+    </tr>
+
+    <tr><td colspan="3"></td></tr>
+    <tr>
+        <th class="ow_name ow_txtleft" colspan="3">
+            <span class="ow_section_icon ow_ic_monitor">{text key='photo+view_settings'}</span>
+        </th>
+    </tr>
+    <tr class="ow_alt1">
+        <td class="ow_label">{text key='photo+main_size'}</td>
+        <td class="ow_value">
+            {input name='mainWidth' class='ow_settings_input'} {error name='mainWidth'} x
+            {input name='mainHeight' class='ow_settings_input'} {error name='mainHeight'} px
+        </td>
+        <td class="ow_desc ow_small">{text key='photo+main_size_desc'}</td>
+    </tr>
+    <tr class="ow_alt2">
+        <td class="ow_label">{text key='photo+preview_size'}</td>
+        <td class="ow_value">
+            {input name='previewWidth' class='ow_settings_input'} {error name='previewWidth'} x
+            {input name='previewHeight' class='ow_settings_input'} {error name='previewHeight'} px        
+        </td>
+        <td class="ow_desc ow_small">{text key='photo+preview_size_desc'}</td>
+    </tr>
+    <tr class="ow_alt1">
+        <td class="ow_label">{label name='perPage'}</td>
+        <td class="ow_value">{input name='perPage' class='ow_settings_input'} {error name='perPage'}</td>
+        <td class="ow_desc ow_small">{text key='photo+per_page_desc'}</td>
+    </tr>
+    <tr><td colspan="3"></td></tr>
+    <tr>
+        <th class="ow_name ow_txtleft" colspan="3">
+            <span class="ow_section_icon ow_ic_lock">{text key='photo+quotas'}</span>
+        </th>
+    </tr>
+    <tr class="ow_alt1">
+        <td class="ow_label">{label name='albumQuota'}</td>
+        <td class="ow_value">{input name='albumQuota' class='ow_settings_input'} {error name='albumQuota'}</td>
+        <td class="ow_desc ow_small">{text key='photo+album_quota_desc'}</td>
+    </tr>
+    <tr class="ow_alt2">
+        <td class="ow_label">{label name='userQuota'}</td>
+        <td class="ow_value">{input name='userQuota' class='ow_settings_input'} {error name='userQuota'}</td>
+        <td class="ow_desc ow_small">{text key='photo+user_quota_desc'}</td>
+    </tr>
+    
+    <tr><td colspan="3" class="ow_submit">{submit name='save' class='ow_ic_save'}</td></tr>
+</table>
+
+{/form}

@@ -1,0 +1,23 @@
+{form name="form"}
+	<table class="ow_table_1 ow_form">
+	    <tr>
+	        <th class="ow_name ow_txtleft" colspan="2">
+	            <span class="ow_section_icon ow_ic_gear_wheel">{text key="blogs+settings"}</span>
+	        </th>
+	    </tr>
+	    <tr class="{cycle values='ow_alt1, ow_alt2'}">
+	    	<td style="width: 50%">
+	    		{text key="blogs+admin_settings_results_per_page"} 
+	    	</td>
+	    	<td>
+	    		{input name='results_per_page' style="width: 50px;"}<br />
+	    		{error name='results_per_page'}
+	    	</td>
+	    </tr>
+	    <tr>
+	    	<td colspan="2" class="ow_center">
+	    		{submit name="submit"}
+	    	</td>
+	    </tr>
+	</table>
+{/form}

@@ -1,0 +1,27 @@
+{form name='NotificationsSettingForm'}
+
+<div class="ow_superwide ow_automargin">
+<table class="ow_table_1 ow_form">
+    <tr>
+        <th class="ow_name ow_txtleft" colspan="3">
+            <span class="ow_section_icon ow_ic_script">{text key='notifications+config_title'}</span>
+        </th>
+    </tr>
+    
+    <tr class="{cycle name="install" values="ow_alt1,ow_alt2"}">
+        <td class="ow_label">{text key='notifications+config_hour_label'}</td>
+        <td class="ow_value">{input name='hour'} {error name='day'}</td>
+        <td class="ow_desc">{text key='notifications+config_hour_desc'}</td>
+    </tr>
+    
+    <tr class="{cycle name="install" values="ow_alt1,ow_alt2"}">
+        <td class="ow_label">{text key='notifications+config_day_label'}</td>
+        <td class="ow_value">{input name='day'} {error name='day'}</td>
+        <td class="ow_desc">{text key='notifications+config_day_desc'}</td>
+    </tr>
+
+    <tr><td colspan="3" class="ow_submit">{submit name='save' class='ow_ic_save'}</td></tr>
+</table>
+</div>
+
+{/form}

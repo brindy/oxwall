@@ -1,0 +1,37 @@
+
+{$menu}
+
+<div class="ow_wide ow_automargin">
+    {if $categories}
+    {block_decorator name='box_cap' type='empty' iconClass='ow_ic_folder' langLabel='virtualgifts+category_list'}{/block_decorator}
+    
+    <table class="ow_table_2" id="categories_tbl">
+        <tbody>
+        {foreach from=$categories item='cat' key='catId'}
+        <tr rel="{$catId}" class="ow_alt1" onmouseover="$('span.del-cont', this).show();" onmouseout="$('span.del-cont', this).hide();">
+            <td style="width: 90%;">
+                <div class="ow_txtleft" style="padding: 2px 0px;">{text_edit key="virtualgifts+category_`$catId`"}</div>
+            </td>
+            <td class="ns-hover-block">
+                <div style="width: 50px;">
+                    <span class="del-cont" style="display: none;">
+                        <a class="ow_lbutton ow_red" href="{url_for for="VIRTUALGIFTS_CTRL_Admin:categories"}?catId={$catId}"
+                            onclick="return(confirm('{text key="admin+are_you_sure"}'));">{text key="admin+delete"}</a>
+                    </span>
+                </div>
+            </td>
+        </tr>
+        {/foreach}
+        </tbody>
+    </table>
+    {/if}
+
+    {block_decorator name='box_cap' langLabel='virtualgifts+add_category' iconClass='ow_ic_add'}{/block_decorator}
+    {block_decorator name='box'}
+        {form name='add-category-form'}
+            <div class="ow_smallmargin ow_center">
+                {label name='catTitle'} {input name='catTitle' style='width: 210px;'} {submit name='add' class='ow_ic_add'}
+            </div>
+        {/form}
+    {/block_decorator}
+</div>

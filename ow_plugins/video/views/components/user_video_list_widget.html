@@ -1,0 +1,31 @@
+
+<div class="ow_other_video_list">
+    {if $showTitles}
+		{foreach from=$clips item='c' name='clips'}
+		<div class="ow_other_video_list_item ow_smallmargin clearfix">
+            <div class="ow_other_video_thumb ow_left">
+	            <a href="{url_for_route for="view_clip:[id=>`$c.id`]"}">
+	                {if $c.thumb != 'undefined'}<img src="{$c.thumb}" alt="{$c.title}" title="{$c.title}" />{/if}
+	            </a>
+            </div>
+            <div class="ow_other_video_item_title ow_small"><a href="{url_for_route for="view_clip:[id=>`$c.id`]"}">{$c.title}</a></div>
+		</div>
+		{foreachelse}
+            <div class="ow_nocontent">{text key='video+no_video_found'}</div>
+		{/foreach}
+    {else}
+    <div class="clearfix ow_center">
+        {foreach from=$clips item='c' name='clips'}
+        {if $smarty.foreach.clips.iteration == 1}
+            <div class="ow_smallmargin">{$c.code}</div>
+        {else}
+	        <a class="ow_other_video_floated" href="{url_for_route for="view_clip:[id=>`$c.id`]"}">
+	            {if $c.thumb != 'undefined'}<img src="{$c.thumb}" alt="{$c.title}" title="{$c.title}" />{/if}
+	        </a>
+        {/if}
+        {foreachelse}
+            <div class="ow_nocontent">{text key='video+no_video_found'}</div>
+        {/foreach}
+    </div>        
+    {/if}
+</div>

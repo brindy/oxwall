@@ -1,0 +1,37 @@
+
+<div class="ow_column ow_automargin">
+{if $gifts}
+{foreach from=$gifts item='gift'}
+    {capture assign='giftId'}{$gift.dto->id}{/capture}
+    {capture assign='senderId'}{$gift.dto->senderId}{/capture}
+    
+    {capture assign='infoString'}
+        <a href="{$avatars[$senderId].url}">{$avatars[$senderId].title}</a>
+        <span class="ow_nowrap ow_tiny">{format_date timestamp=$gift.dto->sendTimestamp}</span>
+    {/capture}
+    
+    {capture assign='content'}
+    <div class="clearfix">
+        <div class="ow_gift_image">
+            <a href="{url_for_route for="virtual_gifts_view_gift:[giftId=>`$gift.dto->id`]"}">
+                <img src="{$gift.imageUrl}" />
+            </a>
+        </div>
+        <div class="ow_gift_message">{if $gift.dto->message != ''}{$gift.dto->message}{/if}</div>
+    </div>
+    {/capture}
+    
+    {decorator name='ipc'
+        addClass='ow_stdmargin'
+        avatar=$avatars[$senderId]
+        infoString=$infoString
+        content=$content
+    }
+{/foreach}
+
+{$paging}
+
+{else}
+    <div class="ow_nocontent">{text key='virtualgifts+no_gifts'}</div>
+{/if}
+</div>

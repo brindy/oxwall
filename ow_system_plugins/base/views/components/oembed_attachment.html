@@ -1,0 +1,87 @@
+{script}{literal}OW.resizeImg($('.ow_oembed_attachment'),{width:'150'});{/literal}{/script}
+<style>{literal}
+
+    .ow_oembed_attachment {
+        position: relative;
+        padding-right: 20px;
+    }
+
+    .ow_oembed_attachment .two_column  .attachment_left {
+        float: left;
+        width: 150px;
+    }
+
+    .ow_oembed_attachment .two_column .attachment_right {
+        margin-left: 155px;
+    }
+
+    .ow_oembed_attachment .video div.attachment_left {
+        width: 160px;
+    }
+
+    .ow_oembed_attachment .video div.attachment_right {
+        margin-left: 165px;
+    }
+
+    .ow_oembed_attachment .one_column .attachment_left {
+        display: none;
+    }
+
+    .ow_oembed_attachment .attachment_left img
+    {
+        width: 150px;
+        height: auto;
+        max-width: none;
+    }
+
+    .ow_oembed_attachment .attachment_left embed,
+    .ow_oembed_attachment .attachment_left object,
+    .ow_oembed_attachment .attachment_left iframe
+    {
+        width: 300px;
+        height: 220px;
+    }
+
+    .ow_oembed_attachment:hover .attachment_delete {
+        display: block;
+    }
+
+    .attachment_delete {
+        position: absolute;
+        right: 0;
+        width:12px;
+        height:12px;
+        display: none;
+    }
+
+{/literal}</style>
+
+<div class="ow_oembed_attachment clearfix {if !empty($containerClass)}{$containerClass}{/if}">
+    {if !empty($delete)}
+        <a class="attachment_delete ow_miniic_delete {if !empty($deleteClass)}{$deleteClass}{/if}" href="javascript://"></a>
+     {/if}
+
+    <div class="{$data.type} {if !empty($data.thumbnail_url) || !empty($data.url)}two_column has_thumbnail{elseif !empty($data.html)}two_column has_html{else}one_column{/if}">
+        <div class="attachment_left">
+            {if !empty($data.thumbnail_url) }
+                <a href="{$data.href}" target="_blank">
+                    <img src="{$data.thumbnail_url}" class="attachment_thumb" />
+                </a>
+            {elseif !empty($data.url)}
+            <a href="javascript://" onclick="OW.showImageInFloatBox('{$data.href}');">
+                    <img src="{$data.url}" class="attachment_thumb from_fullsize_photo" />
+                </a>
+            {elseif !empty($data.html)}
+                {$data.html}
+            {/if}
+        </div>
+        <div class="attachment_right ">
+            {if !empty($data.title)}
+                <div class="attachment_title"><a href="{$data.href}" target="_blank">{$data.title}</a></div>
+            {/if}
+            {if !empty($data.description)}
+                <div class="attachment_desc ow_remark">{$data.description}</div>
+            {/if}
+        </div>
+    </div>
+</div>

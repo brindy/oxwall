@@ -1,0 +1,56 @@
+{style}
+{literal}
+.ow_console a.ow_console_my_profile{
+    text-align:center;
+    padding-top:6px;
+    padding-left: 20px;
+    height:25px;
+    width:auto;
+    background-position: left center;
+}
+{/literal}
+{/style}
+
+<div class="ow_console clearfix">
+    <div class="ow_console_body clearfix">
+        <div style="float:right;">
+            {foreach from=$items item='item'}
+            {if !empty($item.block)}
+                <div class="console_item notification_shortcut{if !empty($item.block_class)} {$item.block_class}{/if}"{if !empty($item.block_id)} id="{$item.block_id}"{/if}>
+                    <div class="fake_node">
+                        <a class="{if !empty($item.icon_class)}{$item.icon_class}{else}ow_ic_file{/if}" href="{$item.url}"{if !empty($item.id)} id="{$item.id}"{/if}{if !empty($item.title)} title="{$item.title}"{/if}>
+                        {if !empty($item.block_items_count)}<span class="ow_txt_value">{$item.block_items_count}</span>{else}&nbsp;{/if}
+                        </a>
+                    </div>
+                </div>
+            {/if}
+            {/foreach}
+            <div class="console_item common_shortcuts">
+                <div class="fake_node">
+                {foreach from=$items item='item'}
+                {if empty($item.block)}
+                <a href="{$item.url}"{if !empty($item.title)} title="{$item.title}"{/if}{if !empty($item.icon_class)} class="{$item.icon_class}"{/if}{if !empty($item.id)} id="{$item.id}}"{/if}>&nbsp</a>
+                {/if}
+                {/foreach}
+                </div>
+            </div>
+            <div class="console_item common_shortcuts">
+                <div class="fake_node">
+                    <a class="ow_console_my_profile ow_ic_user" href="{$links.profile}" title="{$titles.profile}">{$displayName}</a>
+                </div>
+            </div>
+        	<div class="console_item common_shortcuts">
+                <div class="fake_node">
+                    <a style="text-align:center;padding-top:6px;height:25px;width:auto;" onclick="OW.trigger('base.sign_out_click', [ '{$displayName}' ] );" href="{$links.sign_out}">{$titles.sign_out}</a>
+                </div>
+            </div>       
+            {if $switchLanguage}
+            <div class="console_item common_shortcuts">
+                <div class="fake_node">
+                {$switchLanguage}
+                </div>
+            </div>
+            {/if}    
+        </div>       
+    </div>
+</div>

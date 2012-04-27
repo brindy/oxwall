@@ -1,0 +1,81 @@
+
+{literal}
+    <style>
+        input.display_name_input {
+            width:65%;
+        }
+    </style>
+{/literal}
+{script}
+    {literal}
+      $(function(){
+            $("form[name='MainSearchForm'] select[name='accountType']").change(
+               function(){ this.form.submit(); }
+            );
+       });
+   {/literal}
+{/script}
+
+{if isset($menu)}
+	{$menu}
+{/if}
+
+{if isset($authMessage)}
+    <div class="ow_anno ow_std_margin ow_nocontent">{$authMessage}</div>
+{else}
+<div class="clearfix">
+    <div class="ow_left ow_wide">
+                {form name=MainSearchForm}
+                        <table class="ow_table_1 ow_form">
+                            {if $displayAccountType==true}
+                            <tr class="{cycle values='ow_alt1,ow_alt2'}">
+                                <td class="ow_label">
+                                    {label name='accountType'}
+                                </td>
+                                <td class="ow_value ow_center">
+                                    {input name='accountType'}
+                                    <div style="height:1px;"></div>
+                                    {error name='accountType'}
+                                </td>
+                            </tr>
+                            {/if}
+                            {if !empty($questionList)}
+                                {foreach from=$questionList key='section' item='questions'}
+                                {if !empty($section) }
+                                    <tr><th colspan="3">{text key="base+questions_section_`$section`_label"}</th></tr>
+                                {/if}
+                                    {foreach from=$questions item='question'}
+                                        <tr class="{cycle values='ow_alt1,ow_alt2'}">
+                                            <td class="ow_label">
+                                                {label name=$question.name}
+                                            </td>
+                                            <td class="ow_value">
+                                                {input name=$question.name}
+                                                <div style="height:1px;"></div>
+                                                {error name=$question.name}
+                                            </td>
+                                        </tr>
+                                    {/foreach}
+                                {/foreach}
+                                <tr>
+                                        <td colspan="3" class="ow_center">{submit name='MainSearchFormSubmit'}</td>
+                                </tr>
+                           {/if}
+                        </table>
+                {/form}
+    </div>
+    <div class="ow_right ow_narrow">
+        {form name='DisplayNameSearchForm'}
+            {block_decorator name="box_cap" iconClass="ow_ic_lens" langLabel="base+user_search_display_name_search_label"}
+            {/block_decorator}
+            {block_decorator name="box" addClass="ow_center"}
+                <div class="clearfix ow_smallmargin">
+                    {label name=$displayNameQuestion.name}
+                    {input class="display_name_input" name=$displayNameQuestion.name}
+                </div>
+                {submit class="ow_txtcenter"  name='DisplayNameSearchFormSubmit'}
+            {/block_decorator}
+        {/form}
+    </div>
+</div>
+{/if}

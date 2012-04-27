@@ -1,0 +1,151 @@
+{if $addNew_isAuthorized}
+
+    <div class="ow_right">{decorator name='button' class='ow_ic_add' id='btn-add-new-link' langLabel='links+add_new'}</div>
+    {literal}
+    <script>
+    	$(function(){
+    		$('#btn-add-new-link').click(function(){location.href='{/literal}{url_for_route for="link-save-new"}{literal}'})
+    	})
+    </script>
+    {/literal}
+
+{/if}
+
+			{$menu}
+						
+            <div class="ow_links clearfix">
+            	<div class="ow_superwide ow_left">
+{literal}
+<style>
+.ow_anno {
+	background:#DDDDAA url(img/ic_warning.png) no-repeat scroll 15px 45%;
+	border:1px solid #CCCC99;
+	padding:10px;
+}
+</style>
+<script>
+document.vote = function (id, vote)
+{
+	$.ajax( 
+			{ 
+				type: 'post', 
+				url: {/literal}'{url_for for="LINKS_CTRL_List:vote:[]"}'{literal},	
+				data: {itemId: id, vote: vote},
+				dataType: 'json',
+				success: function(json){
+					if(typeof(json.isAuthenticated) != 'undefined' && json.isAuthenticated == false)
+					{
+						OW.info(json.msg);
+						return;
+					}
+{/literal}{if $mode == 'detailed'}{literal}
+					$('#lvru-'+id).empty().html(json.total.up);
+					$('#lvrd-'+id).empty().html(json.total.down);
+
+{/literal}	{else}{literal}
+
+				$('#lvrt-'+id).empty().html(json.total.sum? json.total.sum : 0);
+               
+				{/literal}{/if}
+{literal}
+                
+                switch(json.voteType)
+                {
+                    case "+1":
+                        $('#vote-lbl-'+id).removeClass('ow_red');
+                        $('#vote-lbl-'+id).addClass('ow_green');
+                        $('#vote-lbl-'+id+'-container').show();
+                        break;
+                    case "-1":
+                        $('#vote-lbl-'+id).removeClass('ow_green');
+                        $('#vote-lbl-'+id).addClass('ow_red');
+                        $('#vote-lbl-'+id+'-container').show();
+                        break;
+                    case 0:
+                        $('#vote-lbl-'+id).removeClass('ow_green');
+                        $('#vote-lbl-'+id).removeClass('ow_red');
+                        $('#vote-lbl-'+id+'-container').hide();
+                        return;
+                        break;
+                }
+                $('#vote-lbl-'+id).html(json.voteType);
+				}
+			}
+	);
+}
+</script>
+{/literal}
+				{if $isBrowseByTagCase}       
+					{if $tag}
+			         	<div class="ow_anno ow_stdmargin ow_center">
+                            {text key="links+results_by_tag" tag=$tag}
+						</div>
+					{else}
+						{$tagCloud}
+					{/if}
+				{/if}
+
+				{foreach from=$list item='link'}
+					{assign var='dto' value=$link.dto}
+					{assign var='id' value=$dto->getId()}
+
+                    <div class="ow_ivc_box ow_clearfix" id="link-item-{$dto->id}">
+                        
+                        <div class="ow_ivc_voteupdown">
+                            <div class="ow_highbox" style="width: 55px;">
+						{if $mode != 'sum'}
+						
+                        	<div class="ow_icon_control ow_ic_up_arrow" style="display: block; cursor: pointer; margin-bottom: 2px; margin-top: 2px;" onclick="vote({$id}, 'UP')">
+                        		<span id="lvru-{$id}" style="color: #00AA00; font-weight: bold;">{if isset($link.up)}{$link.up}{else}0{/if}</span>
+                        	</div>
+						
+                        	<div class="ow_icon_control ow_ic_down_arrow" style="display: block; cursor: pointer; padding-bottom: 3px;" onclick="vote({$id}, 'DOWN')">
+                        		<span id="lvrd-{$id}" style="color: #FF6666; font-weight: bold;">{if isset($link.down)}{$link.down}{else}0{/if}</span>
+                        	</div>
+
+						{else}
+                        <div class="clearfix">
+								<div style="float: left; width: 16px; height: 35px;">
+									<div class="ow_icon_control ow_ic_up_arrow" style="min-width: 16px; min-height: 16px; cursor: pointer; margin-bottom: 3px; display: block; padding: 0px;" onclick="vote({$id}, 'UP')"></div>
+	                        		<div class="ow_icon_control ow_ic_down_arrow" style="cursor: pointer; min-width: 16px; min-height: 16px; display: block; padding: 0px;" onclick="vote({$id}, 'DOWN')"></div>
+								</div>
+								<div style="float: left; padding: 7px 5px 0px 13px;" class="ow_txt_value" id="lvrt-{$id}">
+									{if isset($link.voteTotal)}{$link.voteTotal}{else}0{/if}
+								</div>
+                        </div>
+                        	
+						{/if}
+                        </div>
+                            <div id="vote-lbl-{$id}-container" class="ow_tiny" style=" height: 20px; display:{if $isAuthenticated && isset($userVotes[$id])}  block {else} none {/if}" >
+                                <span id="vote-lbl-{$id}" class="ow_lbutton {if isset($userVotes[$id])} {if $userVotes[$id]->vote < 0} ow_red {else} ow_green {/if} {/if}">{if isset($userVotes[$id])}{$userVotes[$id]->vote}{else}0{/if}</span>
+                                <span id="vote-cancel-lbl-{$id}" class="ow_lbutton" onclick="vote({$id}, 'CANCEL')">{text key='links+cancel_vote'}</span>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                        <div class="ow_ivc_content">
+							{decorator name="box_cap" type="empty" label=$dto->title|truncate:$titleLength:'...' addClass="ow_smallmargin" iconClass='ow_ic_link' href="`$dto->url`"}
+
+                            {block_decorator name="box" type="empty" addClass="ow_stdmargin" toolbar=$tb[$id]}
+                            {assign var='userId' value=$dto->userId}
+	                            <div class="ow_smallmargin">
+		            	        	{$dto->description}		        	            	
+	                           	</div>
+                        	{/block_decorator}
+                        </div>
+	            {foreachelse}
+	            	{text key='base+empty_list'}
+                {/foreach}
+
+                {if $paging}<center>{$paging}</center>{/if}
+                
+                </div>
+
+                <div class="ow_supernarrow ow_right">
+                	{$tagSearch}
+		         	{if $list|@count > 0}
+			         	{$tagCloud}
+		         	{/if}
+                </div>
+            </div>

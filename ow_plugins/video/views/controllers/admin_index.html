@@ -1,0 +1,38 @@
+
+{$menu}
+
+{form name='configSaveForm'}
+
+<table class="ow_table_1 ow_form">
+    <tr>
+        <th class="ow_name ow_txtleft" colspan="3">
+            <span class="ow_section_icon ow_ic_monitor">{text key='video+view_settings'}</span>
+        </th>
+    </tr>
+    <tr class="ow_alt1">
+        <td class="ow_label">{text key='video+player_size'}</td>
+        <td class="ow_value">
+            {input name='playerWidth' class='ow_settings_input'} {error name='playerWidth'} x
+            {input name='playerHeight' class='ow_settings_input'} {error name='playerHeight'}
+        </td>
+        <td class="ow_desc ow_small">{text key='video+size_desc'}</td>
+    </tr>
+    <tr class="ow_alt2">
+        <td class="ow_label">{label name='perPage'}</td>
+        <td class="ow_value">{input name='perPage' class='ow_settings_input'} <br />{error name='perPage'}</td>
+        <td class="ow_desc ow_small">{text key='video+per_page_desc'}</td>
+    </tr>
+    <tr>
+        <th class="ow_name ow_txtleft" colspan="3">
+            <span class="ow_section_icon ow_ic_lock">{text key='video+quotas'}</span>
+        </th>
+    </tr>
+    <tr class="ow_alt1">
+        <td class="ow_label">{label name='quota'}</td>
+        <td class="ow_value">{input name='quota' class='ow_settings_input'} <br />{error name='quota'}</td>
+        <td class="ow_desc ow_small">{text key='video+quota_desc'}</td>
+    </tr>
+    <tr><td colspan="3" class="ow_submit">{submit name='save' class='ow_ic_save'}</td></tr>
+</table>
+
+{/form}

@@ -1,0 +1,68 @@
+{script}
+{literal}
+document.flag = function(type, id, title, url, langKey){
+    if(typeof(document.addRoleStorage) === 'undefined'){
+        document.storage = [];
+    }
+
+    $.post( '{/literal}{url_for for="BASE_CTRL_Flag:form"}{literal}', {type: type, id: id, title: title, url: url, langKey: langKey}, function(json){
+        if( typeof(json.isFlagged) != 'undefined' ){
+            OW.warning("{/literal}{text key="base+flag_already_flagged"}{literal}");
+            return;
+        }
+
+        document.storage['flag-panel'] = {
+            fb: new OW_FloatBox({$title: '{/literal}{text key='base+flag_as'}{literal}', $contents: json['markup'], width: '315px'})
+        }
+
+        OW.addCss(json.css);
+
+        OW.addScriptFiles(json['include_js'], function(){ 
+            OW.addScript(json['js']);
+        });
+
+    }, 'json');
+}
+{/literal}
+{/script}
+
+{if !$auth_msg}
+
+	<div class="clearfix">
+		<div class="ow_superwide ow_left">
+
+            {block_decorator name='box' type='empty' addClass='ow_video_player ow_stdmargin' toolbar=$toolbar}
+                {component class='VIDEO_CMP_VideoPlayer' id=$clip->id}
+            {/block_decorator}
+		   
+		   <div class="ow_video_description ow_stdmargin">{$clip->description}</div>
+		   
+		   {$comments}
+		</div>
+		
+		<div class="ow_supernarrow ow_right">
+           {block_decorator name='box_cap' iconClass='ow_ic_video' langLabel='video+video_info'}{/block_decorator}
+           {block_decorator name='box' addClass='ow_small ow_stdmargin'}
+		       <table class="ow_table_3 ow_nomargin">
+		           <tr>
+		               <td class="ow_label">{text key='base+by'}</td>
+		               <td>{if $username && $displayName}{user_link username=$username name=$displayName}{else}{$displayName}{/if}</td>
+		           </tr>
+		           <tr>
+		               <td class="ow_label">{text key='video+added'}</td>
+		               <td>{format_date timestamp=$clip->addDatetime}</td>
+		           </tr>
+		       </table>
+		   {/block_decorator}
+		   
+	       {component class='VIDEO_CMP_OtherVideoList' exclude=$clip->id itemsNum=3}
+		   
+		   {$rate}
+		   
+		   {$tags}
+		</div>
+	</div>
+
+{else}
+    <div class="ow_anno ow_std_margin ow_nocontent">{$auth_msg}</div>
+{/if}

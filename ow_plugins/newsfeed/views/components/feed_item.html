@@ -1,0 +1,115 @@
+<li id="{$item.autoId}" class="ow_newsfeed_item {$item.view.class} {if !empty($item.line)}ow_newsfeed_line_item{/if}" style="{$item.view.style}">
+	<div class="clearfix">
+	    {if empty($item.line)}
+	        <div class="ow_newsfeed_avatar">
+	            {decorator name="avatar_item" url=$item.user.url src=$item.user.avatarUrl label=$item.user.roleLabel.label labelColor=$item.user.roleLabel.labelColor}
+	        </div>
+	    {else}
+	         <div class="ow_newsfeed_line ow_smallmargin ow_ic_info ow_icon_control">
+	            {if $item.context}<a href="{$item.context.url}">{$item.context.label}</a> &raquo; {/if}{$item.line}
+	         </div>
+	    {/if}
+
+	    <div class="ow_newsfeed_body">
+	        {if $item.remove }
+	            <div class="ow_newsfeed_remove">
+	                <a class="ow_lbutton ow_red newsfeed_remove_btn" href="javascript://" rel="{text key="base+are_you_sure"}">{text key="newsfeed+delete_feed_item_label"}</a>
+	            </div>
+	        {/if}
+	        {if empty($item.line)}
+				<div class="ow_newsfeed_string ow_smallmargin">
+				   <a href="{$item.user.url}"><b>{$item.user.name}</b></a>
+				   {if $item.context}  &raquo; <a href="{$item.context.url}">{$item.context.label}</a>{/if}
+				   {$item.string}
+				</div>
+	        {/if}
+
+			{if $item.content}
+	            <div class="ow_newsfeed_content ow_small ow_smallmargin">{$item.content}</div>
+			{/if}
+
+            {strip}
+	        <div class="ow_newsfeed_toolbar ow_small ow_remark">
+	            <span class="ow_nowrap create_time {$item.view.iconClass} ow_icon_control">{$item.createTime}</span>
+	            <span class="ow_newsfeed_toolbar_space">&nbsp;</span>
+	            {if $item.comments || $item.likes}
+		            <span class="ow_newsfeed_control ow_nowrap newsfeed_counter" {if empty($item.comments.count) && empty($item.likes.count)}style="display: none"{/if}>
+		                &middot;
+		                <span class="ow_newsfeed_toolbar_space">&nbsp;</span>
+		                 <span class="ow_cursor_pointer ow_alt2 ow_nowrap ow_newsfeed_feedback_counter newsfeed_features_btn">
+                                     {if $item.comments}
+                                        <span class="newsfeed_counter_comments ow_miniic_comment ow_miniicon_control" {if !$item.comments.count}style="display: none"{/if}>{$item.comments.count}</span>
+                                     {/if}
+
+                                     {if $item.comments && $item.likes}
+                                        <span {if $item.comments.count && $item.likes.count}style="display: none"{/if} class="newsfeed_counter_delim">&nbsp;</span>
+                                     {/if}
+
+                                     {if $item.likes}
+                                        <span class="newsfeed_counter_likes ow_miniic_heart ow_miniicon_control" {if !$item.likes.count}style="display: none"{/if}>{$item.likes.count}</span>
+                                     {/if}
+		                 </span>
+		                 <span class="ow_newsfeed_toolbar_space">&nbsp;</span>
+	                </span>
+                    {/if}
+
+	            {if $item.comments && $item.comments.allow }
+	               <span class="ow_newsfeed_control ow_nowrap">
+	                    &middot;
+	                    <span class="ow_newsfeed_toolbar_space">&nbsp;</span>
+	                    <a href="javascript://" class="newsfeed_comment_btn">{text key="newsfeed+comment_btn_label"}</a>
+	                    <span class="ow_newsfeed_toolbar_space">&nbsp;</span>
+	               </span>
+	            {/if}
+
+	            {if $item.likes && $item.likes.allow}
+	                <span class="ow_newsfeed_control ow_nowrap">
+	                    &middot;
+	                    <span class="ow_newsfeed_toolbar_space">&nbsp;</span>
+	                    <a {if $item.likes.liked}style="display: none"{/if} href="javascript://" class="newsfeed_like_btn">{text key="newsfeed+like_btn_label"}</a>
+	                    <a {if !$item.likes.liked}style="display: none"{/if} href="javascript://" class="newsfeed_unlike_btn">{text key="newsfeed+unlike_btn_label"}</a>
+	                    <span class="ow_newsfeed_toolbar_space">&nbsp;</span>
+	                </span>
+	            {/if}
+
+	            {foreach from=$item.toolbar item=toolbarItem}
+                    <span class="ow_newsfeed_control ow_nowrap {if !empty($toolbarItem.class)}{$toolbarItem.class}{/if}">
+                        &middot;
+                        <span class="ow_newsfeed_toolbar_space">&nbsp;</span>
+                        {if !empty($toolbarItem.href)}
+                            <a href="{$toolbarItem.href}">{$toolbarItem.label}</a>
+                        {else}
+                            {$toolbarItem.label}
+                        {/if}
+                        <span class="ow_newsfeed_toolbar_space">&nbsp;</span>
+                    </span>
+                {/foreach}
+	        </div>
+	        {/strip}
+
+	        {if $item.likes || $item.comments}
+	            <div {if !$item.likes.count && !$item.comments.count || !$item.featuresExpanded}style="display: none"{/if} class="newsfeed-features ow_newsfeed_features">
+	                {block_decorator name='tooltip' addClass='ow_newsfeed_tooltip ow_add_comments_form ow_small'}
+
+	                    {if $item.likes}
+	                        <div class="ow_newsfeed_likes" {if !$item.likes.count}style="display: none"{/if}>
+	                            {$item.likes.cmp}
+	                        </div>
+	                    {/if}
+
+	                    <div {if !$item.likes.count || !$item.comments.count}style="display: none"{/if} class="ow_border ow_newsfeed_delimiter" ow-comments="{$item.comments.count}" ow-likes="{$item.likes.count}"></div>
+
+	                    {if $item.comments}
+	                        <div class="ow_newsfeed_comments" {if !$item.comments.count}style="display: none;"{/if}>
+	                            {$item.comments.cmp}
+	                        </div>
+	                    {/if}
+	                {/block_decorator}
+	            </div>
+	        {/if}
+
+            <div {if $item.cycle.lastSection && $item.cycle.lastItem}style="display: none"{/if} class="newsfeed-item-delim {if !$item.cycle.lastItem}ow_border {/if}ow_newsfeed_delimiter ow_newsfeed_doublesided_stdmargin"></div>
+
+	    </div>
+	</div>
+</li>

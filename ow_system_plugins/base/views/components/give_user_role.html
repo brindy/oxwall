@@ -1,0 +1,19 @@
+{form name="give-role"}
+<table class="ow_table_2 ow_form ow_stdmargin ow_center">
+<tr>
+	<th></th>
+	<th>User Role</th>
+</th>
+{foreach from=$list item='role'}
+<tr class="{cycle values='ow_alt1, ow_alt2'}">
+	<td>{input name="roles[`$role->id`]"}</td>
+	<td>{label name="roles[`$role->id`]"}</td>
+</tr>
+{/foreach}
+<tr>
+	<td colspan="2">	
+		{submit name="submit"}
+	</td>
+</tr>
+</table>
+{/form}

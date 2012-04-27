@@ -1,0 +1,70 @@
+{style}
+{literal}
+    .groups_item_cont {
+        padding: 10px;
+    }
+    
+    .groups_item_thumb {
+        width: 100px;
+        margin-right: -110px;
+        float: left;
+    }
+    
+    .groups_item_details {
+        margin-left: 110px;
+    }
+{/literal}
+{/style}
+
+{if empty($hideCreateNew) && $canCreate}
+	<div class="ow_right">{decorator name='button' class='ow_ic_add' id='btn-create-new-group' langLabel='groups+add_new'}</div>
+	{script}{literal}
+		$('#btn-create-new-group').click(function(){location.href='{/literal}{url_for_route for="groups-create"}{literal}'})
+	{/literal}{/script}
+{/if}
+
+
+{$menu}
+<div class="groups_item_list ow_stdmargin clearfix">
+
+    {assign var='count' value=2}
+    {assign var='alt1' value=false}
+    {assign var='cnt' value=0}
+    
+    {foreach from=$list item='item' name='p'}
+    
+        {if $cnt == $count}
+            {if $alt1}{assign var='alt1' value=false}{else}{assign var='alt1' value=true}{/if}
+            {assign var='cnt' value=0}
+        {/if}
+        
+        {assign var='cnt' value=$cnt+1}
+        
+        {if $cnt == 1}
+            <div class="clearfix {if $alt1}ow_alt1{else}ow_alt2{/if}">
+        {/if} 
+
+        <div class="ow_column ow_left">
+            <div class="groups_item_cont clearfix">
+                <div class="groups_item_thumb">
+                    <a href="{$item.url}"><img src="{$item.image}" /></a>
+                </div>
+                <div class="groups_item_details">
+                    <a href="{$item.url}">{$item.title}</a>
+                    <div class="ow_small ow_smallmargin" style="max-height: 65px;">{$item.description|truncate:200}</div>
+                    <span class="members_count ow_small ow_remark">{text key="groups+listing_users_label" count=$item.users}</span>
+                </div>
+            </div>
+        </div>
+                
+        {if $cnt == $count && $smarty.foreach.p.iteration != 1 || $smarty.foreach.p.last}
+            </div>
+        {/if}
+    {foreachelse}
+        <div class="ow_nocontent">
+            {text key="groups+listing_no_items_msg"}
+        </div>
+    {/foreach}
+</div>
+
+{$paging}

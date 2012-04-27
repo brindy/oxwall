@@ -1,0 +1,99 @@
+{script}
+{literal}
+document.flag = function(type, id, title, url, langKey){
+	if(typeof(document.addRoleStorage) === 'undefined'){
+		document.storage = [];
+	}
+
+	$.post( '{/literal}{url_for for="BASE_CTRL_Flag:form"}{literal}', {type: type, id: id, title: title, url: url, langKey: langKey}, function(json){
+		if( typeof(json.isFlagged) != 'undefined' ){
+			OW.warning("{/literal}{text key="base+flag_already_flagged"}{literal}");
+			return;
+		}
+
+		document.storage['flag-panel'] = {
+			fb: new OW_FloatBox({$title: '{/literal}{text key='base+flag_as'}{literal}', $contents: json['markup'], width: '315px'})
+		}
+
+		OW.addCss(json.css);
+
+		OW.addScriptFiles(json['include_js'], function(){ 
+			OW.addScript(json['js']);
+		});
+
+	}, 'json');
+}
+{/literal}
+{/script}
+      	<div class="clearfix">
+         	<div class="ow_superwide" style="float:left;">
+         		{block_decorator name='box' type='empty' toolbar=$tb addClass="ow_stdmargin"}
+					<div class="clearfix">
+						{$info.text}
+					</div>
+					<div class="ow_stdmargin"><center><br />{$paging}</center></div>
+				{/block_decorator}
+				{block_decorator name="box" addClass="ow_stdmargin"}
+	                     <div class="clearfix">
+	                        <div style="float:left;">
+	                        	{if $adjasentUrl.prev|count_characters > 0}
+	                        		<a href="{$adjasentUrl.prev}">{text key="blogs+prev_post"}</a> <span class="ow_ic_left_arrow" style="background-repeat: no-repeat;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	                        	{/if}
+	                       	</div>
+	                        <div style="float:right;">
+	                        	{if $adjasentUrl.next|count_characters > 0}
+	                        		<span class="ow_ic_right_arrow" style="background-repeat: no-repeat;">&nbsp;&nbsp;&nbsp;&nbsp;</span> <a href="{$adjasentUrl.next}">{text key="blogs+next_post"}</a>
+	                        	{/if}
+	                       	</div>
+	                     </div>
+	                     
+	                     <center> <span class="ow_ic_up_arrow" style="background-repeat: no-repeat;">&nbsp;&nbsp;&nbsp;&nbsp;</span> <a href="{$adjasentUrl.index}">{text key="blogs+blog_index"}</a></center>			
+				{/block_decorator}
+
+                {$comments}
+
+         	</div>
+            
+            <div class="ow_supernarrow" style="float:right;">
+            	{block_decorator name="box_cap" langLabel="blogs+post_title" icon_class="ow_ic_picture"}{/block_decorator}
+               {block_decorator name="box" addClass="ow_stdmargin"}
+                  <table class="ow_table_3 ow_form ow_nomargin">
+                     <tbody>
+                     	{if $isAuthorExists}
+                        <tr>
+                           <td class="ow_label">{text key="blogs+by"}</td>
+                           <td class="ow_value">
+                           	{user_link name=$displayname username=$username} 
+                           </td>
+                        </tr>
+                        {/if}
+                        <tr>
+                           <td class="ow_label">{text key="blogs+added"}</td>
+	                           <td class="ow_value">{format_date timestamp=$info.dto->timestamp}</td>
+                        </tr>
+                     </tbody>
+                  </table>               
+               {/block_decorator}
+
+               	{$tagCloud}
+
+				{$rate}
+				{if $isAuthorExists}               
+					{block_decorator name="box_cap" langLabel="blogs+blog_archive_lbl_archives" icon_class="ow_ic_clock"}{/block_decorator}
+					{block_decorator name="box"}
+					{assign var="uname" value=$author->getUsername() }
+	                  <ul style="list-style-type:disc;list-style-position:inside;">
+	                  	<li><a href="{url_for_route for="user-blog:[user=>`$uname`]"}">{text key="base+all"}</a> </li>
+	                  	{foreach from=$archive key='year' item='months'}
+	                  		{foreach from=$months item='month'}
+	                  			{assign var='u' value=$author->getUsername()}
+	                  			<li>
+	                  				<a href="{url_for_route for="user-blog:[user=>$u]"}?month={$month}-{$year}">{text key="base+month_`$month`"} {$year}</a> 
+	                  			</li>
+	                  		{/foreach}
+	                  	{/foreach}
+	                  </ul>				
+					{/block_decorator}
+				{/if}
+            </div>
+      	</div>

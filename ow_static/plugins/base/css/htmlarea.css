@@ -1,0 +1,31 @@
+.jhtmlarea { display: inline block; }
+.jhtmlarea div { padding: 0px; margin: 0px; }
+.jhtmlarea .toolbar { background: url(toolbar_bg.png) repeat-x;padding: 2px 1px; height:24px;}
+.jhtmlarea .toolbar ul { margin: 1px; padding: 1px; float: left;height: 20px;}
+.jhtmlarea .toolbar ul li { list-style-type: none; float: left; border: none; padding: 1px; margin: 1px; }
+.jhtmlarea .toolbar ul li:hover { border: solid 1px #ccc; padding: 0; }
+.jhtmlarea .toolbar ul li a { display: block; width: 16px; height: 16px; background: url(wysiwyg.png) no-repeat 0 0; border: none; cursor: pointer; padding: 0px; }
+.jhtmlarea .toolbar ul li a.highlighted { border: solid 1px #aaa; background-color: #bbb; padding: 0; }
+.jhtmlarea .toolbar ul li.separator {height: 16px; margin: 0 2px 0 3px; border-left: 1px solid #ccc;}
+.jhtmlarea .toolbar ul li.separator:hover { padding: 1px; background-color: #fff; border-top:none; border-bottom:none; border-right:none;}
+
+.jhtmlarea .toolbar ul li a.bold { background-position: -4px -4px; }
+.jhtmlarea .toolbar ul li.ow_ws_active a.bold{background-position: -4px -24px;}
+.jhtmlarea .toolbar ul li a.italic { background-position: -24px -4px; }
+.jhtmlarea .toolbar ul li.ow_ws_active a.italic { background-position: -24px -24px; }
+.jhtmlarea .toolbar ul li a.underline { background-position: -44px -4px;}
+.jhtmlarea .toolbar ul li.ow_ws_active a.underline { background-position: -44px -24px;}
+.jhtmlarea .toolbar ul li a.orderedlist { background-position: -64px -4px;}
+.jhtmlarea .toolbar ul li.ow_ws_active a.orderedlist { background-position: -64px -24px;}
+.jhtmlarea .toolbar ul li a.unorderedlist { background-position: -84px -4px;}
+.jhtmlarea .toolbar ul li.ow_ws_active a.unorderedlist { background-position: -84px -4px;}
+.jhtmlarea .toolbar ul li a.link { background-position: -204px -4px;}
+.jhtmlarea .toolbar ul li a.image { background-position: -164px -4px;}
+.jhtmlarea .toolbar ul li a.video { background-position: -184px -4px;}
+.jhtmlarea .toolbar ul li a.html { background-position: -144px -4px;}
+.jhtmlarea .toolbar ul li a.switchHtml { background-position: -124px -4px;}
+.jhtmlarea .toolbar ul li a.more { background-position: -104px -4px;}
+
+.jhtmlarea .toolbar ul.switch_html{
+    float: right;
+}
